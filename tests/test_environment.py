@@ -61,3 +61,24 @@ def test_action_span_excludes_trailing_whitespace():
     text = "Thought: gather\nAction: get 1 gold ingot  \n"
     _, span, _ = parse_action(text)
     assert text[slice(*span)] == "get 1 gold ingot"
+
+
+def test_five_debug_tasks_are_solvable_using_supplied_recipes(env):
+    # Independent of the actor: validate every selected one-step recipe task.
+    for index in range(5):
+        task = env.freeze_task(index)
+        env.reset(task)
+        chosen = None
+        for command in task["commands"].splitlines():
+            match = re.match(r"craft (.*) using (.*)", command)
+            recipe = env.env.extract_recipe(match.group(1), match.group(2))
+            if recipe.output_item.item_tag.name == task["goal"]:
+                chosen = command, recipe
+                break
+        assert chosen is not None
+        command, recipe = chosen
+        for ingredient in recipe.input_items:
+            item = ingredient.item_tag.name.replace("minecraft:", "").replace("_", " ")
+            assert env.step(f"Action: get {ingredient.count} {item}")["validity"] == "executable"
+        result = env.step("Action: " + command)
+        assert result["reward"] == 1 and result["done"]
