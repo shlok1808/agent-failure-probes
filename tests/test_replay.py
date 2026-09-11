@@ -41,3 +41,14 @@ def test_action_alignment_does_not_select_eos():
     text = "Action: get 1 wood<eos>"
     positions = locate_action_tokens(CharacterTokenizer(), [ord(c) for c in text], (8, 18))
     assert text[positions[-1]] == "d"
+
+
+def test_noncanonical_generated_tokens_are_not_reencoded():
+    class Tokenizer:
+        pieces = {1: "Action: ", 2: "in", 3: "ventory", 4: "<eos>"}
+        def decode(self, ids, **kwargs):
+            return "".join(self.pieces[i] for i in ids)
+        def __call__(self, text, **kwargs):
+            # Canonical tokenizer would merge the two sampled action tokens.
+            return {"input_ids": [1, 99, 4], "offset_mapping": [(0, 8), (8, 17), (17, 22)]}
+    assert locate_action_tokens(Tokenizer(), [1, 2, 3, 4], (8, 17)) == [1, 2]

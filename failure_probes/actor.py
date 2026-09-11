@@ -7,17 +7,33 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 def locate_action_tokens(tokenizer, generated_ids, span):
     """Return generated-token positions overlapping the raw Action span.
 
-    Exact token reconstruction is checked. If the tokenizer cannot round-trip,
-    fail rather than silently select an EOS/padding token or the wrong action.
+    Generated BPE sequences need not be the canonical encoding of their decoded
+    text. Use original token boundaries; do not re-tokenize and substitute IDs.
     """
     if span is None:
         return []
-    text = tokenizer.decode(generated_ids, skip_special_tokens=False)
+    text = tokenizer.decode(generated_ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)
     enc = tokenizer(text, add_special_tokens=False, return_offsets_mapping=True)
-    if enc["input_ids"] != generated_ids:
-        raise ValueError("Generated tokens did not round-trip for action alignment")
     start, end = span
-    return [i for i, (a, b) in enumerate(enc["offset_mapping"]) if a < end and b > start]
+    if enc["input_ids"] == generated_ids:
+        return [i for i, (a, b) in enumerate(enc["offset_mapping"]) if a < end and b > start]
+    # Slow fallback handles noncanonical token splits and repeated whitespace.
+    # Prefixes ending in an incomplete UTF-8 character are not stable text
+    # boundaries, so keep those tokens together until the character is complete.
+    positions, previous_chars, previous_tokens = [], 0, 0
+    for count in range(1, len(generated_ids) + 1):
+        prefix = tokenizer.decode(generated_ids[:count], skip_special_tokens=False, clean_up_tokenization_spaces=False)
+        if not text.startswith(prefix):
+            continue
+        current_chars = len(prefix)
+        if previous_chars < end and current_chars > start:
+            positions.extend(range(previous_tokens, count))
+        previous_chars, previous_tokens = current_chars, count
+        if current_chars >= end:
+            break
+    if not positions:
+        raise ValueError("Could not align Action span to original generated tokens")
+    return positions
 
 
 class Actor:
@@ -60,8 +76,8 @@ class Actor:
             raise ValueError("Model returned no content tokens")
         record = {"prompt": prompt, "prompt_token_ids": ids[0].tolist(),
                   "generated_token_ids": generated,
-                  "raw_response": self.tokenizer.decode(generated[:content[-1] + 1], skip_special_tokens=False),
-                  "response": self.tokenizer.decode(generated, skip_special_tokens=True),
+                  "raw_response": self.tokenizer.decode(generated[:content[-1] + 1], skip_special_tokens=False, clean_up_tokenization_spaces=False),
+                  "response": self.tokenizer.decode(generated, skip_special_tokens=True, clean_up_tokenization_spaces=False),
                   "token_logprobs": logprobs, "last_content_token": content[-1],
                   "generation_seconds": time.monotonic() - started,
                   "hit_token_limit": generated[-1] not in special and len(generated) == self.config["max_new_tokens"]}
