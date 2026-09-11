@@ -55,7 +55,9 @@ def collect(run, device=None):
     config = manifest["config"]
     actor, env = Actor(config, device), TextCraft()
     write_json(run / "runtime.json", {"device": actor.device, "dtype": str(actor.dtype),
-                                    "model_revision": actor.model.config._commit_hash})
+                                    "model_revision": actor.model.config._commit_hash,
+                                    "code_commit": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
+                                    "code_hashes": {str(p.relative_to(ROOT)): digest(p.read_text()) for p in sorted((ROOT / "failure_probes").glob("*.py"))}})
     for task in manifest["tasks"]:
         for attempt in range(config["attempts_per_task"]):
             episode_id = f'{task["task_id"]}_attempt_{attempt:02d}'
@@ -149,9 +151,23 @@ def audit(run):
             assert 0 <= record["probe_generated_token_index"] < len(record["generated_token_ids"])
         assert episode["success"] == bool(episode["rounds"][-1]["reward"] == 1)
     expected = manifest["config"]["num_tasks"] * manifest["config"]["attempts_per_task"]
+    feature_check = "not_extracted_yet"
+    if (run / "features.npz").exists():
+        extracted = read_json(run / "extraction.json")
+        assert extracted["manifest_hash"] == manifest["manifest_hash"]
+        features = np.load(run / "features.npz", allow_pickle=False)
+        expected_keys = {f'{e["episode_id"]}:r{r["round"]}' for e in data for r in e["rounds"][:manifest["config"]["feature_rounds"]]}
+        assert set(features["keys"].tolist()) == expected_keys
+        assert len(features["keys"]) == len(expected_keys)
+        assert features["residual"].shape == (len(expected_keys), extracted["hidden_size"])
+        assert np.isfinite(features["residual"]).all()
+        assert np.isfinite(features["final_normalized"]).all()
+        assert max(extracted["repeat_replay_max_abs_error"]) < 1e-5
+        feature_check = "passed"
     report = {"purpose": "Debug only; counts and AUC are not scientific evidence", "expected_episodes": expected,
               "completed_episodes": len(data), "all_episodes_complete": len(data) == expected,
               "environment_replay": "passed", "identical_initial_prompt_per_task": "passed",
+              "feature_integrity": feature_check,
               "successes": sum(e["success"] for e in data),
               "first_action_validity": dict(Counter(e["rounds"][0]["validity"] for e in data)),
               "feature_site_fallbacks": sum(r["probe_site"] != "last_action_token" for e in data for r in e["rounds"][:manifest["config"]["feature_rounds"]]),
