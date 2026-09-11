@@ -1,6 +1,9 @@
 """Use unchanged upstream mechanics in process; no HTTP server needed."""
 import ast
+import contextlib
+import hashlib
 import importlib
+import os
 import re
 import sys
 import types
@@ -12,6 +15,42 @@ COMMIT = "3ef9235d23e68e7c2920c5422ad957dc8ced5c6c"
 PACKAGE = UPSTREAM / "agentenv-textcraft/agentenv_textcraft"
 
 
+RECIPE_ORDER_POLICY = "sorted(os.listdir)"
+
+
+class _CanonicalOS:
+    """Only the two `os` attributes `_load_recipes` actually uses.
+
+    Anything else (scandir, walk) raises AttributeError loudly rather than
+    silently reintroducing filesystem order after an upstream bump.
+    """
+
+    path = os.path
+
+    @staticmethod
+    def listdir(directory):
+        return sorted(os.listdir(directory))
+
+
+@contextlib.contextmanager
+def canonical_recipe_order(module):
+    """Swap one module's `os` binding for the duration of tree construction.
+
+    Upstream reads recipes with a bare `os.listdir` (crafting_tree.py:61), the
+    only filesystem-order call site in the package. Directory order differs
+    between APFS and ext4, and upstream breaks recipe cycles by whichever file
+    loads first, so the order decides both `data_idx` -> goal and which items
+    are craftable at all. Scoped to the single constructor call; `vendor/` must
+    stay byte-identical because prepare() rejects a dirty submodule.
+    """
+    original = module.os
+    module.os = _CanonicalOS
+    try:
+        yield
+    finally:
+        module.os = original
+
+
 def upstream_classes():
     # Upstream __init__ starts a global server with a cwd-relative recipe path.
     # A private namespace loads the identical mechanics without that side effect.
@@ -20,9 +59,9 @@ def upstream_classes():
         module = types.ModuleType(name)
         module.__path__ = [str(PACKAGE)]
         sys.modules[name] = module
-    tree = importlib.import_module(name + ".crafting_tree").CraftingTree
+    tree_module = importlib.import_module(name + ".crafting_tree")
     env = importlib.import_module(name + ".environment").TextCraftEnv
-    return tree, env
+    return tree_module.CraftingTree, env, tree_module
 
 
 def upstream_conversation():
@@ -60,8 +99,51 @@ def validity(observation, parse_error=None):
 
 class TextCraft:
     def __init__(self):
-        tree_cls, self.env_cls = upstream_classes()
-        self.tree = tree_cls(minecraft_dir=str(PACKAGE))
+        tree_cls, self.env_cls, tree_module = upstream_classes()
+        with canonical_recipe_order(tree_module):
+            self.tree = tree_cls(minecraft_dir=str(PACKAGE))
+
+    def _depth_ordered_pool(self):
+        """Replicate upstream's goal selection exactly (environment.py:167-169).
+
+        Indices must be the `data_idx` values upstream will actually resolve, so
+        this uses the same generator and the same stable sort rather than
+        re-deriving an order from item names.
+        """
+        pairs = list(self.tree.item_recipes_min_depth(1))
+        return sorted(pairs, key=lambda x: x[1])
+
+    def tasks_by_depth(self, depths):
+        """data_idx values whose goal has one of `depths` as its min recipe depth."""
+        depths = set(depths)
+        return [i for i, (_item, depth) in enumerate(self._depth_ordered_pool()) if depth in depths]
+
+    def fingerprint(self):
+        """Two independent digests, so a cross-machine mismatch is diagnosable.
+
+        A differing corpus hash means the recipe data or submodule drifted; a
+        matching corpus hash with a differing tree hash means the load order or
+        cycle resolution changed. Every set is serialised sorted, so both are
+        independent of PYTHONHASHSEED and safe to pin in tests.
+        """
+        recipes = PACKAGE / "recipes"
+        names = sorted(os.listdir(recipes))
+        corpus = [[n, hashlib.sha256((recipes / n).read_bytes()).hexdigest()] for n in names]
+        pool = self._depth_ordered_pool()
+        histogram = {}
+        for _item, depth in pool:
+            histogram[str(depth)] = histogram.get(str(depth), 0) + 1
+        tree_state = {
+            # Insertion order is deliberately preserved: it is the thing being pinned.
+            "itemid_recipes": [[str(k), [str(r) for r in v]] for k, v in self.tree.itemid_recipes.items()],
+            "tag_recipes": [[str(k), [str(r) for r in v]] for k, v in self.tree.tag_recipes.items()],
+            "itemid_set": sorted(str(i) for i in self.tree.itemid_set),
+            "tag_set": sorted(str(t) for t in self.tree.tag_set),
+            "pool": [[str(getattr(item, "name", item)), depth] for item, depth in pool],
+        }
+        return {"policy": RECIPE_ORDER_POLICY, "recipe_file_count": len(names),
+                "recipe_corpus_hash": digest(corpus), "crafting_tree_hash": digest(tree_state),
+                "pool_size": len(pool), "depth_histogram": histogram}
 
     def freeze_task(self, index, seed=42):
         env = self.env_cls(self.tree, None, None)

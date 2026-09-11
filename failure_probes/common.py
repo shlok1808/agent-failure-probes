@@ -22,5 +22,28 @@ def write_json(path, value):
     os.replace(tmp, path)
 
 
+def episode_paths(run):
+    return sorted((Path(run) / "episodes").glob("*.json"))
+
+
+def iter_episodes(run):
+    """Stream episodes one at a time.
+
+    A 20-round episode is ~0.5 MB of JSON; at 1000 episodes, holding them all as
+    Python objects costs several GB. Callers that need a single pass should use
+    this rather than episodes().
+    """
+    for path in episode_paths(run):
+        yield read_json(path)
+
+
 def episodes(run):
-    return [read_json(p) for p in sorted((Path(run) / "episodes").glob("*.json"))]
+    return list(iter_episodes(run))
+
+
+def append_jsonl(path, value):
+    """Append one record. write_json's atomic replace cannot append."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as handle:
+        handle.write(json.dumps(value) + "\n")

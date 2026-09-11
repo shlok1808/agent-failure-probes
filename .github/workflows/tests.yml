@@ -3,6 +3,12 @@ on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
+    env:
+      # Upstream builds prompts from set iteration order; without this CI is
+      # non-deterministic in distractor selection. README already documents it.
+      PYTHONHASHSEED: "0"
+      # Keep CI from dropping __pycache__ into vendor/, which prepare() rejects.
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@v4
         with:

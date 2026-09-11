@@ -1,20 +1,14 @@
 {
-  "stage": "debug",
+  "stage": "stage2",
   "model": "Qwen/Qwen3-1.7B",
   "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
   "dataset_revision": "1f090d52ef01a83a889da02699e34a500e35a274",
-  "task_selection": {
-    "mode": "agenteval_prefix",
-    "recipe_depths": [
-      1
-    ],
-    "expected_num_tasks": 5
-  },
-  "num_tasks": 5,
-  "attempts_per_task": 3,
+  "task_selection": {"mode": "recipe_depth", "recipe_depths": [1], "expected_num_tasks": 125},
+  "num_tasks": 125,
+  "attempts_per_task": 8,
   "max_episode_retries": 2,
   "environment_seed": 42,
-  "generation_seed": 20260911,
+  "generation_seed": 20260912,
   "temperature": 0.8,
   "top_p": 0.95,
   "top_k": 0,

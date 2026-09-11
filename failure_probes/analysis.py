@@ -8,7 +8,12 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from .common import read_json, write_json, episodes
+from .common import read_json, write_json, iter_episodes
+
+INTERPRETATION = {
+    "debug": "Plumbing checks only; do not interpret debug AUC as evidence",
+    "stage2": "Confirmatory run. Read docs/reproduction.md for what is and is not matched to Ruan.",
+}
 
 
 def within_task(labels, scores, tasks):
@@ -68,24 +73,38 @@ def surface_features(record):
             len(record["generated_token_ids"]), len(record["prompt_token_ids"]), 0.]
 
 
-def analyze(run):
+def analyze(run, allow_incomplete=False):
     from pathlib import Path
     run = Path(run)
     manifest = read_json(run / "manifest.json")
     config = manifest["config"]
-    data = episodes(run)
+    # One streaming pass: keep only the round-1 fields the probe and baselines use.
+    # Holding 1000 full episodes costs several GB as Python objects.
+    data = []
+    for episode in iter_episodes(run):
+        first = episode["rounds"][0]
+        data.append({"episode_id": episode["episode_id"], "task_id": episode["task_id"],
+                     "success": episode["success"], "validity": first["validity"],
+                     "surface": surface_features(first), "text": first["prompt"] + first["response"]})
+    expected = manifest["config"]["num_tasks"] * manifest["config"]["attempts_per_task"]
+    missing = expected - len(data)
+    if missing and not allow_incomplete:
+        raise ValueError(
+            f"{missing} of {expected} episodes are missing. Episode loss is not missing-at-random: "
+            "context blowups and long trajectories track failing episodes, so analysing a subset "
+            "biases the label distribution. Re-run the gaps, or pass --allow-incomplete deliberately.")
     stored = np.load(run / "features.npz", allow_pickle=False)
     vectors = dict(zip(stored["keys"].tolist(), stored["residual"]))
     x = np.stack([vectors[e["episode_id"] + ":r1"] for e in data])
     y = np.array([int(not e["success"]) for e in data])
     groups = np.array([e["task_id"] for e in data])
-    surface = np.array([surface_features(e["rounds"][0]) for e in data])
+    surface = np.array([e["surface"] for e in data])
     hidden_scores, splits = grouped_scores(x, y, groups, config["cv_folds"], config["analysis_seed"])
     score_sets = {"hidden": hidden_scores}
     for name, matrix in [("surface_five", surface), ("hidden_plus_surface", np.column_stack([x, surface]))]:
         score_sets[name], _ = grouped_scores(matrix, y, groups, config["cv_folds"], config["analysis_seed"])
     # Fairer text baseline: task prompt + full response available BEFORE feedback.
-    texts = [e["rounds"][0]["prompt"] + e["rounds"][0]["response"] for e in data]
+    texts = [e["text"] for e in data]
     text_scores = np.full(len(y), np.nan)
     for split in splits:
         if split["status"] != "ok":
@@ -99,8 +118,9 @@ def analyze(run):
         classifier.fit(hstack([a, csr_matrix(scaler.transform(surface[train]))]), y[train])
         text_scores[test] = classifier.predict_proba(hstack([b, csr_matrix(scaler.transform(surface[test]))]))[:, 1]
     score_sets["prefix_text_plus_surface"] = text_scores
-    valid = np.array([e["rounds"][0]["validity"] == "executable" for e in data])
-    report = {"stage": config["stage"], "interpretation": "Plumbing checks only; do not interpret debug AUC as evidence",
+    valid = np.array([e["validity"] == "executable" for e in data])
+    report = {"stage": config["stage"], "interpretation": INTERPRETATION.get(config["stage"], INTERPRETATION["debug"]),
+              "missing_episodes": missing,
               "n_episodes": len(y), "n_tasks": len(set(groups)), "successes": int(sum(y == 0)),
               "models": {}, "folds": [{k: v for k, v in s.items() if k not in ("train", "test")} for s in splits],
               "bootstrap_scope": "Conditional on fitted probes and observed mixed-outcome tasks; not retraining uncertainty",
@@ -108,8 +128,8 @@ def analyze(run):
               "baseline_caveat": "Beating this text baseline does not prove information is unavailable to all external observers."}
     for name, scores in score_sets.items():
         report["models"][name] = {}
-        for subset, mask in [("all", np.ones(len(y), bool)), ("executable_only", valid)]:
-            mask &= np.isfinite(scores)
+        for subset, base in [("all", np.ones(len(y), bool)), ("executable_only", valid)]:
+            mask = base & np.isfinite(scores)
             stats = within_task(y[mask], scores[mask], groups[mask])
             stats.update({"n": int(sum(mask)), "overall_auc": float(roc_auc_score(y[mask], scores[mask])) if len(np.unique(y[mask])) == 2 else None,
                           "conditional_bootstrap_95": bootstrap_within(stats["per_task"], config["bootstrap_samples"], config["analysis_seed"])})
@@ -118,4 +138,5 @@ def analyze(run):
                     **{name: float(s[i]) if np.isfinite(s[i]) else None for name, s in score_sets.items()}} for i, e in enumerate(data)]
     write_json(run / "predictions.json", predictions)
     write_json(run / "analysis.json", report)
-    print(f"Saved debug probe diagnostics; {len(y)} episodes, {sum(y == 0)} successes. No confirmatory conclusions.")
+    print(f'{report["interpretation"]}\n{len(y)} episodes, {sum(y == 0)} successes, '
+          f'{report["models"]["hidden"]["all"]["mixed_tasks"]} mixed-outcome tasks.')

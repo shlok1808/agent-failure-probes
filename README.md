@@ -35,7 +35,7 @@ failure-probes extract --run runs/debug-001
 failure-probes analyze --run runs/debug-001
 ```
 
-- `prepare`: freezes the first five public AgentEval TextCraft task indices and their exact recipe prompts; does not use outcome labels to select tasks.
+- `prepare`: selects tasks by recipe depth (config `task_selection`) under a pinned recipe order, freezes their exact prompts, and records a crafting-tree fingerprint; does not use outcome labels to select tasks. `--dry-run` prints the selection and writes nothing.
 - `collect`: resumes completed episodes. A failed interrupted episode restarts from its saved per-step seeds; infrastructure errors are stored separately and are never counted as task failures.
 - `audit`: reexecutes every logged command in TextCraft and checks rewards, inventory, and identical initial model inputs for repeated attempts.
 - `extract`: stores one block-output vector per episode plus a final-normalized vector for provenance. Reads no future environment feedback into the first-round feature.
@@ -77,7 +77,8 @@ The standard AgentGym prompt asks for `Thought:` and `Action:`. Qwen's dedicated
 - Executable means the environment accepted an action, not that it was useful. No unsupported good/bad-action labels are manufactured.
 - First-round extracted features come before first-action feedback. Validity is a **post-hoc evaluation filter**, not an input to the deployed probe or text baseline.
 - Bootstrap intervals are conditional on fitted cross-validation probes and observed mixed-outcome tasks; they omit probe-training uncertainty.
-- Stage 2 remains disabled in `prepare`. Review debug results and unresolved reproduction choices before enabling the larger run.
+- Stage 2 (`configs/stage2.json`, 125 depth-1 tasks x 8 attempts) is now enabled but **not yet collected**. See `AGENTS.md` before running it.
+- Recipe load order is pinned to `sorted(os.listdir)`. This is arbitrary but deliberate: it fixes which goal each `data_idx` resolves to, and it changes which items are craftable. See `AGENTS.md`.
 
 ## Upstream attribution
 

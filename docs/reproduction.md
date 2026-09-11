@@ -23,7 +23,7 @@ The immediate target is the first-round TextCraft/Qwen3 probe, not every model/e
 | Evaluation task source | AgentEval `1f090d52ef01a83a889da02699e34a500e35a274`, first five TextCraft test indices | Debug choice; author's exact 100-task list not supplied |
 | Prompt and parsing | Read standard AgentGym conversation, reproduce its Action extraction/sanitization | Closest public harness, not confirmed author's prompt |
 | Task reset | Freeze complete goal/recipe/distractor prompt in manifest | Required for genuinely identical-task comparisons |
-| Upstream ordering | Raw source uses sets and filesystem order | Seed alone does not guarantee cross-machine prompts; reuse frozen manifest |
+| Upstream ordering | Recipes loaded via `sorted(os.listdir)`, pinned and hashed into the manifest | **Arbitrary but fixed choice.** Filesystem order previously decided both `data_idx` -> goal and, via cycle breaking, which items are craftable (gold/iron/honey flip). Ascending sort yields depth histogram {1:125, 2:291, 3:117, 4:11}; the reverse yields {1:147, 2:274, 3:112, 4:11} |
 | Model runner | Transformers, sequential, BF16 on MPS/CUDA; CPU float32 | Hardware/backend difference; precision not established as matched |
 | Sampling | Temperature .8, top-p .95, top-k 0, repetition penalty 1 | Chosen defaults; paper does not list these |
 | Response length | Max 256 new tokens, including visible Thought | Chosen cap; every truncation logged |
