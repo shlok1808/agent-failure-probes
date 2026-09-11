@@ -1,0 +1,21 @@
+{
+  "stage": "debug",
+  "model": "Qwen/Qwen3-1.7B",
+  "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "dataset_revision": "1f090d52ef01a83a889da02699e34a500e35a274",
+  "num_tasks": 5,
+  "attempts_per_task": 3,
+  "environment_seed": 42,
+  "generation_seed": 20260911,
+  "temperature": 0.8,
+  "top_p": 0.95,
+  "top_k": 0,
+  "max_new_tokens": 256,
+  "context_limit": 8192,
+  "max_rounds": 20,
+  "feature_rounds": 1,
+  "layer_number": 28,
+  "cv_folds": 5,
+  "analysis_seed": 42,
+  "bootstrap_samples": 1000
+}
