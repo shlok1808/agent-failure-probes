@@ -7,7 +7,7 @@ name = "agent-failure-probes"
 version = "0.1.0"
 description = "TextCraft early failure probe reproduction and within-task diagnostics"
 requires-python = ">=3.11"
-dependencies = ["torch>=2.6", "transformers>=4.51,<6", "huggingface-hub>=0.30", "numpy>=1.26", "scikit-learn>=1.5", "gymnasium>=1.0", "safetensors>=0.5"]
+dependencies = ["torch>=2.6", "transformers>=4.56,<6", "huggingface-hub>=0.30", "numpy>=1.26", "scikit-learn>=1.5", "gymnasium>=1.0", "safetensors>=0.5"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]

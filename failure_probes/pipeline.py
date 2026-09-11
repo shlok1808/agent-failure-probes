@@ -54,10 +54,17 @@ def collect(run, device=None):
     manifest = validate_manifest(run)
     config = manifest["config"]
     actor, env = Actor(config, device), TextCraft()
-    write_json(run / "runtime.json", {"device": actor.device, "dtype": str(actor.dtype),
+    runtime = {"device": actor.device, "dtype": str(actor.dtype),
                                     "model_revision": actor.model.config._commit_hash,
                                     "code_commit": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
-                                    "code_hashes": {str(p.relative_to(ROOT)): digest(p.read_text()) for p in sorted((ROOT / "failure_probes").glob("*.py"))}})
+                                    "code_hashes": {str(p.relative_to(ROOT)): digest(p.read_text()) for p in sorted((ROOT / "failure_probes").glob("*.py"))}}
+    if (run / "runtime.json").exists():
+        prior = read_json(run / "runtime.json")
+        for field in ["device", "dtype", "model_revision", "code_hashes"]:
+            if prior[field] != runtime[field]:
+                raise ValueError(f"Resume changes {field}; use a fresh run directory")
+    else:
+        write_json(run / "runtime.json", runtime)
     for task in manifest["tasks"]:
         for attempt in range(config["attempts_per_task"]):
             episode_id = f'{task["task_id"]}_attempt_{attempt:02d}'
@@ -105,6 +112,9 @@ def extract(run, device=None):
     run = Path(run)
     manifest = validate_manifest(run)
     actor = Actor(manifest["config"], device)
+    runtime = read_json(run / "runtime.json")
+    if actor.device != runtime["device"] or str(actor.dtype) != runtime["dtype"]:
+        raise ValueError("Replay backend/precision must match collection")
     vectors, normalized, keys, replay_checks = [], [], [], []
     for episode in episodes(run):
         if episode["manifest_hash"] != manifest["manifest_hash"]:
