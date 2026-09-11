@@ -1,0 +1,52 @@
+[
+  {
+    "task_id": "textcraft_0",
+    "data_idx": 0,
+    "environment_seed": 42,
+    "goal": "minecraft:dropper",
+    "commands": "craft 1 note block using 8 planks, 1 redstone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 redstone block using 9 redstone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot",
+    "initial_observation": "Crafting commands:\ncraft 1 note block using 8 planks, 1 redstone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 redstone block using 9 redstone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\n\nGoal: craft dropper.",
+    "recipe_depth": 1,
+    "task_hash": "f5da50e736addfe9145b9e9d7d9d2302e91fed46e9a91ffc5ad7b47cd7566ed4"
+  },
+  {
+    "task_id": "textcraft_1",
+    "data_idx": 1,
+    "environment_seed": 42,
+    "goal": "minecraft:stone_pressure_plate",
+    "commands": "craft 6 stone slab using 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stone pressure plate using 2 stone",
+    "initial_observation": "Crafting commands:\ncraft 6 stone slab using 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stone pressure plate using 2 stone\n\nGoal: craft stone pressure plate.",
+    "recipe_depth": 1,
+    "task_hash": "1deda32b97dbaf63b0668a09a4ade20c666a55c6a349f6c2e920c3f618c0239e"
+  },
+  {
+    "task_id": "textcraft_2",
+    "data_idx": 2,
+    "environment_seed": 42,
+    "goal": "minecraft:dark_oak_planks",
+    "commands": "craft 4 dark oak planks using 1 dark oak logs",
+    "initial_observation": "Crafting commands:\ncraft 4 dark oak planks using 1 dark oak logs\n\nGoal: craft dark oak planks.",
+    "recipe_depth": 1,
+    "task_hash": "0aa902f8770e8a6b781551e03c96277a955ccc492120e33314dc4b8a587147ab"
+  },
+  {
+    "task_id": "textcraft_3",
+    "data_idx": 3,
+    "environment_seed": 42,
+    "goal": "minecraft:bucket",
+    "commands": "craft 1 iron trapdoor using 4 iron ingot\ncraft 1 cauldron using 7 iron ingot\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 bucket using 3 iron ingot\ncraft 1 iron helmet using 5 iron ingot\ncraft 1 iron chestplate using 8 iron ingot\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 1 anvil using 3 iron block, 4 iron ingot\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 1 iron shovel using 2 stick, 1 iron ingot\ncraft 9 iron nugget using 1 iron ingot",
+    "initial_observation": "Crafting commands:\ncraft 1 iron trapdoor using 4 iron ingot\ncraft 1 cauldron using 7 iron ingot\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 bucket using 3 iron ingot\ncraft 1 iron helmet using 5 iron ingot\ncraft 1 iron chestplate using 8 iron ingot\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 1 anvil using 3 iron block, 4 iron ingot\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 1 iron shovel using 2 stick, 1 iron ingot\ncraft 9 iron nugget using 1 iron ingot\n\nGoal: craft bucket.",
+    "recipe_depth": 1,
+    "task_hash": "044556c631ec9f997924e36761f5bd84c8effda6fd224c6cdf94ee2467f37c1b"
+  },
+  {
+    "task_id": "textcraft_4",
+    "data_idx": 4,
+    "environment_seed": 42,
+    "goal": "minecraft:oak_wood",
+    "commands": "craft 3 oak wood using 4 oak log",
+    "initial_observation": "Crafting commands:\ncraft 3 oak wood using 4 oak log\n\nGoal: craft oak wood.",
+    "recipe_depth": 1,
+    "task_hash": "3b2e076ad312b356d310cf4492cc74e10f79019756d28e6c2f096237ca121d56"
+  }
+]

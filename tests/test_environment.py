@@ -1,5 +1,7 @@
 import ast
+import json
 import re
+from pathlib import Path
 from dataclasses import dataclass
 import pytest
 from failure_probes.environment import TextCraft, parse_action, upstream_conversation, UPSTREAM
@@ -64,9 +66,10 @@ def test_action_span_excludes_trailing_whitespace():
 
 
 def test_five_debug_tasks_are_solvable_using_supplied_recipes(env):
-    # Independent of the actor: validate every selected one-step recipe task.
-    for index in range(5):
-        task = env.freeze_task(index)
+    # Use the actual frozen debug tasks: upstream numeric indices depend on
+    # filesystem ordering, so regenerating index 0 on Linux can select another task.
+    tasks = json.loads((Path(__file__).parent / "fixtures/debug_tasks.json").read_text())
+    for task in tasks:
         env.reset(task)
         chosen = None
         for command in task["commands"].splitlines():
