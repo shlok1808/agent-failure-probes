@@ -38,8 +38,12 @@ def test_real_environment_errors_and_success(env):
     env.reset(task)
     assert env.step("nonsense")["validity"] == "incorrectly_formatted"
     assert env.step("Action: craft 1 gold ingot using 9 gold nugget")["validity"] == "impossible"
-    assert env.step("Action: get 1 gold ingot")["validity"] == "executable"
-    result = env.step("Action: craft 9 gold nugget using 1 gold ingot")
+    # `get` only yields base items, so the craftable goal cannot be collected
+    # directly; the nuggets it is made from can be, because the cycle break left
+    # them as a base item.
+    assert env.step("Action: get 1 gold ingot")["validity"] == "impossible"
+    assert env.step("Action: get 9 gold nugget")["validity"] == "executable"
+    result = env.step("Action: craft 1 gold ingot using 9 gold nugget")
     assert result["reward"] == 1 and result["done"]
 
 
