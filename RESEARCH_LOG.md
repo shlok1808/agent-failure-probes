@@ -121,3 +121,111 @@ but the mechanistic claim the framing invites is not supported by our data.
 4. Excluding the 15 plural-trap tasks changes the difficulty mix — worth reporting as
    a sensitivity check, but not as the primary estimate (it drops the tasks the model
    is worst at, which is selection on the outcome).
+
+---
+
+## 2026-09-13 (later) — Round and layer sweeps: the earlier conclusion was too strong
+
+**This entry revises the one above.** That entry concluded the within-task signal "does
+not hold". That was measured at a single point — round 1, layer 28 — and treated as if it
+characterised the model. Sweeping rounds and layers shows the signal is real; the paper's
+configuration is simply the weakest corner of the space we searched.
+
+### Round sweep (layer 28, `scripts/rounds_sweep.py`)
+
+Population is episodes alive at each round, the paper's convention.
+
+| Round | Alive | Mixed tasks | Hidden within-task | Surface within-task |
+|---|---|---|---|---|
+| 1 | 1000 | 57 | 0.585 | 0.607 |
+| 2 | 1000 | 57 | 0.650 | 0.691 |
+| **3** | 568 | 50 | **0.749** CI [0.68, 0.82] | 0.702 |
+| 4 | 343 | 39 | 0.619 | 0.746 |
+| 5 | 299 | 33 | 0.534 | 0.486 |
+| 6 | 284 | 28 | 0.699 | 0.579 |
+
+Within-task AUC climbs to 0.749 at round 3, with an interval clear of chance. Once the
+agent has acted twice and seen the results, the hidden state carries genuine
+rollout-specific information. Rounds 4–6 zigzag with intervals spanning 0.3; pairs fall
+from 627 at round 1 to 151 at round 6, so nothing should be read into that shape.
+
+### Layer sweep (`scripts/layer_sweep.py`, all layers in one forward pass)
+
+| Layer | R1 within | R1 pooled | R3 within | R3 pooled |
+|---|---|---|---|---|
+| 4 | 0.620 | 0.722 | 0.718 | 0.697 |
+| 8 | 0.640 | 0.802 | 0.721 | 0.790 |
+| **12** | **0.651** | **0.830** | **0.801** | 0.855 |
+| 16 | 0.625 | 0.807 | 0.795 | **0.867** |
+| 20 | 0.587 | 0.780 | 0.766 | 0.854 |
+| 24 | 0.563 | 0.758 | 0.755 | 0.841 |
+| **28** (paper) | 0.585 | 0.781 | 0.749 | 0.840 |
+
+**Layer 12 beats layer 28 at both rounds on both metrics.** At round 1 it wins even on
+the paper's own selection criterion, pooled AUC: 0.830 against 0.781.
+
+### Revised reading
+
+| Configuration | Within-task AUC |
+|---|---|
+| Round 1, layer 28 — the paper's setup | 0.585, CI [0.51, 0.66] |
+| Round 1, layer 12 | 0.651, CI [0.58, 0.72] |
+| **Round 3, layer 12** | **0.801, CI [0.74, 0.86]** |
+
+Rollout-specific failure signal exists. At the paper's coordinates it is weak enough to be
+mistaken for task difficulty, which is what the first entry concluded. Two rounds later and
+sixteen layers earlier it is unambiguous: same task, same recipe, and the probe separates
+the attempt that fails from the attempts that succeed.
+
+The finding about pooled AUC still stands — 99.6% of its comparisons are cross-task, and the
+probe remains largely a plural-trap detector at round 1 (below). What does not stand is the
+inference from that to "the hidden state carries no within-task information".
+
+### Why this is not a multiple-comparisons artifact
+
+Seven layers were searched, so the maximum is biased upward. Three things argue against
+that explanation:
+
+1. The layer curve is smooth and unimodal at both rounds, peaking mid-network and declining
+   through 28. Independent noise across seven estimates does not organise that way.
+2. **Layer 12 wins at round 1 and round 3 independently** — replication within our own data.
+3. Within-task and pooled metrics peak at adjacent layers (12 and 16), agreeing on a
+   mid-network optimum.
+
+Round 3 / layer 12 remains a selected cell and should be treated as a hypothesis for fresh
+data, not a point estimate to quote.
+
+### Failure modes (`scripts/failure_modes.py`)
+
+All 225 failures hit the 20-round cap; none failed fast. 94.7% repeat one action five or
+more times; 18 episodes emit a literal `abort`.
+
+| Population | Mean round-1 probe score | Share scoring > 0.5 |
+|---|---|---|
+| Successes (775) | 0.108 | — |
+| Failures on plural-trap tasks (69) | 0.747 | 77% |
+| All other failures (156) | 0.310 | 29% |
+
+At round 1, layer 28, the probe is substantially a detector for one lexical, task-level
+failure mode. Whether that remains true at round 3 / layer 12 is not yet measured, and is
+the obvious next check.
+
+### Caveats
+
+- **Hardware.** Sweeps ran on the Mac (MPS); the canonical `features.npz` was extracted on
+  CUDA. Round 1 layer 28 reads 0.547 from CUDA and 0.585 from MPS. Sweeps are internally
+  consistent and should be read as relative across rounds and layers; the CUDA numbers stay
+  authoritative for the headline. That a vendor swap moves the estimate by 0.04 is itself a
+  note about fragility.
+- **Surface baseline.** `token_logprobs` are stored only within the collected
+  `feature_rounds=1`, so rounds 2+ use a logprob-free variant with history counts. It is not
+  the same baseline as the round-1 five-feature version.
+- Later rounds are lower-powered and increasingly failure-weighted (79% by round 6).
+
+### Next
+
+1. Failure-mode breakdown at round 3 / layer 12 — does it still track the plural trap, or
+   does it detect the stuck-in-a-loop cases the round-1 probe missed?
+2. Re-extract the canonical features at layer 12 on CUDA to get an authoritative number.
+3. Rounds sweep at layer 12 rather than 28 — the rounds and layers were swept separately,
+   so their interaction is only measured at rounds 1 and 3.
