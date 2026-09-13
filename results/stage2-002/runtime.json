@@ -1,0 +1,15 @@
+{
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "code_commit": "c1601cab832b119fc886e606e2185ac21b99f26c",
+  "code_hashes": {
+    "failure_probes/__init__.py": "7e72e53aca7e6845d6e1d18785275a6d22bd5aaef532074447f7f84dbea9f738",
+    "failure_probes/actor.py": "1e4ff53b3f59b77e2075729d44d96ac48f5e91f3f8f546d64ffbd95a8d9efde8",
+    "failure_probes/analysis.py": "13161dc44e213ac4e129c74db18debd58372e199482ae958a6ecf49782825bfa",
+    "failure_probes/cli.py": "32276772c23f8bcf991fd95b0f0d5080072faefe4b4c6ac079817893bf645040",
+    "failure_probes/common.py": "72e17b1fd225d252d392a147d925ecb1bc251eea440b03901c9a18f354767727",
+    "failure_probes/environment.py": "bc6dc270d7bbe540f9a8eae1524445c4420abd4a1bdb9616c2bdfb639f9f07b3",
+    "failure_probes/pipeline.py": "547b5642df30fc955598214b6edd0e7744e809820b4f9c8dc79206f2639a1884"
+  }
+}

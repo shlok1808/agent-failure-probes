@@ -1,0 +1,1324 @@
+{
+  "schema_version": 2,
+  "config": {
+    "stage": "stage2",
+    "model": "Qwen/Qwen3-1.7B",
+    "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "dataset_revision": "1f090d52ef01a83a889da02699e34a500e35a274",
+    "task_selection": {
+      "mode": "recipe_depth",
+      "recipe_depths": [
+        1
+      ],
+      "expected_num_tasks": 125
+    },
+    "num_tasks": 125,
+    "attempts_per_task": 8,
+    "max_episode_retries": 2,
+    "environment_seed": 42,
+    "generation_seed": 20260912,
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "top_k": 0,
+    "max_new_tokens": 256,
+    "context_limit": 8192,
+    "max_rounds": 20,
+    "feature_rounds": 1,
+    "layer_number": 28,
+    "cv_folds": 5,
+    "analysis_seed": 42,
+    "bootstrap_samples": 1000
+  },
+  "upstream_commit": "3ef9235d23e68e7c2920c5422ad957dc8ced5c6c",
+  "recipe_order": {
+    "policy": "sorted(os.listdir)",
+    "recipe_file_count": 860,
+    "recipe_corpus_hash": "2b11d08046dc9f217732a6d301b433dfcebbae54af1675552ec55d6d3efa9da8",
+    "crafting_tree_hash": "8ec9aad5989b4afe9a01c5d69c9648b23ef59dbd1517aa8aa647ee0c5db2367c",
+    "pool_size": 544,
+    "depth_histogram": {
+      "1": 125,
+      "2": 291,
+      "3": 117,
+      "4": 11
+    }
+  },
+  "agenteval": {
+    "revision": "1f090d52ef01a83a889da02699e34a500e35a274",
+    "n_rows": 100,
+    "indices_covered_by_selection": 31,
+    "note": "AgentEval publishes indices only; the goal an index resolves to is tree-order dependent, so this is index coverage, not goal identity."
+  },
+  "conversation_start": [
+    {
+      "role": "user",
+      "content": "You are given few useful crafting recipes to craft items in Minecraft. Crafting commands are of the format \"craft [target object] using [input ingredients]\".\nEvery round I will give you an observation, you have to respond an action based on the state and instruction. You can \"get\" an object (ingredients) from the inventory or the environment, look-up the game inventory by \"inventory\", or \"craft\" (target) using any of the crafting commands.\nYour output must strictly follow this format:\"Thought:\nyour thoughts.\n\nAction:\nyour next action\"\n\nReminder: \n1. Always specify the quantity when using \"get\" and \"craft\" commands. - Example of get: get 1 lapis lazuli - Example1 of craft: craft 1 blue dye using 1 lapis lazuli - Example2 of craft: craft 1 golden carrot using 8 gold nugget, 1 carrot\n2. When using \"get\" command, do not specify whether the item comes from the inventory or the environment.\n3. You can use ONLY crafting commands provided, do not use your own crafting commands. However, if the crafting command uses a generic ingredient like \"planks\", you can use special types of the same ingredient e.g. \"dark oak planks\" in the command instead.\n\n"
+    },
+    {
+      "role": "assistant",
+      "content": "OK. I'll follow your instructions and try my best to solve the task."
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "textcraft_0",
+      "data_idx": 0,
+      "environment_seed": 42,
+      "goal": "minecraft:acacia_planks",
+      "commands": "craft 4 acacia planks using 1 acacia logs",
+      "initial_observation": "Crafting commands:\ncraft 4 acacia planks using 1 acacia logs\n\nGoal: craft acacia planks.",
+      "recipe_depth": 1,
+      "task_hash": "fa8383b16ab45d91aff9d006353285286d0815574754fc3fbca9e3022d6e6e4b"
+    },
+    {
+      "task_id": "textcraft_1",
+      "data_idx": 1,
+      "environment_seed": 42,
+      "goal": "minecraft:acacia_wood",
+      "commands": "craft 3 acacia wood using 4 acacia log",
+      "initial_observation": "Crafting commands:\ncraft 3 acacia wood using 4 acacia log\n\nGoal: craft acacia wood.",
+      "recipe_depth": 1,
+      "task_hash": "fcc111ec44ade5a6005215fc23494d2d4d8842ad1301a077b001c532cebaeb3e"
+    },
+    {
+      "task_id": "textcraft_2",
+      "data_idx": 2,
+      "environment_seed": 42,
+      "goal": "minecraft:beacon",
+      "commands": "craft 8 magenta stained glass using 8 glass, 1 magenta dye\ncraft 8 light gray stained glass using 8 glass, 1 light gray dye\ncraft 16 glass pane using 6 glass\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 8 white stained glass using 8 glass, 1 white dye\ncraft 1 end crystal using 1 ghast tear, 1 ender eye, 7 glass\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 beacon using 1 nether star, 5 glass, 3 obsidian\ncraft 1 ender chest using 8 obsidian, 1 ender eye\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye",
+      "initial_observation": "Crafting commands:\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\ncraft 8 light gray stained glass using 8 glass, 1 light gray dye\ncraft 16 glass pane using 6 glass\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 8 white stained glass using 8 glass, 1 white dye\ncraft 1 end crystal using 1 ghast tear, 1 ender eye, 7 glass\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 beacon using 1 nether star, 5 glass, 3 obsidian\ncraft 1 ender chest using 8 obsidian, 1 ender eye\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\n\nGoal: craft beacon.",
+      "recipe_depth": 1,
+      "task_hash": "d7e4375c8dc19dc99c9e5b50c66bc38c58f1f10dc83aa10c42ce8fddc30e3e61"
+    },
+    {
+      "task_id": "textcraft_3",
+      "data_idx": 3,
+      "environment_seed": 42,
+      "goal": "minecraft:birch_planks",
+      "commands": "craft 4 birch planks using 1 birch logs",
+      "initial_observation": "Crafting commands:\ncraft 4 birch planks using 1 birch logs\n\nGoal: craft birch planks.",
+      "recipe_depth": 1,
+      "task_hash": "a22437defb9319ca86ad616db7f6c133d00716b35bdcbb9646d7bec8ddb42f64"
+    },
+    {
+      "task_id": "textcraft_4",
+      "data_idx": 4,
+      "environment_seed": 42,
+      "goal": "minecraft:birch_wood",
+      "commands": "craft 3 birch wood using 4 birch log",
+      "initial_observation": "Crafting commands:\ncraft 3 birch wood using 4 birch log\n\nGoal: craft birch wood.",
+      "recipe_depth": 1,
+      "task_hash": "2dea89599b21d1800b3a17a1ee7f842c26db0a9aacdeb0a2ef6521b47668ad1b"
+    },
+    {
+      "task_id": "textcraft_5",
+      "data_idx": 5,
+      "environment_seed": 42,
+      "goal": "minecraft:black_dye",
+      "commands": "craft 1 black dye using 1 wither rose\ncraft 1 writable book using 1 book, 1 ink sac, 1 feather\ncraft 1 black dye using 1 ink sac",
+      "initial_observation": "Crafting commands:\ncraft 1 black dye using 1 wither rose\ncraft 1 writable book using 1 book, 1 ink sac, 1 feather\ncraft 1 black dye using 1 ink sac\n\nGoal: craft black dye.",
+      "recipe_depth": 1,
+      "task_hash": "81d2f85da51b861b5f140be219061c2cf01b298ec9003fb1caba5fd55a365a9d"
+    },
+    {
+      "task_id": "textcraft_6",
+      "data_idx": 6,
+      "environment_seed": 42,
+      "goal": "minecraft:blackstone_slab",
+      "commands": "craft 6 blackstone wall using 6 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 6 blackstone slab using 3 blackstone",
+      "initial_observation": "Crafting commands:\ncraft 6 blackstone wall using 6 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 6 blackstone slab using 3 blackstone\n\nGoal: craft blackstone slab.",
+      "recipe_depth": 1,
+      "task_hash": "0942af355d2c586fe90dd25bd5eb442fc14cc8d91370ada3e3885c03597087e8"
+    },
+    {
+      "task_id": "textcraft_7",
+      "data_idx": 7,
+      "environment_seed": 42,
+      "goal": "minecraft:blackstone_stairs",
+      "commands": "craft 6 blackstone slab using 3 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 6 blackstone wall using 6 blackstone\ncraft 4 blackstone stairs using 6 blackstone",
+      "initial_observation": "Crafting commands:\ncraft 6 blackstone slab using 3 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 6 blackstone wall using 6 blackstone\ncraft 4 blackstone stairs using 6 blackstone\n\nGoal: craft blackstone stairs.",
+      "recipe_depth": 1,
+      "task_hash": "733e40da022eec9c17ecc68a792b07ad17af4aceefbd52e667582d3c234500bd"
+    },
+    {
+      "task_id": "textcraft_8",
+      "data_idx": 8,
+      "environment_seed": 42,
+      "goal": "minecraft:blackstone_wall",
+      "commands": "craft 6 blackstone slab using 3 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 6 blackstone wall using 6 blackstone",
+      "initial_observation": "Crafting commands:\ncraft 6 blackstone slab using 3 blackstone\ncraft 4 polished blackstone using 4 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 6 blackstone wall using 6 blackstone\n\nGoal: craft blackstone wall.",
+      "recipe_depth": 1,
+      "task_hash": "d2942674b1328747f6a123fa069377a638196c24e59824d13996eca992289635"
+    },
+    {
+      "task_id": "textcraft_9",
+      "data_idx": 9,
+      "environment_seed": 42,
+      "goal": "minecraft:blaze_powder",
+      "commands": "craft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 2 blaze powder using 1 blaze rod",
+      "initial_observation": "Crafting commands:\ncraft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 2 blaze powder using 1 blaze rod\n\nGoal: craft blaze powder.",
+      "recipe_depth": 1,
+      "task_hash": "63e6176d5a49a8f093a15260fbf13b5cc17d9ad8a88ec6c16fff459bff266607"
+    },
+    {
+      "task_id": "textcraft_10",
+      "data_idx": 10,
+      "environment_seed": 42,
+      "goal": "minecraft:blue_dye",
+      "commands": "craft 1 blue dye using 1 cornflower\ncraft 1 lapis block using 9 lapis lazuli\ncraft 1 blue dye using 1 lapis lazuli",
+      "initial_observation": "Crafting commands:\ncraft 1 blue dye using 1 cornflower\ncraft 1 lapis block using 9 lapis lazuli\ncraft 1 blue dye using 1 lapis lazuli\n\nGoal: craft blue dye.",
+      "recipe_depth": 1,
+      "task_hash": "49a083e62f0a479bfa6cc37d4786b1ef281c9c6908874384560e79ac1675c502"
+    },
+    {
+      "task_id": "textcraft_11",
+      "data_idx": 11,
+      "environment_seed": 42,
+      "goal": "minecraft:bone_meal",
+      "commands": "craft 3 bone meal using 1 bone",
+      "initial_observation": "Crafting commands:\ncraft 3 bone meal using 1 bone\n\nGoal: craft bone meal.",
+      "recipe_depth": 1,
+      "task_hash": "eac3766205a95597c1b59040a51ac5730eb4278addf9562fc6b5e57d72d38b29"
+    },
+    {
+      "task_id": "textcraft_12",
+      "data_idx": 12,
+      "environment_seed": 42,
+      "goal": "minecraft:bread",
+      "commands": "craft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 1 hay block using 9 wheat\ncraft 1 bread using 3 wheat",
+      "initial_observation": "Crafting commands:\ncraft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 1 hay block using 9 wheat\ncraft 1 bread using 3 wheat\n\nGoal: craft bread.",
+      "recipe_depth": 1,
+      "task_hash": "e942139487d86e0b7320a21a1cf63c02aba425d71293b25d73fbada8c5a23d69"
+    },
+    {
+      "task_id": "textcraft_13",
+      "data_idx": 13,
+      "environment_seed": 42,
+      "goal": "minecraft:brewing_stand",
+      "commands": "craft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 1 furnace using 8 stone crafting materials\ncraft 2 blaze powder using 1 blaze rod\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials",
+      "initial_observation": "Crafting commands:\ncraft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 1 furnace using 8 stone crafting materials\ncraft 2 blaze powder using 1 blaze rod\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\n\nGoal: craft brewing stand.",
+      "recipe_depth": 1,
+      "task_hash": "9f72cd15113007ea1ac77260d1675e6a60c6bd6298238a58ace0f44cf1379cc6"
+    },
+    {
+      "task_id": "textcraft_14",
+      "data_idx": 14,
+      "environment_seed": 42,
+      "goal": "minecraft:bricks",
+      "commands": "craft 1 flower pot using 3 brick\ncraft 1 bricks using 4 brick",
+      "initial_observation": "Crafting commands:\ncraft 1 flower pot using 3 brick\ncraft 1 bricks using 4 brick\n\nGoal: craft bricks.",
+      "recipe_depth": 1,
+      "task_hash": "6b8cf4dab8be0dc2f0e80164e6af58428915e9e0432b1bbeb0e2f984f892ac75"
+    },
+    {
+      "task_id": "textcraft_15",
+      "data_idx": 15,
+      "environment_seed": 42,
+      "goal": "minecraft:brown_dye",
+      "commands": "craft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 brown dye using 1 cocoa beans",
+      "initial_observation": "Crafting commands:\ncraft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 brown dye using 1 cocoa beans\n\nGoal: craft brown dye.",
+      "recipe_depth": 1,
+      "task_hash": "d75bfd9f40660e20fd01a0bc4b0490fafc2b1ee3fddda12b72f02321e6b1fc20"
+    },
+    {
+      "task_id": "textcraft_16",
+      "data_idx": 16,
+      "environment_seed": 42,
+      "goal": "minecraft:chiseled_quartz_block",
+      "commands": "craft 1 chiseled quartz block using 2 quartz slab",
+      "initial_observation": "Crafting commands:\ncraft 1 chiseled quartz block using 2 quartz slab\n\nGoal: craft chiseled quartz block.",
+      "recipe_depth": 1,
+      "task_hash": "072e617e7dff0ebc972be55fce222457a53aab1aefc24db27cf213ec022835a6"
+    },
+    {
+      "task_id": "textcraft_17",
+      "data_idx": 17,
+      "environment_seed": 42,
+      "goal": "minecraft:clay",
+      "commands": "craft 1 clay using 4 clay ball",
+      "initial_observation": "Crafting commands:\ncraft 1 clay using 4 clay ball\n\nGoal: craft clay.",
+      "recipe_depth": 1,
+      "task_hash": "208b0eee930cb7004bebada36942fc8d61b146c1ef0182b38946b311ee3f9d06"
+    },
+    {
+      "task_id": "textcraft_18",
+      "data_idx": 18,
+      "environment_seed": 42,
+      "goal": "minecraft:coal_block",
+      "commands": "craft 4 soul torch using 1 coal, 1 stick, 1 soul fire base blocks\ncraft 4 torch using 1 stick, 1 coal\ncraft 3 fire charge using 1 gunpowder, 1 blaze powder, 1 coal\ncraft 1 coal block using 9 coal",
+      "initial_observation": "Crafting commands:\ncraft 4 soul torch using 1 coal, 1 stick, 1 soul fire base blocks\ncraft 4 torch using 1 stick, 1 coal\ncraft 3 fire charge using 1 gunpowder, 1 blaze powder, 1 coal\ncraft 1 coal block using 9 coal\n\nGoal: craft coal block.",
+      "recipe_depth": 1,
+      "task_hash": "2a50ce5a531e3e5a65ac1965d5368d003cca5036e19eee0c022b795b32ddce8d"
+    },
+    {
+      "task_id": "textcraft_19",
+      "data_idx": 19,
+      "environment_seed": 42,
+      "goal": "minecraft:coarse_dirt",
+      "commands": "craft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 8 light blue concrete powder using 1 light blue dye, 4 sand, 4 gravel\ncraft 8 black concrete powder using 1 black dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 4 coarse dirt using 2 dirt, 2 gravel\ncraft 8 orange concrete powder using 1 orange dye, 4 sand, 4 gravel",
+      "initial_observation": "Crafting commands:\ncraft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 8 light blue concrete powder using 1 light blue dye, 4 sand, 4 gravel\ncraft 8 black concrete powder using 1 black dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 4 coarse dirt using 2 dirt, 2 gravel\ncraft 8 orange concrete powder using 1 orange dye, 4 sand, 4 gravel\n\nGoal: craft coarse dirt.",
+      "recipe_depth": 1,
+      "task_hash": "baf3f61d6c7c7a6ae07325f48c77883f78e97b8ffaac28e57af5f78038c29faa"
+    },
+    {
+      "task_id": "textcraft_20",
+      "data_idx": 20,
+      "environment_seed": 42,
+      "goal": "minecraft:cobblestone_slab",
+      "commands": "craft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow",
+      "initial_observation": "Crafting commands:\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\n\nGoal: craft cobblestone slab.",
+      "recipe_depth": 1,
+      "task_hash": "cd6fe82d8cfc17b86c6da03dcb82fe5355cb0ed1738ab0161994c10731bb870d"
+    },
+    {
+      "task_id": "textcraft_21",
+      "data_idx": 21,
+      "environment_seed": 42,
+      "goal": "minecraft:cobblestone_stairs",
+      "commands": "craft 6 cobblestone wall using 6 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone\n\nGoal: craft cobblestone stairs.",
+      "recipe_depth": 1,
+      "task_hash": "903d22ff4014c224b72c3521bde10c75467ea51028858289352195f579b79e3e"
+    },
+    {
+      "task_id": "textcraft_22",
+      "data_idx": 22,
+      "environment_seed": 42,
+      "goal": "minecraft:cobblestone_wall",
+      "commands": "craft 2 diorite using 2 quartz, 2 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone\n\nGoal: craft cobblestone wall.",
+      "recipe_depth": 1,
+      "task_hash": "9d39f080ef40042bb8398efcab44a82c10c4443b629ffb8c7dfac9bcf79b78b4"
+    },
+    {
+      "task_id": "textcraft_23",
+      "data_idx": 23,
+      "environment_seed": 42,
+      "goal": "minecraft:composter",
+      "commands": "craft 1 lectern using 4 wooden slabs, 1 bookshelf\ncraft 1 barrel using 6 planks, 2 wooden slabs\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 1 composter using 7 wooden slabs",
+      "initial_observation": "Crafting commands:\ncraft 1 lectern using 4 wooden slabs, 1 bookshelf\ncraft 1 barrel using 6 planks, 2 wooden slabs\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 1 composter using 7 wooden slabs\n\nGoal: craft composter.",
+      "recipe_depth": 1,
+      "task_hash": "d0a6a13c9231324a2b246856734064d1371d0895df5551320a284fbe28c29a52"
+    },
+    {
+      "task_id": "textcraft_24",
+      "data_idx": 24,
+      "environment_seed": 42,
+      "goal": "minecraft:conduit",
+      "commands": "craft 1 conduit using 8 nautilus shell, 1 heart of the sea",
+      "initial_observation": "Crafting commands:\ncraft 1 conduit using 8 nautilus shell, 1 heart of the sea\n\nGoal: craft conduit.",
+      "recipe_depth": 1,
+      "task_hash": "879e3f29065a002c356ec3756073f2c4a110a0e4e70c5e9cabd67e80cea67fc7"
+    },
+    {
+      "task_id": "textcraft_25",
+      "data_idx": 25,
+      "environment_seed": 42,
+      "goal": "minecraft:cookie",
+      "commands": "craft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 1 bread using 3 wheat\ncraft 1 brown dye using 1 cocoa beans\ncraft 1 hay block using 9 wheat\ncraft 8 cookie using 2 wheat, 1 cocoa beans",
+      "initial_observation": "Crafting commands:\ncraft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 1 bread using 3 wheat\ncraft 1 brown dye using 1 cocoa beans\ncraft 1 hay block using 9 wheat\ncraft 8 cookie using 2 wheat, 1 cocoa beans\n\nGoal: craft cookie.",
+      "recipe_depth": 1,
+      "task_hash": "8ca6e480a1f717c0adc8142f5d8cefbd85300fc39642cb828baaa91d3aea5b82"
+    },
+    {
+      "task_id": "textcraft_26",
+      "data_idx": 26,
+      "environment_seed": 42,
+      "goal": "minecraft:crimson_hyphae",
+      "commands": "craft 3 crimson hyphae using 4 crimson stem",
+      "initial_observation": "Crafting commands:\ncraft 3 crimson hyphae using 4 crimson stem\n\nGoal: craft crimson hyphae.",
+      "recipe_depth": 1,
+      "task_hash": "42a5a3bac7094113bef3c05ed5450bc2f10d8dd0772f333e0c096abbe1843a4c"
+    },
+    {
+      "task_id": "textcraft_27",
+      "data_idx": 27,
+      "environment_seed": 42,
+      "goal": "minecraft:crimson_planks",
+      "commands": "craft 4 crimson planks using 1 crimson stems",
+      "initial_observation": "Crafting commands:\ncraft 4 crimson planks using 1 crimson stems\n\nGoal: craft crimson planks.",
+      "recipe_depth": 1,
+      "task_hash": "3544b148a7f177f7d82c1d79dd1d1a69e8738683712838754b1596bb7fc951da"
+    },
+    {
+      "task_id": "textcraft_28",
+      "data_idx": 28,
+      "environment_seed": 42,
+      "goal": "minecraft:dark_oak_planks",
+      "commands": "craft 4 dark oak planks using 1 dark oak logs",
+      "initial_observation": "Crafting commands:\ncraft 4 dark oak planks using 1 dark oak logs\n\nGoal: craft dark oak planks.",
+      "recipe_depth": 1,
+      "task_hash": "424fb35351bfac00bd87e5cacfbcec213f777359f8588733f44e2e278b56eab3"
+    },
+    {
+      "task_id": "textcraft_29",
+      "data_idx": 29,
+      "environment_seed": 42,
+      "goal": "minecraft:dark_oak_wood",
+      "commands": "craft 3 dark oak wood using 4 dark oak log",
+      "initial_observation": "Crafting commands:\ncraft 3 dark oak wood using 4 dark oak log\n\nGoal: craft dark oak wood.",
+      "recipe_depth": 1,
+      "task_hash": "ab3db94211135aa5f960392d84be27d2f3eee87185ec2b532ce0accb78649f34"
+    },
+    {
+      "task_id": "textcraft_30",
+      "data_idx": 30,
+      "environment_seed": 42,
+      "goal": "minecraft:daylight_detector",
+      "commands": "craft 1 composter using 7 wooden slabs\ncraft 1 beacon using 1 nether star, 5 glass, 3 obsidian\ncraft 1 quartz block using 4 quartz\ncraft 1 barrel using 6 planks, 2 wooden slabs\ncraft 1 end crystal using 1 ghast tear, 1 ender eye, 7 glass\ncraft 8 blue stained glass using 8 glass, 1 blue dye\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 granite using 1 diorite, 1 quartz",
+      "initial_observation": "Crafting commands:\ncraft 1 composter using 7 wooden slabs\ncraft 1 beacon using 1 nether star, 5 glass, 3 obsidian\ncraft 1 quartz block using 4 quartz\ncraft 1 barrel using 6 planks, 2 wooden slabs\ncraft 1 end crystal using 1 ghast tear, 1 ender eye, 7 glass\ncraft 8 blue stained glass using 8 glass, 1 blue dye\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 granite using 1 diorite, 1 quartz\n\nGoal: craft daylight detector.",
+      "recipe_depth": 1,
+      "task_hash": "94a055c6c69905f26d39c39636941f697f2ea46377c3c81ebd0b164b32e5caac"
+    },
+    {
+      "task_id": "textcraft_31",
+      "data_idx": 31,
+      "environment_seed": 42,
+      "goal": "minecraft:diamond_block",
+      "commands": "craft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 diamond chestplate using 8 diamond",
+      "initial_observation": "Crafting commands:\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 diamond chestplate using 8 diamond\n\nGoal: craft diamond block.",
+      "recipe_depth": 1,
+      "task_hash": "d4d04c346a159e3302cb46630b95e8e8e4043c2dbf338cd584f456625cb3060a"
+    },
+    {
+      "task_id": "textcraft_32",
+      "data_idx": 32,
+      "environment_seed": 42,
+      "goal": "minecraft:diamond_boots",
+      "commands": "craft 1 diamond block using 9 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond",
+      "initial_observation": "Crafting commands:\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\n\nGoal: craft diamond boots.",
+      "recipe_depth": 1,
+      "task_hash": "0b6109fecd9f32052230db8b8d6c2898d504ed3b24e3fc2a26ad1185f86a8c7d"
+    },
+    {
+      "task_id": "textcraft_33",
+      "data_idx": 33,
+      "environment_seed": 42,
+      "goal": "minecraft:diamond_chestplate",
+      "commands": "craft 1 diamond block using 9 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond",
+      "initial_observation": "Crafting commands:\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\n\nGoal: craft diamond chestplate.",
+      "recipe_depth": 1,
+      "task_hash": "ec208b120fa0134834090147d85363af0ea5562f1598f7e8235d4a7518937c3a"
+    },
+    {
+      "task_id": "textcraft_34",
+      "data_idx": 34,
+      "environment_seed": 42,
+      "goal": "minecraft:diamond_helmet",
+      "commands": "craft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 diamond chestplate using 8 diamond",
+      "initial_observation": "Crafting commands:\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\ncraft 1 diamond chestplate using 8 diamond\n\nGoal: craft diamond helmet.",
+      "recipe_depth": 1,
+      "task_hash": "e50345c3ce224d4dcbe7ee6b180cba1da70b52e64cb14bfcf0a898ed025a7c49"
+    },
+    {
+      "task_id": "textcraft_35",
+      "data_idx": 35,
+      "environment_seed": 42,
+      "goal": "minecraft:diamond_leggings",
+      "commands": "craft 1 diamond block using 9 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond",
+      "initial_observation": "Crafting commands:\ncraft 1 diamond block using 9 diamond\ncraft 1 diamond chestplate using 8 diamond\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 1 diamond leggings using 7 diamond\ncraft 1 diamond helmet using 5 diamond\ncraft 1 diamond axe using 2 stick, 3 diamond\ncraft 1 diamond sword using 1 stick, 2 diamond\ncraft 1 diamond boots using 4 diamond\ncraft 1 diamond shovel using 2 stick, 1 diamond\ncraft 1 enchanting table using 1 book, 4 obsidian, 2 diamond\n\nGoal: craft diamond leggings.",
+      "recipe_depth": 1,
+      "task_hash": "f7efc0a36f6655de2a7d970b237329f250dc259a5bf92e749999bdc10615d086"
+    },
+    {
+      "task_id": "textcraft_36",
+      "data_idx": 36,
+      "environment_seed": 42,
+      "goal": "minecraft:diorite",
+      "commands": "craft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 granite using 1 diorite, 1 quartz\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 4 cobblestone stairs using 6 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 1 granite using 1 diorite, 1 quartz\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 dropper using 1 redstone, 7 cobblestone\n\nGoal: craft diorite.",
+      "recipe_depth": 1,
+      "task_hash": "1df3c14ef54db61f74586256a2ed269924e8ee4cb2e646090eed1a031edcda61"
+    },
+    {
+      "task_id": "textcraft_37",
+      "data_idx": 37,
+      "environment_seed": 42,
+      "goal": "minecraft:dried_kelp_block",
+      "commands": "craft 1 dried kelp block using 9 dried kelp",
+      "initial_observation": "Crafting commands:\ncraft 1 dried kelp block using 9 dried kelp\n\nGoal: craft dried kelp block.",
+      "recipe_depth": 1,
+      "task_hash": "c5ab18733b39eeb9429e85c4351b850399f70a5144b8b3770c5617a0832f3200"
+    },
+    {
+      "task_id": "textcraft_38",
+      "data_idx": 38,
+      "environment_seed": 42,
+      "goal": "minecraft:dropper",
+      "commands": "craft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\ncraft 1 note block using 8 planks, 1 redstone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 lever using 1 cobblestone, 1 stick\ncraft 4 cobblestone stairs using 6 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\ncraft 1 note block using 8 planks, 1 redstone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 lever using 1 cobblestone, 1 stick\ncraft 4 cobblestone stairs using 6 cobblestone\n\nGoal: craft dropper.",
+      "recipe_depth": 1,
+      "task_hash": "c152449b745ef231510cf6de728310126914404d44d08796c76ab310899c0bea"
+    },
+    {
+      "task_id": "textcraft_39",
+      "data_idx": 39,
+      "environment_seed": 42,
+      "goal": "minecraft:emerald_block",
+      "commands": "craft 1 emerald block using 9 emerald",
+      "initial_observation": "Crafting commands:\ncraft 1 emerald block using 9 emerald\n\nGoal: craft emerald block.",
+      "recipe_depth": 1,
+      "task_hash": "9b60c96323da744d248152b0a1e01350a8299fa0e06b5fcb58579e824e3053c1"
+    },
+    {
+      "task_id": "textcraft_40",
+      "data_idx": 40,
+      "environment_seed": 42,
+      "goal": "minecraft:end_rod",
+      "commands": "craft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 4 purpur block using 4 popped chorus fruit\ncraft 2 blaze powder using 1 blaze rod\ncraft 4 end rod using 1 popped chorus fruit, 1 blaze rod",
+      "initial_observation": "Crafting commands:\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 4 purpur block using 4 popped chorus fruit\ncraft 2 blaze powder using 1 blaze rod\ncraft 4 end rod using 1 popped chorus fruit, 1 blaze rod\n\nGoal: craft end rod.",
+      "recipe_depth": 1,
+      "task_hash": "c4b5afd33f31bafe2b51303937d1b8a957f59c34a54caf819a497e72cac4c30d"
+    },
+    {
+      "task_id": "textcraft_41",
+      "data_idx": 41,
+      "environment_seed": 42,
+      "goal": "minecraft:end_stone_bricks",
+      "commands": "craft 4 end stone bricks using 4 end stone",
+      "initial_observation": "Crafting commands:\ncraft 4 end stone bricks using 4 end stone\n\nGoal: craft end stone bricks.",
+      "recipe_depth": 1,
+      "task_hash": "66f7e32e09406208b81c9517204e87f248eb1173c8515d61f4f0439f8ba21f42"
+    },
+    {
+      "task_id": "textcraft_42",
+      "data_idx": 42,
+      "environment_seed": 42,
+      "goal": "minecraft:flower_pot",
+      "commands": "craft 1 bricks using 4 brick\ncraft 1 flower pot using 3 brick",
+      "initial_observation": "Crafting commands:\ncraft 1 bricks using 4 brick\ncraft 1 flower pot using 3 brick\n\nGoal: craft flower pot.",
+      "recipe_depth": 1,
+      "task_hash": "878a64fc58f8ee0e3e69c21b128305ca771300385a6301f5ae94cdd43bffba40"
+    },
+    {
+      "task_id": "textcraft_43",
+      "data_idx": 43,
+      "environment_seed": 42,
+      "goal": "minecraft:furnace",
+      "commands": "craft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 1 furnace using 8 stone crafting materials",
+      "initial_observation": "Crafting commands:\ncraft 1 brewing stand using 1 blaze rod, 3 stone crafting materials\ncraft 1 furnace using 8 stone crafting materials\n\nGoal: craft furnace.",
+      "recipe_depth": 1,
+      "task_hash": "ee1946e61bfdf3074c56a515ab25425f5e41d9b4b55e4ddd27980fe15cb8fefb"
+    },
+    {
+      "task_id": "textcraft_44",
+      "data_idx": 44,
+      "environment_seed": 42,
+      "goal": "minecraft:glass_bottle",
+      "commands": "craft 16 glass pane using 6 glass\ncraft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 3 glass bottle using 3 glass\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye",
+      "initial_observation": "Crafting commands:\ncraft 16 glass pane using 6 glass\ncraft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 3 glass bottle using 3 glass\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\n\nGoal: craft glass bottle.",
+      "recipe_depth": 1,
+      "task_hash": "4fb01cdc9dac4bd118b138104adfa489f0b18b5c39e87ad7ebc3e0494c9ff8ec"
+    },
+    {
+      "task_id": "textcraft_45",
+      "data_idx": 45,
+      "environment_seed": 42,
+      "goal": "minecraft:glass_pane",
+      "commands": "craft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 3 glass bottle using 3 glass\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 16 glass pane using 6 glass\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye",
+      "initial_observation": "Crafting commands:\ncraft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 3 glass bottle using 3 glass\ncraft 8 black stained glass using 8 glass, 1 black dye\ncraft 16 glass pane using 6 glass\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\n\nGoal: craft glass pane.",
+      "recipe_depth": 1,
+      "task_hash": "baa1ffabb65b09ac1d2ef266fc7c0893585b430ffaaa3bb0abdcfb2b1de4e572"
+    },
+    {
+      "task_id": "textcraft_46",
+      "data_idx": 46,
+      "environment_seed": 42,
+      "goal": "minecraft:glistering_melon_slice",
+      "commands": "craft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 melon using 9 melon slice\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 melon seeds using 1 melon slice\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice",
+      "initial_observation": "Crafting commands:\ncraft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 melon using 9 melon slice\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 melon seeds using 1 melon slice\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\n\nGoal: craft glistering melon slice.",
+      "recipe_depth": 1,
+      "task_hash": "02c1c2e1aa3d5fb357f6aabc17100b3a92a3059f499873a7fb5ae5e2f1d32464"
+    },
+    {
+      "task_id": "textcraft_47",
+      "data_idx": 47,
+      "environment_seed": 42,
+      "goal": "minecraft:glowstone",
+      "commands": "craft 2 spectral arrow using 4 glowstone dust, 1 arrow\ncraft 1 glowstone using 4 glowstone dust",
+      "initial_observation": "Crafting commands:\ncraft 2 spectral arrow using 4 glowstone dust, 1 arrow\ncraft 1 glowstone using 4 glowstone dust\n\nGoal: craft glowstone.",
+      "recipe_depth": 1,
+      "task_hash": "b62660d5ae9fee0d0a4e743feec0efaa7bf417959c6c1eb313768ae038dc3660"
+    },
+    {
+      "task_id": "textcraft_48",
+      "data_idx": 48,
+      "environment_seed": 42,
+      "goal": "minecraft:gold_ingot",
+      "commands": "craft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice",
+      "initial_observation": "Crafting commands:\ncraft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\n\nGoal: craft gold ingot.",
+      "recipe_depth": 1,
+      "task_hash": "8a0152ed44da366248bdcc2b402e9879510bd048299d5bc32c33de20d7fba126"
+    },
+    {
+      "task_id": "textcraft_49",
+      "data_idx": 49,
+      "environment_seed": 42,
+      "goal": "minecraft:golden_carrot",
+      "commands": "craft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 rabbit stew using 1 baked potato, 1 cooked rabbit, 1 bowl, 1 carrot, 1 brown mushroom\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 carrot on a stick using 1 fishing rod, 1 carrot\ncraft 1 rabbit stew using 1 baked potato, 1 cooked rabbit, 1 bowl, 1 carrot, 1 red mushroom",
+      "initial_observation": "Crafting commands:\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 rabbit stew using 1 baked potato, 1 cooked rabbit, 1 bowl, 1 carrot, 1 brown mushroom\ncraft 1 gold ingot using 9 gold nugget\ncraft 1 golden carrot using 8 gold nugget, 1 carrot\ncraft 1 carrot on a stick using 1 fishing rod, 1 carrot\ncraft 1 rabbit stew using 1 baked potato, 1 cooked rabbit, 1 bowl, 1 carrot, 1 red mushroom\n\nGoal: craft golden carrot.",
+      "recipe_depth": 1,
+      "task_hash": "514b2ebe6614c5c4557738044de175903b00b113b2c7714cde8c8c14a81e7fc0"
+    },
+    {
+      "task_id": "textcraft_50",
+      "data_idx": 50,
+      "environment_seed": 42,
+      "goal": "minecraft:green_concrete_powder",
+      "commands": "craft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 light blue concrete powder using 1 light blue dye, 4 sand, 4 gravel\ncraft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 8 pink concrete powder using 1 pink dye, 4 sand, 4 gravel\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 8 green stained glass pane using 8 glass pane, 1 green dye\ncraft 8 brown concrete powder using 1 brown dye, 4 sand, 4 gravel\ncraft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel",
+      "initial_observation": "Crafting commands:\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 light blue concrete powder using 1 light blue dye, 4 sand, 4 gravel\ncraft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 8 pink concrete powder using 1 pink dye, 4 sand, 4 gravel\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 8 green stained glass pane using 8 glass pane, 1 green dye\ncraft 8 brown concrete powder using 1 brown dye, 4 sand, 4 gravel\ncraft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel\n\nGoal: craft green concrete powder.",
+      "recipe_depth": 1,
+      "task_hash": "571fc773987b3819ebf44cd1f39a6f82adaa91a1b9449140a38621c0adda2add"
+    },
+    {
+      "task_id": "textcraft_51",
+      "data_idx": 51,
+      "environment_seed": 42,
+      "goal": "minecraft:green_stained_glass",
+      "commands": "craft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 8 green terracotta using 8 terracotta, 1 green dye\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 green stained glass using 8 glass, 1 green dye\ncraft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 16 glass pane using 6 glass\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 1 green bed using 1 white bed, 1 green dye\ncraft 8 green carpet using 8 white carpet, 1 green dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye",
+      "initial_observation": "Crafting commands:\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 8 green terracotta using 8 terracotta, 1 green dye\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 8 orange stained glass using 8 glass, 1 orange dye\ncraft 8 green stained glass using 8 glass, 1 green dye\ncraft 8 brown stained glass using 8 glass, 1 brown dye\ncraft 16 glass pane using 6 glass\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 1 green bed using 1 white bed, 1 green dye\ncraft 8 green carpet using 8 white carpet, 1 green dye\ncraft 8 magenta stained glass using 8 glass, 1 magenta dye\n\nGoal: craft green stained glass.",
+      "recipe_depth": 1,
+      "task_hash": "32c50983d87ddf881dbe21863e341e2c503edc0622d489051a1214e7ea856859"
+    },
+    {
+      "task_id": "textcraft_52",
+      "data_idx": 52,
+      "environment_seed": 42,
+      "goal": "minecraft:green_terracotta",
+      "commands": "craft 1 green bed using 1 white bed, 1 green dye\ncraft 8 light gray terracotta using 8 terracotta, 1 light gray dye\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 8 green terracotta using 8 terracotta, 1 green dye\ncraft 8 yellow terracotta using 8 terracotta, 1 yellow dye\ncraft 8 black terracotta using 8 terracotta, 1 black dye\ncraft 8 pink terracotta using 8 terracotta, 1 pink dye\ncraft 8 green stained glass using 8 glass, 1 green dye\ncraft 8 cyan terracotta using 8 terracotta, 1 cyan dye\ncraft 8 green carpet using 8 white carpet, 1 green dye\ncraft 8 lime terracotta using 8 terracotta, 1 lime dye",
+      "initial_observation": "Crafting commands:\ncraft 1 green bed using 1 white bed, 1 green dye\ncraft 8 light gray terracotta using 8 terracotta, 1 light gray dye\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 8 green terracotta using 8 terracotta, 1 green dye\ncraft 8 yellow terracotta using 8 terracotta, 1 yellow dye\ncraft 8 black terracotta using 8 terracotta, 1 black dye\ncraft 8 pink terracotta using 8 terracotta, 1 pink dye\ncraft 8 green stained glass using 8 glass, 1 green dye\ncraft 8 cyan terracotta using 8 terracotta, 1 cyan dye\ncraft 8 green carpet using 8 white carpet, 1 green dye\ncraft 8 lime terracotta using 8 terracotta, 1 lime dye\n\nGoal: craft green terracotta.",
+      "recipe_depth": 1,
+      "task_hash": "6c1bfbffcb7c1b1439fdd777166d6f769e40c8c370db81da6794378dce114ab3"
+    },
+    {
+      "task_id": "textcraft_53",
+      "data_idx": 53,
+      "environment_seed": 42,
+      "goal": "minecraft:hay_block",
+      "commands": "craft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 bread using 3 wheat\ncraft 1 hay block using 9 wheat",
+      "initial_observation": "Crafting commands:\ncraft 1 cake using 3 milk bucket, 2 sugar, 3 wheat, 1 egg\ncraft 8 cookie using 2 wheat, 1 cocoa beans\ncraft 1 bread using 3 wheat\ncraft 1 hay block using 9 wheat\n\nGoal: craft hay block.",
+      "recipe_depth": 1,
+      "task_hash": "3b01fe66df8edc8e9a63b0c27040a629d93420c9a8c9ac5fe61854005bf40da4"
+    },
+    {
+      "task_id": "textcraft_54",
+      "data_idx": 54,
+      "environment_seed": 42,
+      "goal": "minecraft:honey_block",
+      "commands": "craft 3 sugar using 1 honey bottle\ncraft 1 honey block using 4 honey bottle",
+      "initial_observation": "Crafting commands:\ncraft 3 sugar using 1 honey bottle\ncraft 1 honey block using 4 honey bottle\n\nGoal: craft honey block.",
+      "recipe_depth": 1,
+      "task_hash": "5feda7a495741e928e4161953cce42b1f0a03abf004cf0b38bbff6c18838291e"
+    },
+    {
+      "task_id": "textcraft_55",
+      "data_idx": 55,
+      "environment_seed": 42,
+      "goal": "minecraft:honeycomb_block",
+      "commands": "craft 1 beehive using 6 planks, 3 honeycomb\ncraft 1 honeycomb block using 4 honeycomb",
+      "initial_observation": "Crafting commands:\ncraft 1 beehive using 6 planks, 3 honeycomb\ncraft 1 honeycomb block using 4 honeycomb\n\nGoal: craft honeycomb block.",
+      "recipe_depth": 1,
+      "task_hash": "83870dd5d14df6f2ce4a399750a7f30ea189b1b4ae3999a4f018a51e5079c5ea"
+    },
+    {
+      "task_id": "textcraft_56",
+      "data_idx": 56,
+      "environment_seed": 42,
+      "goal": "minecraft:iron_ingot",
+      "commands": "craft 1 lantern using 1 torch, 8 iron nugget\ncraft 1 chain using 1 iron ingot, 2 iron nugget\ncraft 1 soul lantern using 1 soul torch, 8 iron nugget\ncraft 1 iron ingot using 9 iron nugget",
+      "initial_observation": "Crafting commands:\ncraft 1 lantern using 1 torch, 8 iron nugget\ncraft 1 chain using 1 iron ingot, 2 iron nugget\ncraft 1 soul lantern using 1 soul torch, 8 iron nugget\ncraft 1 iron ingot using 9 iron nugget\n\nGoal: craft iron ingot.",
+      "recipe_depth": 1,
+      "task_hash": "95d7f36b110c29f56a1dccb3d3573c5b09647a66ce68d163c96abb6d5a268910"
+    },
+    {
+      "task_id": "textcraft_57",
+      "data_idx": 57,
+      "environment_seed": 42,
+      "goal": "minecraft:jungle_planks",
+      "commands": "craft 4 jungle planks using 1 jungle logs",
+      "initial_observation": "Crafting commands:\ncraft 4 jungle planks using 1 jungle logs\n\nGoal: craft jungle planks.",
+      "recipe_depth": 1,
+      "task_hash": "2665dd2e3499aa634221e8b429ed33eedefaa9d142bcad09527f0f7799a7a0c8"
+    },
+    {
+      "task_id": "textcraft_58",
+      "data_idx": 58,
+      "environment_seed": 42,
+      "goal": "minecraft:jungle_wood",
+      "commands": "craft 3 jungle wood using 4 jungle log",
+      "initial_observation": "Crafting commands:\ncraft 3 jungle wood using 4 jungle log\n\nGoal: craft jungle wood.",
+      "recipe_depth": 1,
+      "task_hash": "96119cc575bfbbd53560667522e2a10ccdd2522636dbe5bbee3a3b7cbdd463fe"
+    },
+    {
+      "task_id": "textcraft_59",
+      "data_idx": 59,
+      "environment_seed": 42,
+      "goal": "minecraft:lapis_block",
+      "commands": "craft 1 blue dye using 1 lapis lazuli\ncraft 1 lapis block using 9 lapis lazuli",
+      "initial_observation": "Crafting commands:\ncraft 1 blue dye using 1 lapis lazuli\ncraft 1 lapis block using 9 lapis lazuli\n\nGoal: craft lapis block.",
+      "recipe_depth": 1,
+      "task_hash": "19fd6c0fa422a4dac0a2fc281f1be61fe7b634b682a318f3ab789d3f23277199"
+    },
+    {
+      "task_id": "textcraft_60",
+      "data_idx": 60,
+      "environment_seed": 42,
+      "goal": "minecraft:lead",
+      "commands": "craft 1 bow using 3 stick, 3 string\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 1 white wool using 4 string\ncraft 1 sticky piston using 1 piston, 1 slime ball\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 slime block using 9 slime ball\ncraft 1 magma cream using 1 blaze powder, 1 slime ball\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 1 loom using 2 planks, 2 string",
+      "initial_observation": "Crafting commands:\ncraft 1 bow using 3 stick, 3 string\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 1 white wool using 4 string\ncraft 1 sticky piston using 1 piston, 1 slime ball\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 slime block using 9 slime ball\ncraft 1 magma cream using 1 blaze powder, 1 slime ball\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 1 loom using 2 planks, 2 string\n\nGoal: craft lead.",
+      "recipe_depth": 1,
+      "task_hash": "f225af291deaabe317b0bb219d2a7ec94515cbcacba0eebbc4ed13bb11c875b3"
+    },
+    {
+      "task_id": "textcraft_61",
+      "data_idx": 61,
+      "environment_seed": 42,
+      "goal": "minecraft:leather",
+      "commands": "craft 1 leather using 4 rabbit hide",
+      "initial_observation": "Crafting commands:\ncraft 1 leather using 4 rabbit hide\n\nGoal: craft leather.",
+      "recipe_depth": 1,
+      "task_hash": "19df48a4aac423f96db56f47a28cb78f6fabcdf2b55b59019f46a87e80245cda"
+    },
+    {
+      "task_id": "textcraft_62",
+      "data_idx": 62,
+      "environment_seed": 42,
+      "goal": "minecraft:light_blue_dye",
+      "commands": "craft 8 blue carpet using 8 white carpet, 1 blue dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 2 light blue dye using 1 blue dye, 1 white dye\ncraft 1 blue dye using 1 cornflower\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 8 blue stained glass using 8 glass, 1 blue dye\ncraft 1 light blue dye using 1 blue orchid\ncraft 1 lapis block using 9 lapis lazuli\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 1 white dye using 1 lily of the valley\ncraft 8 blue stained glass pane using 8 glass pane, 1 blue dye\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 1 white dye using 1 bone meal\ncraft 3 light gray dye using 1 black dye, 2 white dye\ncraft 3 bone meal using 1 bone\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 1 blue dye using 1 lapis lazuli",
+      "initial_observation": "Crafting commands:\ncraft 8 blue carpet using 8 white carpet, 1 blue dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 2 light blue dye using 1 blue dye, 1 white dye\ncraft 1 blue dye using 1 cornflower\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 8 blue stained glass using 8 glass, 1 blue dye\ncraft 1 light blue dye using 1 blue orchid\ncraft 1 lapis block using 9 lapis lazuli\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 1 white dye using 1 lily of the valley\ncraft 8 blue stained glass pane using 8 glass pane, 1 blue dye\ncraft 2 cyan dye using 1 blue dye, 1 green dye\ncraft 1 white dye using 1 bone meal\ncraft 3 light gray dye using 1 black dye, 2 white dye\ncraft 3 bone meal using 1 bone\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 1 blue dye using 1 lapis lazuli\n\nGoal: craft light blue dye.",
+      "recipe_depth": 1,
+      "task_hash": "3496d5c3dd1815397d1ebfa1a0d0824cbb2d23147d61df705e104710eaa068c2"
+    },
+    {
+      "task_id": "textcraft_63",
+      "data_idx": 63,
+      "environment_seed": 42,
+      "goal": "minecraft:light_gray_dye",
+      "commands": "craft 3 light gray dye using 1 black dye, 2 white dye\ncraft 1 black dye using 1 wither rose\ncraft 1 light gray dye using 1 azure bluet\ncraft 8 gray stained glass using 8 glass, 1 gray dye\ncraft 2 light blue dye using 1 blue dye, 1 white dye\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 2 gray dye using 1 black dye, 1 white dye\ncraft 1 light gray dye using 1 oxeye daisy\ncraft 8 black carpet using 8 white carpet, 1 black dye\ncraft 1 white dye using 1 lily of the valley\ncraft 8 black terracotta using 8 terracotta, 1 black dye\ncraft 1 light gray dye using 1 white tulip\ncraft 8 black stained glass pane using 8 glass pane, 1 black dye\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 8 white stained glass using 8 glass, 1 white dye\ncraft 3 bone meal using 1 bone\ncraft 2 light gray dye using 1 gray dye, 1 white dye\ncraft 8 gray terracotta using 8 terracotta, 1 gray dye\ncraft 8 white stained glass pane using 8 glass pane, 1 white dye\ncraft 1 white dye using 1 bone meal\ncraft 1 black dye using 1 ink sac",
+      "initial_observation": "Crafting commands:\ncraft 3 light gray dye using 1 black dye, 2 white dye\ncraft 1 black dye using 1 wither rose\ncraft 1 light gray dye using 1 azure bluet\ncraft 8 gray stained glass using 8 glass, 1 gray dye\ncraft 2 light blue dye using 1 blue dye, 1 white dye\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 2 gray dye using 1 black dye, 1 white dye\ncraft 1 light gray dye using 1 oxeye daisy\ncraft 8 black carpet using 8 white carpet, 1 black dye\ncraft 1 white dye using 1 lily of the valley\ncraft 8 black terracotta using 8 terracotta, 1 black dye\ncraft 1 light gray dye using 1 white tulip\ncraft 8 black stained glass pane using 8 glass pane, 1 black dye\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 8 white stained glass using 8 glass, 1 white dye\ncraft 3 bone meal using 1 bone\ncraft 2 light gray dye using 1 gray dye, 1 white dye\ncraft 8 gray terracotta using 8 terracotta, 1 gray dye\ncraft 8 white stained glass pane using 8 glass pane, 1 white dye\ncraft 1 white dye using 1 bone meal\ncraft 1 black dye using 1 ink sac\n\nGoal: craft light gray dye.",
+      "recipe_depth": 1,
+      "task_hash": "8cd1b9b83fd18332d02fc5556bdc0abe972e9eaed955866e24d658a7cf1ed160"
+    },
+    {
+      "task_id": "textcraft_64",
+      "data_idx": 64,
+      "environment_seed": 42,
+      "goal": "minecraft:magenta_dye",
+      "commands": "craft 1 pink dye using 1 pink tulip\ncraft 4 magenta dye using 1 blue dye, 2 red dye, 1 white dye\ncraft 1 red dye using 1 poppy\ncraft 1 lapis block using 9 lapis lazuli\ncraft 1 pink wool using 1 pink dye, 1 white wool\ncraft 1 white dye using 1 lily of the valley\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 1 blue dye using 1 cornflower\ncraft 8 pink terracotta using 8 terracotta, 1 pink dye\ncraft 8 red carpet using 8 white carpet, 1 red dye\ncraft 2 magenta dye using 1 purple dye, 1 pink dye\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 1 blue dye using 1 lapis lazuli\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 2 red dye using 1 rose bush\ncraft 1 pink bed using 1 white bed, 1 pink dye\ncraft 8 purple stained glass pane using 8 glass pane, 1 purple dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 1 magenta dye using 1 allium\ncraft 2 pink dye using 1 peony\ncraft 2 magenta dye using 1 lilac\ncraft 1 white dye using 1 bone meal\ncraft 1 red dye using 1 red tulip\ncraft 2 purple dye using 1 blue dye, 1 red dye\ncraft 3 light gray dye using 1 black dye, 2 white dye\ncraft 3 bone meal using 1 bone\ncraft 1 red dye using 1 beetroot",
+      "initial_observation": "Crafting commands:\ncraft 1 pink dye using 1 pink tulip\ncraft 4 magenta dye using 1 blue dye, 2 red dye, 1 white dye\ncraft 1 red dye using 1 poppy\ncraft 1 lapis block using 9 lapis lazuli\ncraft 1 pink wool using 1 pink dye, 1 white wool\ncraft 1 white dye using 1 lily of the valley\ncraft 8 white terracotta using 8 terracotta, 1 white dye\ncraft 1 blue dye using 1 cornflower\ncraft 8 pink terracotta using 8 terracotta, 1 pink dye\ncraft 8 red carpet using 8 white carpet, 1 red dye\ncraft 2 magenta dye using 1 purple dye, 1 pink dye\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 1 blue dye using 1 lapis lazuli\ncraft 8 purple stained glass using 8 glass, 1 purple dye\ncraft 2 red dye using 1 rose bush\ncraft 1 pink bed using 1 white bed, 1 pink dye\ncraft 8 purple stained glass pane using 8 glass pane, 1 purple dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 1 magenta dye using 1 allium\ncraft 2 pink dye using 1 peony\ncraft 2 magenta dye using 1 lilac\ncraft 1 white dye using 1 bone meal\ncraft 1 red dye using 1 red tulip\ncraft 2 purple dye using 1 blue dye, 1 red dye\ncraft 3 light gray dye using 1 black dye, 2 white dye\ncraft 3 bone meal using 1 bone\ncraft 1 red dye using 1 beetroot\n\nGoal: craft magenta dye.",
+      "recipe_depth": 1,
+      "task_hash": "68fd242267b1a60e82ce7cc76774ed142871415d4dfc20f87c2574108ce0ff7b"
+    },
+    {
+      "task_id": "textcraft_65",
+      "data_idx": 65,
+      "environment_seed": 42,
+      "goal": "minecraft:melon",
+      "commands": "craft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 melon seeds using 1 melon slice\ncraft 1 melon using 9 melon slice",
+      "initial_observation": "Crafting commands:\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 melon seeds using 1 melon slice\ncraft 1 melon using 9 melon slice\n\nGoal: craft melon.",
+      "recipe_depth": 1,
+      "task_hash": "32da7edf12bcfda2cac4461058e1ce3e0a9ac7d2583d0e0813a4fe18d8a859e0"
+    },
+    {
+      "task_id": "textcraft_66",
+      "data_idx": 66,
+      "environment_seed": 42,
+      "goal": "minecraft:melon_seeds",
+      "commands": "craft 1 melon using 9 melon slice\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 melon seeds using 1 melon slice",
+      "initial_observation": "Crafting commands:\ncraft 1 melon using 9 melon slice\ncraft 1 glistering melon slice using 8 gold nugget, 1 melon slice\ncraft 1 melon seeds using 1 melon slice\n\nGoal: craft melon seeds.",
+      "recipe_depth": 1,
+      "task_hash": "122f6ef8911fb1ba86d29aa8a7fcd40a40886eee57bc7eebcb6ce292634d51f6"
+    },
+    {
+      "task_id": "textcraft_67",
+      "data_idx": 67,
+      "environment_seed": 42,
+      "goal": "minecraft:mossy_cobblestone",
+      "commands": "craft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 mossy stone bricks using 1 stone bricks, 1 vine\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 1 mossy stone bricks using 1 stone bricks, 1 vine\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 2 diorite using 2 quartz, 2 cobblestone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 6 cobblestone wall using 6 cobblestone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 2 andesite using 1 diorite, 1 cobblestone\ncraft 4 cobblestone stairs using 6 cobblestone\n\nGoal: craft mossy cobblestone.",
+      "recipe_depth": 1,
+      "task_hash": "39f3bd09e8206f8c3cd1e93f1d3690702bb0f1f88449ed76cff48184e8b8f48b"
+    },
+    {
+      "task_id": "textcraft_68",
+      "data_idx": 68,
+      "environment_seed": 42,
+      "goal": "minecraft:nether_bricks",
+      "commands": "craft 6 nether brick fence using 4 nether bricks, 2 nether brick\ncraft 1 red nether bricks using 2 nether wart, 2 nether brick\ncraft 1 nether bricks using 4 nether brick",
+      "initial_observation": "Crafting commands:\ncraft 6 nether brick fence using 4 nether bricks, 2 nether brick\ncraft 1 red nether bricks using 2 nether wart, 2 nether brick\ncraft 1 nether bricks using 4 nether brick\n\nGoal: craft nether bricks.",
+      "recipe_depth": 1,
+      "task_hash": "fa24354b0272c97a1bc7ccf6166bb01877c3e925e304dc928bb5cf3ea63c520d"
+    },
+    {
+      "task_id": "textcraft_69",
+      "data_idx": 69,
+      "environment_seed": 42,
+      "goal": "minecraft:nether_wart_block",
+      "commands": "craft 1 red nether bricks using 2 nether wart, 2 nether brick\ncraft 1 nether wart block using 9 nether wart",
+      "initial_observation": "Crafting commands:\ncraft 1 red nether bricks using 2 nether wart, 2 nether brick\ncraft 1 nether wart block using 9 nether wart\n\nGoal: craft nether wart block.",
+      "recipe_depth": 1,
+      "task_hash": "1d227d794c7b2935a1949b97d90747a8794c732faa02c273d61f44cd94db6b55"
+    },
+    {
+      "task_id": "textcraft_70",
+      "data_idx": 70,
+      "environment_seed": 42,
+      "goal": "minecraft:oak_planks",
+      "commands": "craft 4 oak planks using 1 oak logs",
+      "initial_observation": "Crafting commands:\ncraft 4 oak planks using 1 oak logs\n\nGoal: craft oak planks.",
+      "recipe_depth": 1,
+      "task_hash": "b8f24f397ace47930df67d22ea5166f67dac021723d1eb18689cc27cd3deac86"
+    },
+    {
+      "task_id": "textcraft_71",
+      "data_idx": 71,
+      "environment_seed": 42,
+      "goal": "minecraft:oak_wood",
+      "commands": "craft 3 oak wood using 4 oak log",
+      "initial_observation": "Crafting commands:\ncraft 3 oak wood using 4 oak log\n\nGoal: craft oak wood.",
+      "recipe_depth": 1,
+      "task_hash": "5f331c9b1d892fb08e61edaa82a2804e328ce3a6de1950f719d9e8820b84b4ba"
+    },
+    {
+      "task_id": "textcraft_72",
+      "data_idx": 72,
+      "environment_seed": 42,
+      "goal": "minecraft:observer",
+      "commands": "craft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 6 powered rail using 1 redstone, 1 stick, 6 gold ingot\ncraft 1 quartz block using 4 quartz\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 redstone lamp using 4 redstone, 1 glowstone",
+      "initial_observation": "Crafting commands:\ncraft 1 mossy cobblestone using 1 cobblestone, 1 vine\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 piston using 1 redstone, 4 cobblestone, 3 planks, 1 iron ingot\ncraft 6 powered rail using 1 redstone, 1 stick, 6 gold ingot\ncraft 1 quartz block using 4 quartz\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 6 cobblestone slab using 3 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\n\nGoal: craft observer.",
+      "recipe_depth": 1,
+      "task_hash": "5f6a41016664ce4aa625299a02437e3f0aebb2432e663f6f3aac6252c2eb47ec"
+    },
+    {
+      "task_id": "textcraft_73",
+      "data_idx": 73,
+      "environment_seed": 42,
+      "goal": "minecraft:orange_dye",
+      "commands": "craft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 1 yellow wool using 1 yellow dye, 1 white wool\ncraft 1 yellow dye using 1 dandelion\ncraft 8 red stained glass using 8 glass, 1 red dye\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 2 yellow dye using 1 sunflower\ncraft 2 orange dye using 1 red dye, 1 yellow dye\ncraft 8 yellow stained glass pane using 8 glass pane, 1 yellow dye\ncraft 1 orange dye using 1 orange tulip\ncraft 8 yellow terracotta using 8 terracotta, 1 yellow dye\ncraft 2 red dye using 1 rose bush\ncraft 1 red dye using 1 poppy\ncraft 8 red terracotta using 8 terracotta, 1 red dye\ncraft 1 red dye using 1 beetroot\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 8 yellow carpet using 8 white carpet, 1 yellow dye\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 1 red dye using 1 red tulip",
+      "initial_observation": "Crafting commands:\ncraft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 1 yellow wool using 1 yellow dye, 1 white wool\ncraft 1 yellow dye using 1 dandelion\ncraft 8 red stained glass using 8 glass, 1 red dye\ncraft 8 red concrete powder using 1 red dye, 4 sand, 4 gravel\ncraft 2 yellow dye using 1 sunflower\ncraft 2 orange dye using 1 red dye, 1 yellow dye\ncraft 8 yellow stained glass pane using 8 glass pane, 1 yellow dye\ncraft 1 orange dye using 1 orange tulip\ncraft 8 yellow terracotta using 8 terracotta, 1 yellow dye\ncraft 2 red dye using 1 rose bush\ncraft 1 red dye using 1 poppy\ncraft 8 red terracotta using 8 terracotta, 1 red dye\ncraft 1 red dye using 1 beetroot\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 8 yellow carpet using 8 white carpet, 1 yellow dye\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 1 red dye using 1 red tulip\n\nGoal: craft orange dye.",
+      "recipe_depth": 1,
+      "task_hash": "90c1dcfe615a09ad06e3cf82f75d64defe9c69c53fd8e3f5c99c1c095dad6927"
+    },
+    {
+      "task_id": "textcraft_74",
+      "data_idx": 74,
+      "environment_seed": 42,
+      "goal": "minecraft:packed_ice",
+      "commands": "craft 1 packed ice using 9 ice",
+      "initial_observation": "Crafting commands:\ncraft 1 packed ice using 9 ice\n\nGoal: craft packed ice.",
+      "recipe_depth": 1,
+      "task_hash": "f35ab122e27fbecc0b4869a937fcbadbac56d2f09e00a1ca49fde09e7001dbb3"
+    },
+    {
+      "task_id": "textcraft_75",
+      "data_idx": 75,
+      "environment_seed": 42,
+      "goal": "minecraft:paper",
+      "commands": "craft 1 sugar using 1 sugar cane\ncraft 3 paper using 3 sugar cane",
+      "initial_observation": "Crafting commands:\ncraft 1 sugar using 1 sugar cane\ncraft 3 paper using 3 sugar cane\n\nGoal: craft paper.",
+      "recipe_depth": 1,
+      "task_hash": "3ab4575ebda6cffa7cb91765e95e7040b70fbbfb74fbe8aee73fb3e1391ed66b"
+    },
+    {
+      "task_id": "textcraft_76",
+      "data_idx": 76,
+      "environment_seed": 42,
+      "goal": "minecraft:pink_dye",
+      "commands": "craft 4 magenta dye using 1 blue dye, 2 red dye, 1 white dye\ncraft 2 red dye using 1 rose bush\ncraft 2 lime dye using 1 green dye, 1 white dye\ncraft 2 pink dye using 1 peony\ncraft 8 red terracotta using 8 terracotta, 1 red dye\ncraft 2 orange dye using 1 red dye, 1 yellow dye\ncraft 2 purple dye using 1 blue dye, 1 red dye\ncraft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 1 red dye using 1 red tulip\ncraft 2 light gray dye using 1 gray dye, 1 white dye\ncraft 1 pink dye using 1 pink tulip\ncraft 1 red dye using 1 beetroot\ncraft 8 red carpet using 8 white carpet, 1 red dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 8 red stained glass pane using 8 glass pane, 1 red dye\ncraft 1 white dye using 1 lily of the valley\ncraft 1 white dye using 1 bone meal\ncraft 1 red dye using 1 poppy\ncraft 3 bone meal using 1 bone",
+      "initial_observation": "Crafting commands:\ncraft 4 magenta dye using 1 blue dye, 2 red dye, 1 white dye\ncraft 2 red dye using 1 rose bush\ncraft 2 lime dye using 1 green dye, 1 white dye\ncraft 2 pink dye using 1 peony\ncraft 8 red terracotta using 8 terracotta, 1 red dye\ncraft 2 orange dye using 1 red dye, 1 yellow dye\ncraft 2 purple dye using 1 blue dye, 1 red dye\ncraft 8 white concrete powder using 1 white dye, 4 sand, 4 gravel\ncraft 1 red dye using 1 red tulip\ncraft 2 light gray dye using 1 gray dye, 1 white dye\ncraft 1 pink dye using 1 pink tulip\ncraft 1 red dye using 1 beetroot\ncraft 8 red carpet using 8 white carpet, 1 red dye\ncraft 2 pink dye using 1 red dye, 1 white dye\ncraft 3 magenta dye using 1 blue dye, 1 red dye, 1 pink dye\ncraft 8 red stained glass pane using 8 glass pane, 1 red dye\ncraft 1 white dye using 1 lily of the valley\ncraft 1 white dye using 1 bone meal\ncraft 1 red dye using 1 poppy\ncraft 3 bone meal using 1 bone\n\nGoal: craft pink dye.",
+      "recipe_depth": 1,
+      "task_hash": "86746977b0675be916a110780e26cb13d20ffb3361ea6e20c48982c4704ec586"
+    },
+    {
+      "task_id": "textcraft_77",
+      "data_idx": 77,
+      "environment_seed": 42,
+      "goal": "minecraft:polished_basalt",
+      "commands": "craft 4 polished basalt using 4 basalt",
+      "initial_observation": "Crafting commands:\ncraft 4 polished basalt using 4 basalt\n\nGoal: craft polished basalt.",
+      "recipe_depth": 1,
+      "task_hash": "1e3a2a8725e72cc41c73307d3c3c869d527e30489254f12ea9e1a4c90e4f08e7"
+    },
+    {
+      "task_id": "textcraft_78",
+      "data_idx": 78,
+      "environment_seed": 42,
+      "goal": "minecraft:polished_blackstone",
+      "commands": "craft 6 blackstone wall using 6 blackstone\ncraft 6 blackstone slab using 3 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 4 polished blackstone using 4 blackstone",
+      "initial_observation": "Crafting commands:\ncraft 6 blackstone wall using 6 blackstone\ncraft 6 blackstone slab using 3 blackstone\ncraft 4 blackstone stairs using 6 blackstone\ncraft 4 polished blackstone using 4 blackstone\n\nGoal: craft polished blackstone.",
+      "recipe_depth": 1,
+      "task_hash": "9e7e14aa86543aff3c97f47f58d8175c1cdd54c3ebcb3561cf2b29b17f60871c"
+    },
+    {
+      "task_id": "textcraft_79",
+      "data_idx": 79,
+      "environment_seed": 42,
+      "goal": "minecraft:prismarine",
+      "commands": "craft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 prismarine bricks using 9 prismarine shard\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 prismarine using 4 prismarine shard",
+      "initial_observation": "Crafting commands:\ncraft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 prismarine bricks using 9 prismarine shard\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 prismarine using 4 prismarine shard\n\nGoal: craft prismarine.",
+      "recipe_depth": 1,
+      "task_hash": "83681377fa5b357963a5a051facbb2240c949d02abbc8c3c425499cf9333c7de"
+    },
+    {
+      "task_id": "textcraft_80",
+      "data_idx": 80,
+      "environment_seed": 42,
+      "goal": "minecraft:prismarine_bricks",
+      "commands": "craft 1 prismarine using 4 prismarine shard\ncraft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 prismarine bricks using 9 prismarine shard",
+      "initial_observation": "Crafting commands:\ncraft 1 prismarine using 4 prismarine shard\ncraft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 prismarine bricks using 9 prismarine shard\n\nGoal: craft prismarine bricks.",
+      "recipe_depth": 1,
+      "task_hash": "661b5dc959216a3e3eb81e8e6cfb99040ee979d8009097f75e4ee3bc01209e25"
+    },
+    {
+      "task_id": "textcraft_81",
+      "data_idx": 81,
+      "environment_seed": 42,
+      "goal": "minecraft:pumpkin_seeds",
+      "commands": "craft 1 pumpkin pie using 1 pumpkin, 1 sugar, 1 egg\ncraft 4 pumpkin seeds using 1 pumpkin",
+      "initial_observation": "Crafting commands:\ncraft 1 pumpkin pie using 1 pumpkin, 1 sugar, 1 egg\ncraft 4 pumpkin seeds using 1 pumpkin\n\nGoal: craft pumpkin seeds.",
+      "recipe_depth": 1,
+      "task_hash": "f0d2899d0bc23beb15d7aef92d13630c5d4cae6e07f5d6a9c190a063131e0fac"
+    },
+    {
+      "task_id": "textcraft_82",
+      "data_idx": 82,
+      "environment_seed": 42,
+      "goal": "minecraft:purpur_block",
+      "commands": "craft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 4 purpur block using 4 popped chorus fruit",
+      "initial_observation": "Crafting commands:\ncraft 4 end rod using 1 popped chorus fruit, 1 blaze rod\ncraft 4 purpur block using 4 popped chorus fruit\n\nGoal: craft purpur block.",
+      "recipe_depth": 1,
+      "task_hash": "94b5423bed90edb1e40fc3ed960dc09224a69ef0f223a8dbaa1356f9d6c71c53"
+    },
+    {
+      "task_id": "textcraft_83",
+      "data_idx": 83,
+      "environment_seed": 42,
+      "goal": "minecraft:purpur_pillar",
+      "commands": "craft 1 purpur pillar using 2 purpur slab",
+      "initial_observation": "Crafting commands:\ncraft 1 purpur pillar using 2 purpur slab\n\nGoal: craft purpur pillar.",
+      "recipe_depth": 1,
+      "task_hash": "2589fa2128cbbb4e612d847ba82cb33333e5e14fdd8bfef97cf30775b49cf5c2"
+    },
+    {
+      "task_id": "textcraft_84",
+      "data_idx": 84,
+      "environment_seed": 42,
+      "goal": "minecraft:quartz_block",
+      "commands": "craft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 1 quartz block using 4 quartz\ncraft 1 granite using 1 diorite, 1 quartz\ncraft 2 diorite using 2 quartz, 2 cobblestone",
+      "initial_observation": "Crafting commands:\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 observer using 1 quartz, 2 redstone, 6 cobblestone\ncraft 1 daylight detector using 3 quartz, 3 glass, 3 wooden slabs\ncraft 1 quartz block using 4 quartz\ncraft 1 granite using 1 diorite, 1 quartz\ncraft 2 diorite using 2 quartz, 2 cobblestone\n\nGoal: craft quartz block.",
+      "recipe_depth": 1,
+      "task_hash": "958a49d4e17fcbc7a107f15ce9006f1a1290f6e9ff3893c73fc52bbd612350c9"
+    },
+    {
+      "task_id": "textcraft_85",
+      "data_idx": 85,
+      "environment_seed": 42,
+      "goal": "minecraft:red_dye",
+      "commands": "craft 1 red dye using 1 beetroot\ncraft 1 red dye using 1 poppy\ncraft 1 red dye using 1 red tulip\ncraft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 2 red dye using 1 rose bush",
+      "initial_observation": "Crafting commands:\ncraft 1 red dye using 1 beetroot\ncraft 1 red dye using 1 poppy\ncraft 1 red dye using 1 red tulip\ncraft 1 beetroot soup using 1 bowl, 6 beetroot\ncraft 2 red dye using 1 rose bush\n\nGoal: craft red dye.",
+      "recipe_depth": 1,
+      "task_hash": "50cc8f36bc3a57305e90cb11da01b5dff008a0914e2d2d3e077eeff3529ab49d"
+    },
+    {
+      "task_id": "textcraft_86",
+      "data_idx": 86,
+      "environment_seed": 42,
+      "goal": "minecraft:red_nether_bricks",
+      "commands": "craft 1 nether bricks using 4 nether brick\ncraft 1 nether wart block using 9 nether wart\ncraft 6 nether brick fence using 4 nether bricks, 2 nether brick\ncraft 1 red nether bricks using 2 nether wart, 2 nether brick",
+      "initial_observation": "Crafting commands:\ncraft 1 nether bricks using 4 nether brick\ncraft 1 nether wart block using 9 nether wart\ncraft 6 nether brick fence using 4 nether bricks, 2 nether brick\ncraft 1 red nether bricks using 2 nether wart, 2 nether brick\n\nGoal: craft red nether bricks.",
+      "recipe_depth": 1,
+      "task_hash": "82b9d8d1306389ecdc6dd4af97dee1fd0425ff5eecc4c3b9f33ceaf658336c22"
+    },
+    {
+      "task_id": "textcraft_87",
+      "data_idx": 87,
+      "environment_seed": 42,
+      "goal": "minecraft:red_sandstone",
+      "commands": "craft 1 red sandstone using 4 red sand",
+      "initial_observation": "Crafting commands:\ncraft 1 red sandstone using 4 red sand\n\nGoal: craft red sandstone.",
+      "recipe_depth": 1,
+      "task_hash": "aec31728516c1d48107db9e452230aa2f0edfa928515e5f9faf30f7f220c7d4d"
+    },
+    {
+      "task_id": "textcraft_88",
+      "data_idx": 88,
+      "environment_seed": 42,
+      "goal": "minecraft:redstone_block",
+      "commands": "craft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 redstone torch using 1 stick, 1 redstone\ncraft 1 note block using 8 planks, 1 redstone\ncraft 1 redstone block using 9 redstone\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 target using 1 hay block, 4 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone",
+      "initial_observation": "Crafting commands:\ncraft 1 dispenser using 1 redstone, 7 cobblestone, 1 bow\ncraft 1 redstone torch using 1 stick, 1 redstone\ncraft 1 note block using 8 planks, 1 redstone\ncraft 1 redstone block using 9 redstone\ncraft 1 compass using 4 iron ingot, 1 redstone\ncraft 1 dropper using 1 redstone, 7 cobblestone\ncraft 6 detector rail using 1 redstone, 1 stone pressure plate, 6 iron ingot\ncraft 1 clock using 4 gold ingot, 1 redstone\ncraft 1 target using 1 hay block, 4 redstone\ncraft 1 redstone lamp using 4 redstone, 1 glowstone\n\nGoal: craft redstone block.",
+      "recipe_depth": 1,
+      "task_hash": "ca86cbaeb4f4badf7ecc64a38738021d13b62991f4c4636e89226e67c15d3f37"
+    },
+    {
+      "task_id": "textcraft_89",
+      "data_idx": 89,
+      "environment_seed": 42,
+      "goal": "minecraft:sandstone",
+      "commands": "craft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 1 sandstone using 4 sand\ncraft 8 purple concrete powder using 1 purple dye, 4 sand, 4 gravel",
+      "initial_observation": "Crafting commands:\ncraft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 1 sandstone using 4 sand\ncraft 8 purple concrete powder using 1 purple dye, 4 sand, 4 gravel\n\nGoal: craft sandstone.",
+      "recipe_depth": 1,
+      "task_hash": "c3622fa9cb58edfea9f5a79be2bca3a5720959c19ea57a51033f13e4ed445efc"
+    },
+    {
+      "task_id": "textcraft_90",
+      "data_idx": 90,
+      "environment_seed": 42,
+      "goal": "minecraft:scaffolding",
+      "commands": "craft 1 bow using 3 stick, 3 string\ncraft 1 loom using 2 planks, 2 string\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 1 stick using 2 bamboo\ncraft 1 white wool using 4 string\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 6 scaffolding using 1 string, 6 bamboo",
+      "initial_observation": "Crafting commands:\ncraft 1 bow using 3 stick, 3 string\ncraft 1 loom using 2 planks, 2 string\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 1 stick using 2 bamboo\ncraft 1 white wool using 4 string\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 6 scaffolding using 1 string, 6 bamboo\n\nGoal: craft scaffolding.",
+      "recipe_depth": 1,
+      "task_hash": "d310bcc0ef512c8cb27eff0ee4721f71f9ee78413e2933b45c1fd55d1edf0a42"
+    },
+    {
+      "task_id": "textcraft_91",
+      "data_idx": 91,
+      "environment_seed": 42,
+      "goal": "minecraft:sea_lantern",
+      "commands": "craft 1 prismarine bricks using 9 prismarine shard\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 prismarine using 4 prismarine shard",
+      "initial_observation": "Crafting commands:\ncraft 1 prismarine bricks using 9 prismarine shard\ncraft 1 dark prismarine using 8 prismarine shard, 1 black dye\ncraft 1 sea lantern using 4 prismarine shard, 5 prismarine crystals\ncraft 1 prismarine using 4 prismarine shard\n\nGoal: craft sea lantern.",
+      "recipe_depth": 1,
+      "task_hash": "ea1fbb84bf5ad2e910d6866332dcb1caf747e770faf2b2c2f8bdc36e4ec0a98c"
+    },
+    {
+      "task_id": "textcraft_92",
+      "data_idx": 92,
+      "environment_seed": 42,
+      "goal": "minecraft:slime_block",
+      "commands": "craft 1 magma cream using 1 blaze powder, 1 slime ball\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 sticky piston using 1 piston, 1 slime ball\ncraft 1 slime block using 9 slime ball",
+      "initial_observation": "Crafting commands:\ncraft 1 magma cream using 1 blaze powder, 1 slime ball\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 sticky piston using 1 piston, 1 slime ball\ncraft 1 slime block using 9 slime ball\n\nGoal: craft slime block.",
+      "recipe_depth": 1,
+      "task_hash": "902cbffb663e87f37ca376b87996d295a5847ac229a19ae7144fe92a46ac2930"
+    },
+    {
+      "task_id": "textcraft_93",
+      "data_idx": 93,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_quartz_slab",
+      "commands": "craft 4 smooth quartz stairs using 6 smooth quartz\ncraft 6 smooth quartz slab using 3 smooth quartz",
+      "initial_observation": "Crafting commands:\ncraft 4 smooth quartz stairs using 6 smooth quartz\ncraft 6 smooth quartz slab using 3 smooth quartz\n\nGoal: craft smooth quartz slab.",
+      "recipe_depth": 1,
+      "task_hash": "2c49309d0cd07a6dbc690d1ef82f250422cab4502de01b16a51329ab9e264868"
+    },
+    {
+      "task_id": "textcraft_94",
+      "data_idx": 94,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_quartz_stairs",
+      "commands": "craft 6 smooth quartz slab using 3 smooth quartz\ncraft 4 smooth quartz stairs using 6 smooth quartz",
+      "initial_observation": "Crafting commands:\ncraft 6 smooth quartz slab using 3 smooth quartz\ncraft 4 smooth quartz stairs using 6 smooth quartz\n\nGoal: craft smooth quartz stairs.",
+      "recipe_depth": 1,
+      "task_hash": "ca620f8545bd6f636344262de5c0e7b6d5bcb4397c8685095fbb2846b9dae19b"
+    },
+    {
+      "task_id": "textcraft_95",
+      "data_idx": 95,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_red_sandstone_slab",
+      "commands": "craft 4 smooth red sandstone stairs using 6 smooth red sandstone\ncraft 6 smooth red sandstone slab using 3 smooth red sandstone",
+      "initial_observation": "Crafting commands:\ncraft 4 smooth red sandstone stairs using 6 smooth red sandstone\ncraft 6 smooth red sandstone slab using 3 smooth red sandstone\n\nGoal: craft smooth red sandstone slab.",
+      "recipe_depth": 1,
+      "task_hash": "488d13d27240ef214eb5ac6b52048bc262916d63cdd6275630881985bf666752"
+    },
+    {
+      "task_id": "textcraft_96",
+      "data_idx": 96,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_red_sandstone_stairs",
+      "commands": "craft 6 smooth red sandstone slab using 3 smooth red sandstone\ncraft 4 smooth red sandstone stairs using 6 smooth red sandstone",
+      "initial_observation": "Crafting commands:\ncraft 6 smooth red sandstone slab using 3 smooth red sandstone\ncraft 4 smooth red sandstone stairs using 6 smooth red sandstone\n\nGoal: craft smooth red sandstone stairs.",
+      "recipe_depth": 1,
+      "task_hash": "2eef62e61bd05c82ea18025691ca9510fc3a0c5cbf47260d38fd733e7d1fc1e0"
+    },
+    {
+      "task_id": "textcraft_97",
+      "data_idx": 97,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_sandstone_slab",
+      "commands": "craft 4 smooth sandstone stairs using 6 smooth sandstone\ncraft 6 smooth sandstone slab using 3 smooth sandstone",
+      "initial_observation": "Crafting commands:\ncraft 4 smooth sandstone stairs using 6 smooth sandstone\ncraft 6 smooth sandstone slab using 3 smooth sandstone\n\nGoal: craft smooth sandstone slab.",
+      "recipe_depth": 1,
+      "task_hash": "52faa02ce16dbf7aa41923f53dd11cc6326f2861989cef6faf21214b13fe153d"
+    },
+    {
+      "task_id": "textcraft_98",
+      "data_idx": 98,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_sandstone_stairs",
+      "commands": "craft 6 smooth sandstone slab using 3 smooth sandstone\ncraft 4 smooth sandstone stairs using 6 smooth sandstone",
+      "initial_observation": "Crafting commands:\ncraft 6 smooth sandstone slab using 3 smooth sandstone\ncraft 4 smooth sandstone stairs using 6 smooth sandstone\n\nGoal: craft smooth sandstone stairs.",
+      "recipe_depth": 1,
+      "task_hash": "2e7def9a72ea668728f3518c638cbbea0d540ca1fc8295844b713ea784023bc5"
+    },
+    {
+      "task_id": "textcraft_99",
+      "data_idx": 99,
+      "environment_seed": 42,
+      "goal": "minecraft:smooth_stone_slab",
+      "commands": "craft 1 blast furnace using 3 smooth stone, 1 furnace, 5 iron ingot\ncraft 6 smooth stone slab using 3 smooth stone",
+      "initial_observation": "Crafting commands:\ncraft 1 blast furnace using 3 smooth stone, 1 furnace, 5 iron ingot\ncraft 6 smooth stone slab using 3 smooth stone\n\nGoal: craft smooth stone slab.",
+      "recipe_depth": 1,
+      "task_hash": "c61bd38414cd27734af516b4bf9da77d0e3ab3ebc55d2484ca71faa1be63f483"
+    },
+    {
+      "task_id": "textcraft_100",
+      "data_idx": 100,
+      "environment_seed": 42,
+      "goal": "minecraft:snow_block",
+      "commands": "craft 1 snow block using 4 snowball",
+      "initial_observation": "Crafting commands:\ncraft 1 snow block using 4 snowball\n\nGoal: craft snow block.",
+      "recipe_depth": 1,
+      "task_hash": "63aef28a13279e421c71c2c4a8e8473d5e3f2d39f40baae073ca4a5d3468e59e"
+    },
+    {
+      "task_id": "textcraft_101",
+      "data_idx": 101,
+      "environment_seed": 42,
+      "goal": "minecraft:spruce_planks",
+      "commands": "craft 4 spruce planks using 1 spruce logs",
+      "initial_observation": "Crafting commands:\ncraft 4 spruce planks using 1 spruce logs\n\nGoal: craft spruce planks.",
+      "recipe_depth": 1,
+      "task_hash": "940dd6d7d07ed6976ed14b9dd0da5470120ea836132146ac51245e24a208ab39"
+    },
+    {
+      "task_id": "textcraft_102",
+      "data_idx": 102,
+      "environment_seed": 42,
+      "goal": "minecraft:spruce_wood",
+      "commands": "craft 3 spruce wood using 4 spruce log",
+      "initial_observation": "Crafting commands:\ncraft 3 spruce wood using 4 spruce log\n\nGoal: craft spruce wood.",
+      "recipe_depth": 1,
+      "task_hash": "58317268c7629818bd3902aaa10417ff3ec1a602d1df42aca643350753a24b24"
+    },
+    {
+      "task_id": "textcraft_103",
+      "data_idx": 103,
+      "environment_seed": 42,
+      "goal": "minecraft:stick",
+      "commands": "craft 1 beehive using 6 planks, 3 honeycomb\ncraft 1 grindstone using 2 stick, 1 stone slab, 2 planks\ncraft 4 birch planks using 1 birch logs\ncraft 4 acacia planks using 1 acacia logs\ncraft 4 dark oak planks using 1 dark oak logs\ncraft 1 cartography table using 4 planks, 2 paper\ncraft 4 warped planks using 1 warped stems\ncraft 1 green bed using 3 green wool, 3 planks\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 4 oak planks using 1 oak logs\ncraft 4 spruce planks using 1 spruce logs\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 4 jungle planks using 1 jungle logs\ncraft 4 crimson planks using 1 crimson stems\ncraft 1 magenta bed using 3 magenta wool, 3 planks\ncraft 1 brown bed using 3 brown wool, 3 planks\ncraft 4 stick using 2 planks\ncraft 1 light gray bed using 3 light gray wool, 3 planks\ncraft 1 chest using 8 planks\ncraft 1 stick using 2 bamboo",
+      "initial_observation": "Crafting commands:\ncraft 1 beehive using 6 planks, 3 honeycomb\ncraft 1 grindstone using 2 stick, 1 stone slab, 2 planks\ncraft 4 birch planks using 1 birch logs\ncraft 4 acacia planks using 1 acacia logs\ncraft 4 dark oak planks using 1 dark oak logs\ncraft 1 cartography table using 4 planks, 2 paper\ncraft 4 warped planks using 1 warped stems\ncraft 1 green bed using 3 green wool, 3 planks\ncraft 1 jukebox using 8 planks, 1 diamond\ncraft 4 oak planks using 1 oak logs\ncraft 4 spruce planks using 1 spruce logs\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 4 jungle planks using 1 jungle logs\ncraft 4 crimson planks using 1 crimson stems\ncraft 1 magenta bed using 3 magenta wool, 3 planks\ncraft 1 brown bed using 3 brown wool, 3 planks\ncraft 4 stick using 2 planks\ncraft 1 light gray bed using 3 light gray wool, 3 planks\ncraft 1 chest using 8 planks\ncraft 1 stick using 2 bamboo\n\nGoal: craft stick.",
+      "recipe_depth": 1,
+      "task_hash": "c3e361d01258acb2f9fad9fe273cbba4273c673ddcb8e12eee09c69bb24a1c2d"
+    },
+    {
+      "task_id": "textcraft_104",
+      "data_idx": 104,
+      "environment_seed": 42,
+      "goal": "minecraft:stone_bricks",
+      "commands": "craft 6 stone slab using 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone button using 1 stone\ncraft 4 stone bricks using 4 stone",
+      "initial_observation": "Crafting commands:\ncraft 6 stone slab using 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone button using 1 stone\ncraft 4 stone bricks using 4 stone\n\nGoal: craft stone bricks.",
+      "recipe_depth": 1,
+      "task_hash": "e0ef5a212f00d8fcc163fb21935fb58bdc9c80c65d2f036f072c5c9e25cf1048"
+    },
+    {
+      "task_id": "textcraft_105",
+      "data_idx": 105,
+      "environment_seed": 42,
+      "goal": "minecraft:stone_button",
+      "commands": "craft 6 stone slab using 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stone button using 1 stone",
+      "initial_observation": "Crafting commands:\ncraft 6 stone slab using 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 stone button using 1 stone\n\nGoal: craft stone button.",
+      "recipe_depth": 1,
+      "task_hash": "be75cda1ac1a6e1351ab2ed02b178aab26a91a355f7a2155c0773b33d440d663"
+    },
+    {
+      "task_id": "textcraft_106",
+      "data_idx": 106,
+      "environment_seed": 42,
+      "goal": "minecraft:stone_pressure_plate",
+      "commands": "craft 6 stone slab using 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stone pressure plate using 2 stone",
+      "initial_observation": "Crafting commands:\ncraft 6 stone slab using 3 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stone pressure plate using 2 stone\n\nGoal: craft stone pressure plate.",
+      "recipe_depth": 1,
+      "task_hash": "0bd8568889281eb669c8521eb46b6c8933390d04d79d11f175dc3dcea5a86a83"
+    },
+    {
+      "task_id": "textcraft_107",
+      "data_idx": 107,
+      "environment_seed": 42,
+      "goal": "minecraft:stone_slab",
+      "commands": "craft 4 stone bricks using 4 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 stone button using 1 stone\ncraft 6 stone slab using 3 stone",
+      "initial_observation": "Crafting commands:\ncraft 4 stone bricks using 4 stone\ncraft 4 stone stairs using 6 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 stone button using 1 stone\ncraft 6 stone slab using 3 stone\n\nGoal: craft stone slab.",
+      "recipe_depth": 1,
+      "task_hash": "8ae4e7886669bc521ae49dd87a4d3c06da95315badd6980bdb7b655c19300f02"
+    },
+    {
+      "task_id": "textcraft_108",
+      "data_idx": 108,
+      "environment_seed": 42,
+      "goal": "minecraft:stone_stairs",
+      "commands": "craft 6 stone slab using 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 4 stone stairs using 6 stone",
+      "initial_observation": "Crafting commands:\ncraft 6 stone slab using 3 stone\ncraft 1 stone button using 1 stone\ncraft 1 stonecutter using 1 iron ingot, 3 stone\ncraft 4 stone bricks using 4 stone\ncraft 1 stone pressure plate using 2 stone\ncraft 1 repeater using 2 redstone torch, 1 redstone, 3 stone\ncraft 1 comparator using 3 redstone torch, 1 quartz, 3 stone\ncraft 4 stone stairs using 6 stone\n\nGoal: craft stone stairs.",
+      "recipe_depth": 1,
+      "task_hash": "b2f82ffab852f58fb2b03b54c73edf30de4bc4f6af843ef3e89700de9b97a54c"
+    },
+    {
+      "task_id": "textcraft_109",
+      "data_idx": 109,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_acacia_wood",
+      "commands": "craft 3 stripped acacia wood using 4 stripped acacia log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped acacia wood using 4 stripped acacia log\n\nGoal: craft stripped acacia wood.",
+      "recipe_depth": 1,
+      "task_hash": "8806de72d0b1907a7e1497fdaf4b151684499f17111cf7f1ac93d2731a707910"
+    },
+    {
+      "task_id": "textcraft_110",
+      "data_idx": 110,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_birch_wood",
+      "commands": "craft 3 stripped birch wood using 4 stripped birch log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped birch wood using 4 stripped birch log\n\nGoal: craft stripped birch wood.",
+      "recipe_depth": 1,
+      "task_hash": "75997e9b453e5e51e10460674633c9631a374038a5fbcb82e1d039b3ce9ac028"
+    },
+    {
+      "task_id": "textcraft_111",
+      "data_idx": 111,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_crimson_hyphae",
+      "commands": "craft 3 stripped crimson hyphae using 4 stripped crimson stem",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped crimson hyphae using 4 stripped crimson stem\n\nGoal: craft stripped crimson hyphae.",
+      "recipe_depth": 1,
+      "task_hash": "9f8002addab7604983e60deaabba6ed1c33e75d7562278cf9f7de67e7967b420"
+    },
+    {
+      "task_id": "textcraft_112",
+      "data_idx": 112,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_dark_oak_wood",
+      "commands": "craft 3 stripped dark oak wood using 4 stripped dark oak log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped dark oak wood using 4 stripped dark oak log\n\nGoal: craft stripped dark oak wood.",
+      "recipe_depth": 1,
+      "task_hash": "fa1da399defd8805b3f7995640750424acfd99d8003fab15339f08269ba694b9"
+    },
+    {
+      "task_id": "textcraft_113",
+      "data_idx": 113,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_jungle_wood",
+      "commands": "craft 3 stripped jungle wood using 4 stripped jungle log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped jungle wood using 4 stripped jungle log\n\nGoal: craft stripped jungle wood.",
+      "recipe_depth": 1,
+      "task_hash": "c8d35c9393347cdccc3edabe49923f70e9ebe81ebc260ddc1c1de5a0858688cd"
+    },
+    {
+      "task_id": "textcraft_114",
+      "data_idx": 114,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_oak_wood",
+      "commands": "craft 3 stripped oak wood using 4 stripped oak log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped oak wood using 4 stripped oak log\n\nGoal: craft stripped oak wood.",
+      "recipe_depth": 1,
+      "task_hash": "5d9f133d37daeeb1df387abf6c1c5233aacbbb21bcf3e66caa1d78a0c1cdb36f"
+    },
+    {
+      "task_id": "textcraft_115",
+      "data_idx": 115,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_spruce_wood",
+      "commands": "craft 3 stripped spruce wood using 4 stripped spruce log",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped spruce wood using 4 stripped spruce log\n\nGoal: craft stripped spruce wood.",
+      "recipe_depth": 1,
+      "task_hash": "86ba71e7a2eef6cb531218a254676941b35cbbf94f0b39e8e37cba9d5029ff6e"
+    },
+    {
+      "task_id": "textcraft_116",
+      "data_idx": 116,
+      "environment_seed": 42,
+      "goal": "minecraft:stripped_warped_hyphae",
+      "commands": "craft 3 stripped warped hyphae using 4 stripped warped stem",
+      "initial_observation": "Crafting commands:\ncraft 3 stripped warped hyphae using 4 stripped warped stem\n\nGoal: craft stripped warped hyphae.",
+      "recipe_depth": 1,
+      "task_hash": "306f3c0a2fbd8b914e66dc130d8199792f0f25e3bf27014eaaf03a216e0c1868"
+    },
+    {
+      "task_id": "textcraft_117",
+      "data_idx": 117,
+      "environment_seed": 42,
+      "goal": "minecraft:sugar",
+      "commands": "craft 1 honey block using 4 honey bottle\ncraft 3 paper using 3 sugar cane\ncraft 1 sugar using 1 sugar cane\ncraft 3 sugar using 1 honey bottle",
+      "initial_observation": "Crafting commands:\ncraft 1 honey block using 4 honey bottle\ncraft 3 paper using 3 sugar cane\ncraft 1 sugar using 1 sugar cane\ncraft 3 sugar using 1 honey bottle\n\nGoal: craft sugar.",
+      "recipe_depth": 1,
+      "task_hash": "43aea4bb22caa3ba893120c96285fde8dbae62486b409de6f7c742d4d35c06c3"
+    },
+    {
+      "task_id": "textcraft_118",
+      "data_idx": 118,
+      "environment_seed": 42,
+      "goal": "minecraft:tnt",
+      "commands": "craft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 purple concrete powder using 1 purple dye, 4 sand, 4 gravel\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 1 tnt using 4 sand, 5 gunpowder\ncraft 3 fire charge using 1 gunpowder, 1 blaze powder, 1 coal\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel",
+      "initial_observation": "Crafting commands:\ncraft 8 light gray concrete powder using 1 light gray dye, 4 sand, 4 gravel\ncraft 8 purple concrete powder using 1 purple dye, 4 sand, 4 gravel\ncraft 8 yellow concrete powder using 1 yellow dye, 4 sand, 4 gravel\ncraft 8 cyan concrete powder using 1 cyan dye, 4 sand, 4 gravel\ncraft 8 green concrete powder using 1 green dye, 4 sand, 4 gravel\ncraft 1 tnt using 4 sand, 5 gunpowder\ncraft 3 fire charge using 1 gunpowder, 1 blaze powder, 1 coal\ncraft 8 gray concrete powder using 1 gray dye, 4 sand, 4 gravel\ncraft 8 magenta concrete powder using 1 magenta dye, 4 sand, 4 gravel\ncraft 8 blue concrete powder using 1 blue dye, 4 sand, 4 gravel\n\nGoal: craft tnt.",
+      "recipe_depth": 1,
+      "task_hash": "a688fa978ef373447e89add1b5fe839a5c20d9a9620c72a50debf8efa839ad15"
+    },
+    {
+      "task_id": "textcraft_119",
+      "data_idx": 119,
+      "environment_seed": 42,
+      "goal": "minecraft:turtle_helmet",
+      "commands": "craft 1 turtle helmet using 5 scute",
+      "initial_observation": "Crafting commands:\ncraft 1 turtle helmet using 5 scute\n\nGoal: craft turtle helmet.",
+      "recipe_depth": 1,
+      "task_hash": "9327f052a137960c7acfe147ea2fc4854d255d915cff2ab713a7b45f0374e37c"
+    },
+    {
+      "task_id": "textcraft_120",
+      "data_idx": 120,
+      "environment_seed": 42,
+      "goal": "minecraft:warped_hyphae",
+      "commands": "craft 3 warped hyphae using 4 warped stem",
+      "initial_observation": "Crafting commands:\ncraft 3 warped hyphae using 4 warped stem\n\nGoal: craft warped hyphae.",
+      "recipe_depth": 1,
+      "task_hash": "bea4aaddc6ae4fa15e3c303d224996aaa5bcbdd72b81907ff8661fac72e9a3dd"
+    },
+    {
+      "task_id": "textcraft_121",
+      "data_idx": 121,
+      "environment_seed": 42,
+      "goal": "minecraft:warped_planks",
+      "commands": "craft 4 warped planks using 1 warped stems",
+      "initial_observation": "Crafting commands:\ncraft 4 warped planks using 1 warped stems\n\nGoal: craft warped planks.",
+      "recipe_depth": 1,
+      "task_hash": "9a87b295c4175a4476a3181cb55f56b7bdb99e9296b3443e5165e0a1d919d631"
+    },
+    {
+      "task_id": "textcraft_122",
+      "data_idx": 122,
+      "environment_seed": 42,
+      "goal": "minecraft:white_dye",
+      "commands": "craft 1 bone block using 9 bone meal\ncraft 1 white dye using 1 bone meal\ncraft 1 white dye using 1 lily of the valley\ncraft 3 bone meal using 1 bone",
+      "initial_observation": "Crafting commands:\ncraft 1 bone block using 9 bone meal\ncraft 1 white dye using 1 bone meal\ncraft 1 white dye using 1 lily of the valley\ncraft 3 bone meal using 1 bone\n\nGoal: craft white dye.",
+      "recipe_depth": 1,
+      "task_hash": "58db05acaddca366ba3f64f8e8f806dcdeb0cdfef6653a4225bd4a81260f1ff3"
+    },
+    {
+      "task_id": "textcraft_123",
+      "data_idx": 123,
+      "environment_seed": 42,
+      "goal": "minecraft:white_wool",
+      "commands": "craft 1 loom using 2 planks, 2 string\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 1 bow using 3 stick, 3 string\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 white wool using 4 string",
+      "initial_observation": "Crafting commands:\ncraft 1 loom using 2 planks, 2 string\ncraft 6 scaffolding using 1 string, 6 bamboo\ncraft 1 fishing rod using 3 stick, 2 string\ncraft 1 bow using 3 stick, 3 string\ncraft 1 crossbow using 2 string, 3 stick, 1 iron ingot, 1 tripwire hook\ncraft 2 lead using 4 string, 1 slime ball\ncraft 1 white wool using 4 string\n\nGoal: craft white wool.",
+      "recipe_depth": 1,
+      "task_hash": "6791567f19db6bb5cffdce1eed813fce664bee883da3137b470cdedef8364f22"
+    },
+    {
+      "task_id": "textcraft_124",
+      "data_idx": 124,
+      "environment_seed": 42,
+      "goal": "minecraft:yellow_dye",
+      "commands": "craft 2 yellow dye using 1 sunflower\ncraft 1 yellow dye using 1 dandelion",
+      "initial_observation": "Crafting commands:\ncraft 2 yellow dye using 1 sunflower\ncraft 1 yellow dye using 1 dandelion\n\nGoal: craft yellow dye.",
+      "recipe_depth": 1,
+      "task_hash": "d676beb5aae81f0e2ec59a0f92d2f9c022ad82ed1a79cf77efb4d1d483ab1c97"
+    }
+  ],
+  "python": "3.13.15 (main, Sep  1 2026, 14:18:08) [Clang 22.1.3 ]",
+  "platform": "Linux-6.8.0-1046-nvidia-x86_64-with-glibc2.35",
+  "packages": {
+    "torch": "2.14.0",
+    "transformers": "5.17.0",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "gymnasium": "1.3.0"
+  },
+  "manifest_hash": "b1b4b59b614b496e2c684087388d1dd78e7db561bdd859091d86166fe7ec1717"
+}

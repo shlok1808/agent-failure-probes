@@ -1,0 +1,12 @@
+{
+  "manifest_hash": "b1b4b59b614b496e2c684087388d1dd78e7db561bdd859091d86166fe7ec1717",
+  "rows": 1000,
+  "hidden_size": 2048,
+  "layer_number": 28,
+  "primary_site": "decoder block output, pre final RMSNorm, one-based layer numbering",
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "repeat_replay_max_abs_error": [
+    0.0
+  ]
+}

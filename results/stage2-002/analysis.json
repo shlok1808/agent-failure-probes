@@ -1,0 +1,4057 @@
+{
+  "stage": "stage2",
+  "interpretation": "Confirmatory run. Read docs/reproduction.md for what is and is not matched to Ruan.",
+  "missing_episodes": 0,
+  "n_episodes": 1000,
+  "n_tasks": 125,
+  "successes": 775,
+  "probe_site_fallbacks": 0,
+  "estimand_note": "Primary estimand is last_action_token_only; 'all' includes fallback-site episodes, which read a different token.",
+  "models": {
+    "hidden": {
+      "all": {
+        "pair_weighted_auc": 0.5470494417862839,
+        "macro_auc": 0.5357038429406851,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 12.0,
+            "pairs": 16,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 14.0,
+            "pairs": 16,
+            "auc": 0.875
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 2.5,
+            "pairs": 7,
+            "auc": 0.35714285714285715
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 13.0,
+            "pairs": 16,
+            "auc": 0.8125
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.5,
+            "pairs": 16,
+            "auc": 0.03125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 4.0,
+            "pairs": 12,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 8.0,
+            "pairs": 12,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 1.0,
+            "pairs": 12,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 3.0,
+            "pairs": 15,
+            "auc": 0.2
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 5.0,
+            "pairs": 12,
+            "auc": 0.4166666666666667
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 10.0,
+            "pairs": 15,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7911053763440861,
+        "conditional_bootstrap_95": [
+          0.4601256310984383,
+          0.6274269000858829
+        ]
+      },
+      "executable_only": {
+        "pair_weighted_auc": 0.4481707317073171,
+        "macro_auc": 0.3978869047619048,
+        "mixed_tasks": 20,
+        "per_task": [
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 3,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 1.0,
+            "pairs": 3,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 1.5,
+            "pairs": 3,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 0.5,
+            "pairs": 6,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 2.0,
+            "pairs": 4,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.0,
+            "pairs": 3,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 6.0,
+            "pairs": 6,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 1.0,
+            "pairs": 6,
+            "auc": 0.16666666666666666
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 7.0,
+            "pairs": 12,
+            "auc": 0.5833333333333334
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          }
+        ],
+        "n": 592,
+        "overall_auc": 0.8495605138607167,
+        "conditional_bootstrap_95": [
+          0.26583483385169426,
+          0.6156194766938138
+        ]
+      },
+      "last_action_token_only": {
+        "pair_weighted_auc": 0.5470494417862839,
+        "macro_auc": 0.5357038429406851,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 12.0,
+            "pairs": 16,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 14.0,
+            "pairs": 16,
+            "auc": 0.875
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 2.5,
+            "pairs": 7,
+            "auc": 0.35714285714285715
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 13.0,
+            "pairs": 16,
+            "auc": 0.8125
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.5,
+            "pairs": 16,
+            "auc": 0.03125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 4.0,
+            "pairs": 12,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 8.0,
+            "pairs": 12,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 1.0,
+            "pairs": 12,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 3.0,
+            "pairs": 15,
+            "auc": 0.2
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 5.0,
+            "pairs": 12,
+            "auc": 0.4166666666666667
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 10.0,
+            "pairs": 15,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7911053763440861,
+        "conditional_bootstrap_95": [
+          0.4601256310984383,
+          0.6274269000858829
+        ]
+      }
+    },
+    "surface_five": {
+      "all": {
+        "pair_weighted_auc": 0.6148325358851675,
+        "macro_auc": 0.6379855889724311,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 5.0,
+            "pairs": 16,
+            "auc": 0.3125
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 4.0,
+            "pairs": 15,
+            "auc": 0.26666666666666666
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 9.0,
+            "pairs": 15,
+            "auc": 0.6
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 7.5,
+            "pairs": 12,
+            "auc": 0.625
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 9.0,
+            "pairs": 16,
+            "auc": 0.5625
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 6.5,
+            "pairs": 16,
+            "auc": 0.40625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 9.0,
+            "pairs": 15,
+            "auc": 0.6
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 10.0,
+            "pairs": 12,
+            "auc": 0.8333333333333334
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.697574193548387,
+        "conditional_bootstrap_95": [
+          0.5229734945959855,
+          0.6939346157571061
+        ]
+      },
+      "executable_only": {
+        "pair_weighted_auc": 0.4817073170731707,
+        "macro_auc": 0.46138392857142857,
+        "mixed_tasks": 20,
+        "per_task": [
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 3,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 2.0,
+            "pairs": 3,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 0.5,
+            "pairs": 3,
+            "auc": 0.16666666666666666
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 3.5,
+            "pairs": 6,
+            "auc": 0.5833333333333334
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 9.0,
+            "pairs": 15,
+            "auc": 0.6
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 2.0,
+            "pairs": 5,
+            "auc": 0.4
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 2.0,
+            "pairs": 4,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 1.0,
+            "pairs": 3,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 6.5,
+            "pairs": 16,
+            "auc": 0.40625
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 6.0,
+            "pairs": 6,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 6,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 2.0,
+            "pairs": 12,
+            "auc": 0.16666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 10.0,
+            "pairs": 12,
+            "auc": 0.8333333333333334
+          }
+        ],
+        "n": 592,
+        "overall_auc": 0.7408773331694225,
+        "conditional_bootstrap_95": [
+          0.3140226176971072,
+          0.6259507640067911
+        ]
+      },
+      "last_action_token_only": {
+        "pair_weighted_auc": 0.6148325358851675,
+        "macro_auc": 0.6379855889724311,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 5.0,
+            "pairs": 16,
+            "auc": 0.3125
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 4.0,
+            "pairs": 15,
+            "auc": 0.26666666666666666
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 9.0,
+            "pairs": 15,
+            "auc": 0.6
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 7.5,
+            "pairs": 12,
+            "auc": 0.625
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 9.0,
+            "pairs": 16,
+            "auc": 0.5625
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 6.5,
+            "pairs": 16,
+            "auc": 0.40625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 8.0,
+            "pairs": 16,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 9.0,
+            "pairs": 15,
+            "auc": 0.6
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 10.0,
+            "pairs": 12,
+            "auc": 0.8333333333333334
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.697574193548387,
+        "conditional_bootstrap_95": [
+          0.5229734945959855,
+          0.6939346157571061
+        ]
+      }
+    },
+    "hidden_plus_surface": {
+      "all": {
+        "pair_weighted_auc": 0.5486443381180224,
+        "macro_auc": 0.5355367585630743,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 12.0,
+            "pairs": 16,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 2.5,
+            "pairs": 7,
+            "auc": 0.35714285714285715
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 13.0,
+            "pairs": 16,
+            "auc": 0.8125
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 6.0,
+            "pairs": 15,
+            "auc": 0.4
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 6.0,
+            "pairs": 16,
+            "auc": 0.375
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.5,
+            "pairs": 16,
+            "auc": 0.03125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 4.0,
+            "pairs": 12,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 8.0,
+            "pairs": 12,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 1.0,
+            "pairs": 12,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 5.0,
+            "pairs": 12,
+            "auc": 0.4166666666666667
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 10.0,
+            "pairs": 15,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7947354838709676,
+        "conditional_bootstrap_95": [
+          0.460352274962449,
+          0.6284032195145252
+        ]
+      },
+      "executable_only": {
+        "pair_weighted_auc": 0.43597560975609756,
+        "macro_auc": 0.3645535714285714,
+        "mixed_tasks": 20,
+        "per_task": [
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 3,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 0.0,
+            "pairs": 3,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 1.5,
+            "pairs": 3,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 1.5,
+            "pairs": 6,
+            "auc": 0.25
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 0.0,
+            "pairs": 4,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.0,
+            "pairs": 3,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 6.0,
+            "pairs": 6,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 1.0,
+            "pairs": 6,
+            "auc": 0.16666666666666666
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 7.0,
+            "pairs": 12,
+            "auc": 0.5833333333333334
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          }
+        ],
+        "n": 592,
+        "overall_auc": 0.8466920728584014,
+        "conditional_bootstrap_95": [
+          0.25,
+          0.6034535323801513
+        ]
+      },
+      "last_action_token_only": {
+        "pair_weighted_auc": 0.5486443381180224,
+        "macro_auc": 0.5355367585630743,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 12.0,
+            "pairs": 16,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 3.5,
+            "pairs": 7,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 2.5,
+            "pairs": 7,
+            "auc": 0.35714285714285715
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 0.5,
+            "pairs": 7,
+            "auc": 0.07142857142857142
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 13.0,
+            "pairs": 15,
+            "auc": 0.8666666666666667
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 13.0,
+            "pairs": 16,
+            "auc": 0.8125
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 6.0,
+            "pairs": 15,
+            "auc": 0.4
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 6.0,
+            "pairs": 16,
+            "auc": 0.375
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 0.5,
+            "pairs": 16,
+            "auc": 0.03125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 4.0,
+            "pairs": 12,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 8.0,
+            "pairs": 12,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 1.0,
+            "pairs": 12,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 6.5,
+            "pairs": 12,
+            "auc": 0.5416666666666666
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 2.5,
+            "pairs": 16,
+            "auc": 0.15625
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 5.0,
+            "pairs": 15,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 2.0,
+            "pairs": 7,
+            "auc": 0.2857142857142857
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 5.0,
+            "pairs": 12,
+            "auc": 0.4166666666666667
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 10.0,
+            "pairs": 15,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 6.0,
+            "pairs": 12,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 9.0,
+            "pairs": 12,
+            "auc": 0.75
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7947354838709676,
+        "conditional_bootstrap_95": [
+          0.460352274962449,
+          0.6284032195145252
+        ]
+      }
+    },
+    "prefix_text_plus_surface": {
+      "all": {
+        "pair_weighted_auc": 0.6060606060606061,
+        "macro_auc": 0.6261904761904761,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 6.0,
+            "pairs": 16,
+            "auc": 0.375
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 10.0,
+            "pairs": 16,
+            "auc": 0.625
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 4.5,
+            "pairs": 7,
+            "auc": 0.6428571428571429
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 14.0,
+            "pairs": 15,
+            "auc": 0.9333333333333333
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 9.0,
+            "pairs": 16,
+            "auc": 0.5625
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 3.5,
+            "pairs": 12,
+            "auc": 0.2916666666666667
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 7.5,
+            "pairs": 16,
+            "auc": 0.46875
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 4.0,
+            "pairs": 15,
+            "auc": 0.26666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 11.0,
+            "pairs": 12,
+            "auc": 0.9166666666666666
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 10.0,
+            "pairs": 12,
+            "auc": 0.8333333333333334
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7174250896057348,
+        "conditional_bootstrap_95": [
+          0.510116989869754,
+          0.6911163456031912
+        ]
+      },
+      "executable_only": {
+        "pair_weighted_auc": 0.49085365853658536,
+        "macro_auc": 0.45613095238095236,
+        "mixed_tasks": 20,
+        "per_task": [
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 3,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 2.0,
+            "pairs": 3,
+            "auc": 0.6666666666666666
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 0.5,
+            "pairs": 3,
+            "auc": 0.16666666666666666
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 3.5,
+            "pairs": 6,
+            "auc": 0.5833333333333334
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 2.0,
+            "pairs": 4,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 1.0,
+            "pairs": 3,
+            "auc": 0.3333333333333333
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 5,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 7.5,
+            "pairs": 16,
+            "auc": 0.46875
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 6.0,
+            "pairs": 6,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 6,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 1.0,
+            "pairs": 12,
+            "auc": 0.08333333333333333
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 11.0,
+            "pairs": 12,
+            "auc": 0.9166666666666666
+          }
+        ],
+        "n": 592,
+        "overall_auc": 0.73767082590612,
+        "conditional_bootstrap_95": [
+          0.3180630936227951,
+          0.649359398086943
+        ]
+      },
+      "last_action_token_only": {
+        "pair_weighted_auc": 0.6060606060606061,
+        "macro_auc": 0.6261904761904761,
+        "mixed_tasks": 57,
+        "per_task": [
+          {
+            "task_id": "textcraft_104",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_107",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_108",
+            "wins": 6.0,
+            "pairs": 16,
+            "auc": 0.375
+          },
+          {
+            "task_id": "textcraft_109",
+            "wins": 4.0,
+            "pairs": 7,
+            "auc": 0.5714285714285714
+          },
+          {
+            "task_id": "textcraft_11",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_112",
+            "wins": 10.0,
+            "pairs": 16,
+            "auc": 0.625
+          },
+          {
+            "task_id": "textcraft_118",
+            "wins": 2.0,
+            "pairs": 15,
+            "auc": 0.13333333333333333
+          },
+          {
+            "task_id": "textcraft_121",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_123",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_124",
+            "wins": 1.5,
+            "pairs": 7,
+            "auc": 0.21428571428571427
+          },
+          {
+            "task_id": "textcraft_13",
+            "wins": 0.0,
+            "pairs": 16,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_14",
+            "wins": 0.0,
+            "pairs": 7,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_15",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_17",
+            "wins": 5.5,
+            "pairs": 7,
+            "auc": 0.7857142857142857
+          },
+          {
+            "task_id": "textcraft_19",
+            "wins": 4.5,
+            "pairs": 7,
+            "auc": 0.6428571428571429
+          },
+          {
+            "task_id": "textcraft_21",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_24",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_25",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_27",
+            "wins": 14.0,
+            "pairs": 15,
+            "auc": 0.9333333333333333
+          },
+          {
+            "task_id": "textcraft_30",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_33",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_34",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_35",
+            "wins": 16.0,
+            "pairs": 16,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_38",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_40",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_46",
+            "wins": 8.0,
+            "pairs": 15,
+            "auc": 0.5333333333333333
+          },
+          {
+            "task_id": "textcraft_47",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_49",
+            "wins": 5.5,
+            "pairs": 12,
+            "auc": 0.4583333333333333
+          },
+          {
+            "task_id": "textcraft_50",
+            "wins": 9.0,
+            "pairs": 16,
+            "auc": 0.5625
+          },
+          {
+            "task_id": "textcraft_51",
+            "wins": 12.5,
+            "pairs": 16,
+            "auc": 0.78125
+          },
+          {
+            "task_id": "textcraft_52",
+            "wins": 10.5,
+            "pairs": 16,
+            "auc": 0.65625
+          },
+          {
+            "task_id": "textcraft_56",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_58",
+            "wins": 3.0,
+            "pairs": 7,
+            "auc": 0.42857142857142855
+          },
+          {
+            "task_id": "textcraft_6",
+            "wins": 12.0,
+            "pairs": 15,
+            "auc": 0.8
+          },
+          {
+            "task_id": "textcraft_60",
+            "wins": 7.5,
+            "pairs": 15,
+            "auc": 0.5
+          },
+          {
+            "task_id": "textcraft_62",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_64",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_65",
+            "wins": 6.5,
+            "pairs": 7,
+            "auc": 0.9285714285714286
+          },
+          {
+            "task_id": "textcraft_67",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_68",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_7",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_70",
+            "wins": 3.5,
+            "pairs": 12,
+            "auc": 0.2916666666666667
+          },
+          {
+            "task_id": "textcraft_72",
+            "wins": 7.5,
+            "pairs": 16,
+            "auc": 0.46875
+          },
+          {
+            "task_id": "textcraft_73",
+            "wins": 7.0,
+            "pairs": 15,
+            "auc": 0.4666666666666667
+          },
+          {
+            "task_id": "textcraft_76",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_77",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_78",
+            "wins": 1.0,
+            "pairs": 7,
+            "auc": 0.14285714285714285
+          },
+          {
+            "task_id": "textcraft_79",
+            "wins": 12.0,
+            "pairs": 12,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_81",
+            "wins": 15.0,
+            "pairs": 15,
+            "auc": 1.0
+          },
+          {
+            "task_id": "textcraft_85",
+            "wins": 5.0,
+            "pairs": 7,
+            "auc": 0.7142857142857143
+          },
+          {
+            "task_id": "textcraft_86",
+            "wins": 0.0,
+            "pairs": 12,
+            "auc": 0.0
+          },
+          {
+            "task_id": "textcraft_87",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_90",
+            "wins": 4.0,
+            "pairs": 15,
+            "auc": 0.26666666666666666
+          },
+          {
+            "task_id": "textcraft_91",
+            "wins": 11.0,
+            "pairs": 12,
+            "auc": 0.9166666666666666
+          },
+          {
+            "task_id": "textcraft_94",
+            "wins": 10.0,
+            "pairs": 12,
+            "auc": 0.8333333333333334
+          },
+          {
+            "task_id": "textcraft_95",
+            "wins": 6.0,
+            "pairs": 7,
+            "auc": 0.8571428571428571
+          },
+          {
+            "task_id": "textcraft_97",
+            "wins": 7.0,
+            "pairs": 7,
+            "auc": 1.0
+          }
+        ],
+        "n": 1000,
+        "overall_auc": 0.7174250896057348,
+        "conditional_bootstrap_95": [
+          0.510116989869754,
+          0.6911163456031912
+        ]
+      }
+    }
+  },
+  "folds": [
+    {
+      "train_tasks": [
+        "textcraft_0",
+        "textcraft_1",
+        "textcraft_10",
+        "textcraft_100",
+        "textcraft_101",
+        "textcraft_102",
+        "textcraft_103",
+        "textcraft_104",
+        "textcraft_105",
+        "textcraft_106",
+        "textcraft_107",
+        "textcraft_108",
+        "textcraft_109",
+        "textcraft_110",
+        "textcraft_111",
+        "textcraft_113",
+        "textcraft_114",
+        "textcraft_115",
+        "textcraft_116",
+        "textcraft_117",
+        "textcraft_118",
+        "textcraft_119",
+        "textcraft_12",
+        "textcraft_121",
+        "textcraft_123",
+        "textcraft_124",
+        "textcraft_13",
+        "textcraft_14",
+        "textcraft_15",
+        "textcraft_16",
+        "textcraft_17",
+        "textcraft_18",
+        "textcraft_19",
+        "textcraft_21",
+        "textcraft_22",
+        "textcraft_24",
+        "textcraft_26",
+        "textcraft_28",
+        "textcraft_29",
+        "textcraft_3",
+        "textcraft_30",
+        "textcraft_32",
+        "textcraft_33",
+        "textcraft_35",
+        "textcraft_36",
+        "textcraft_37",
+        "textcraft_38",
+        "textcraft_39",
+        "textcraft_41",
+        "textcraft_42",
+        "textcraft_43",
+        "textcraft_45",
+        "textcraft_46",
+        "textcraft_5",
+        "textcraft_51",
+        "textcraft_52",
+        "textcraft_53",
+        "textcraft_54",
+        "textcraft_56",
+        "textcraft_59",
+        "textcraft_6",
+        "textcraft_60",
+        "textcraft_61",
+        "textcraft_62",
+        "textcraft_63",
+        "textcraft_64",
+        "textcraft_65",
+        "textcraft_66",
+        "textcraft_67",
+        "textcraft_68",
+        "textcraft_69",
+        "textcraft_7",
+        "textcraft_70",
+        "textcraft_72",
+        "textcraft_73",
+        "textcraft_74",
+        "textcraft_75",
+        "textcraft_76",
+        "textcraft_77",
+        "textcraft_78",
+        "textcraft_79",
+        "textcraft_80",
+        "textcraft_81",
+        "textcraft_83",
+        "textcraft_84",
+        "textcraft_85",
+        "textcraft_86",
+        "textcraft_88",
+        "textcraft_89",
+        "textcraft_9",
+        "textcraft_90",
+        "textcraft_91",
+        "textcraft_92",
+        "textcraft_93",
+        "textcraft_94",
+        "textcraft_95",
+        "textcraft_96",
+        "textcraft_97",
+        "textcraft_98",
+        "textcraft_99"
+      ],
+      "test_tasks": [
+        "textcraft_11",
+        "textcraft_112",
+        "textcraft_120",
+        "textcraft_122",
+        "textcraft_2",
+        "textcraft_20",
+        "textcraft_23",
+        "textcraft_25",
+        "textcraft_27",
+        "textcraft_31",
+        "textcraft_34",
+        "textcraft_4",
+        "textcraft_40",
+        "textcraft_44",
+        "textcraft_47",
+        "textcraft_48",
+        "textcraft_49",
+        "textcraft_50",
+        "textcraft_55",
+        "textcraft_57",
+        "textcraft_58",
+        "textcraft_71",
+        "textcraft_8",
+        "textcraft_82",
+        "textcraft_87"
+      ],
+      "status": "ok"
+    },
+    {
+      "train_tasks": [
+        "textcraft_1",
+        "textcraft_100",
+        "textcraft_101",
+        "textcraft_103",
+        "textcraft_104",
+        "textcraft_105",
+        "textcraft_107",
+        "textcraft_108",
+        "textcraft_109",
+        "textcraft_11",
+        "textcraft_110",
+        "textcraft_112",
+        "textcraft_113",
+        "textcraft_114",
+        "textcraft_115",
+        "textcraft_116",
+        "textcraft_117",
+        "textcraft_119",
+        "textcraft_12",
+        "textcraft_120",
+        "textcraft_121",
+        "textcraft_122",
+        "textcraft_123",
+        "textcraft_124",
+        "textcraft_14",
+        "textcraft_16",
+        "textcraft_18",
+        "textcraft_19",
+        "textcraft_2",
+        "textcraft_20",
+        "textcraft_22",
+        "textcraft_23",
+        "textcraft_25",
+        "textcraft_27",
+        "textcraft_28",
+        "textcraft_29",
+        "textcraft_3",
+        "textcraft_30",
+        "textcraft_31",
+        "textcraft_32",
+        "textcraft_33",
+        "textcraft_34",
+        "textcraft_36",
+        "textcraft_37",
+        "textcraft_38",
+        "textcraft_4",
+        "textcraft_40",
+        "textcraft_41",
+        "textcraft_42",
+        "textcraft_44",
+        "textcraft_45",
+        "textcraft_46",
+        "textcraft_47",
+        "textcraft_48",
+        "textcraft_49",
+        "textcraft_5",
+        "textcraft_50",
+        "textcraft_51",
+        "textcraft_52",
+        "textcraft_53",
+        "textcraft_54",
+        "textcraft_55",
+        "textcraft_56",
+        "textcraft_57",
+        "textcraft_58",
+        "textcraft_59",
+        "textcraft_6",
+        "textcraft_60",
+        "textcraft_62",
+        "textcraft_63",
+        "textcraft_65",
+        "textcraft_66",
+        "textcraft_67",
+        "textcraft_68",
+        "textcraft_70",
+        "textcraft_71",
+        "textcraft_72",
+        "textcraft_73",
+        "textcraft_75",
+        "textcraft_76",
+        "textcraft_77",
+        "textcraft_79",
+        "textcraft_8",
+        "textcraft_80",
+        "textcraft_82",
+        "textcraft_83",
+        "textcraft_84",
+        "textcraft_85",
+        "textcraft_86",
+        "textcraft_87",
+        "textcraft_88",
+        "textcraft_89",
+        "textcraft_9",
+        "textcraft_90",
+        "textcraft_92",
+        "textcraft_94",
+        "textcraft_95",
+        "textcraft_96",
+        "textcraft_97",
+        "textcraft_98"
+      ],
+      "test_tasks": [
+        "textcraft_0",
+        "textcraft_10",
+        "textcraft_102",
+        "textcraft_106",
+        "textcraft_111",
+        "textcraft_118",
+        "textcraft_13",
+        "textcraft_15",
+        "textcraft_17",
+        "textcraft_21",
+        "textcraft_24",
+        "textcraft_26",
+        "textcraft_35",
+        "textcraft_39",
+        "textcraft_43",
+        "textcraft_61",
+        "textcraft_64",
+        "textcraft_69",
+        "textcraft_7",
+        "textcraft_74",
+        "textcraft_78",
+        "textcraft_81",
+        "textcraft_91",
+        "textcraft_93",
+        "textcraft_99"
+      ],
+      "status": "ok"
+    },
+    {
+      "train_tasks": [
+        "textcraft_0",
+        "textcraft_10",
+        "textcraft_100",
+        "textcraft_101",
+        "textcraft_102",
+        "textcraft_103",
+        "textcraft_104",
+        "textcraft_106",
+        "textcraft_107",
+        "textcraft_108",
+        "textcraft_11",
+        "textcraft_111",
+        "textcraft_112",
+        "textcraft_113",
+        "textcraft_114",
+        "textcraft_116",
+        "textcraft_117",
+        "textcraft_118",
+        "textcraft_119",
+        "textcraft_120",
+        "textcraft_122",
+        "textcraft_123",
+        "textcraft_124",
+        "textcraft_13",
+        "textcraft_14",
+        "textcraft_15",
+        "textcraft_16",
+        "textcraft_17",
+        "textcraft_18",
+        "textcraft_19",
+        "textcraft_2",
+        "textcraft_20",
+        "textcraft_21",
+        "textcraft_23",
+        "textcraft_24",
+        "textcraft_25",
+        "textcraft_26",
+        "textcraft_27",
+        "textcraft_29",
+        "textcraft_3",
+        "textcraft_30",
+        "textcraft_31",
+        "textcraft_32",
+        "textcraft_34",
+        "textcraft_35",
+        "textcraft_38",
+        "textcraft_39",
+        "textcraft_4",
+        "textcraft_40",
+        "textcraft_41",
+        "textcraft_42",
+        "textcraft_43",
+        "textcraft_44",
+        "textcraft_46",
+        "textcraft_47",
+        "textcraft_48",
+        "textcraft_49",
+        "textcraft_5",
+        "textcraft_50",
+        "textcraft_51",
+        "textcraft_53",
+        "textcraft_55",
+        "textcraft_57",
+        "textcraft_58",
+        "textcraft_59",
+        "textcraft_60",
+        "textcraft_61",
+        "textcraft_62",
+        "textcraft_63",
+        "textcraft_64",
+        "textcraft_65",
+        "textcraft_66",
+        "textcraft_67",
+        "textcraft_69",
+        "textcraft_7",
+        "textcraft_70",
+        "textcraft_71",
+        "textcraft_73",
+        "textcraft_74",
+        "textcraft_78",
+        "textcraft_79",
+        "textcraft_8",
+        "textcraft_80",
+        "textcraft_81",
+        "textcraft_82",
+        "textcraft_84",
+        "textcraft_85",
+        "textcraft_87",
+        "textcraft_88",
+        "textcraft_9",
+        "textcraft_90",
+        "textcraft_91",
+        "textcraft_92",
+        "textcraft_93",
+        "textcraft_94",
+        "textcraft_95",
+        "textcraft_96",
+        "textcraft_97",
+        "textcraft_98",
+        "textcraft_99"
+      ],
+      "test_tasks": [
+        "textcraft_1",
+        "textcraft_105",
+        "textcraft_109",
+        "textcraft_110",
+        "textcraft_115",
+        "textcraft_12",
+        "textcraft_121",
+        "textcraft_22",
+        "textcraft_28",
+        "textcraft_33",
+        "textcraft_36",
+        "textcraft_37",
+        "textcraft_45",
+        "textcraft_52",
+        "textcraft_54",
+        "textcraft_56",
+        "textcraft_6",
+        "textcraft_68",
+        "textcraft_72",
+        "textcraft_75",
+        "textcraft_76",
+        "textcraft_77",
+        "textcraft_83",
+        "textcraft_86",
+        "textcraft_89"
+      ],
+      "status": "ok"
+    },
+    {
+      "train_tasks": [
+        "textcraft_0",
+        "textcraft_1",
+        "textcraft_10",
+        "textcraft_102",
+        "textcraft_103",
+        "textcraft_104",
+        "textcraft_105",
+        "textcraft_106",
+        "textcraft_109",
+        "textcraft_11",
+        "textcraft_110",
+        "textcraft_111",
+        "textcraft_112",
+        "textcraft_113",
+        "textcraft_115",
+        "textcraft_116",
+        "textcraft_118",
+        "textcraft_119",
+        "textcraft_12",
+        "textcraft_120",
+        "textcraft_121",
+        "textcraft_122",
+        "textcraft_123",
+        "textcraft_124",
+        "textcraft_13",
+        "textcraft_14",
+        "textcraft_15",
+        "textcraft_17",
+        "textcraft_18",
+        "textcraft_19",
+        "textcraft_2",
+        "textcraft_20",
+        "textcraft_21",
+        "textcraft_22",
+        "textcraft_23",
+        "textcraft_24",
+        "textcraft_25",
+        "textcraft_26",
+        "textcraft_27",
+        "textcraft_28",
+        "textcraft_30",
+        "textcraft_31",
+        "textcraft_33",
+        "textcraft_34",
+        "textcraft_35",
+        "textcraft_36",
+        "textcraft_37",
+        "textcraft_38",
+        "textcraft_39",
+        "textcraft_4",
+        "textcraft_40",
+        "textcraft_42",
+        "textcraft_43",
+        "textcraft_44",
+        "textcraft_45",
+        "textcraft_46",
+        "textcraft_47",
+        "textcraft_48",
+        "textcraft_49",
+        "textcraft_50",
+        "textcraft_52",
+        "textcraft_54",
+        "textcraft_55",
+        "textcraft_56",
+        "textcraft_57",
+        "textcraft_58",
+        "textcraft_6",
+        "textcraft_60",
+        "textcraft_61",
+        "textcraft_63",
+        "textcraft_64",
+        "textcraft_66",
+        "textcraft_68",
+        "textcraft_69",
+        "textcraft_7",
+        "textcraft_70",
+        "textcraft_71",
+        "textcraft_72",
+        "textcraft_74",
+        "textcraft_75",
+        "textcraft_76",
+        "textcraft_77",
+        "textcraft_78",
+        "textcraft_79",
+        "textcraft_8",
+        "textcraft_80",
+        "textcraft_81",
+        "textcraft_82",
+        "textcraft_83",
+        "textcraft_84",
+        "textcraft_86",
+        "textcraft_87",
+        "textcraft_89",
+        "textcraft_9",
+        "textcraft_91",
+        "textcraft_93",
+        "textcraft_94",
+        "textcraft_96",
+        "textcraft_98",
+        "textcraft_99"
+      ],
+      "test_tasks": [
+        "textcraft_100",
+        "textcraft_101",
+        "textcraft_107",
+        "textcraft_108",
+        "textcraft_114",
+        "textcraft_117",
+        "textcraft_16",
+        "textcraft_29",
+        "textcraft_3",
+        "textcraft_32",
+        "textcraft_41",
+        "textcraft_5",
+        "textcraft_51",
+        "textcraft_53",
+        "textcraft_59",
+        "textcraft_62",
+        "textcraft_65",
+        "textcraft_67",
+        "textcraft_73",
+        "textcraft_85",
+        "textcraft_88",
+        "textcraft_90",
+        "textcraft_92",
+        "textcraft_95",
+        "textcraft_97"
+      ],
+      "status": "ok"
+    },
+    {
+      "train_tasks": [
+        "textcraft_0",
+        "textcraft_1",
+        "textcraft_10",
+        "textcraft_100",
+        "textcraft_101",
+        "textcraft_102",
+        "textcraft_105",
+        "textcraft_106",
+        "textcraft_107",
+        "textcraft_108",
+        "textcraft_109",
+        "textcraft_11",
+        "textcraft_110",
+        "textcraft_111",
+        "textcraft_112",
+        "textcraft_114",
+        "textcraft_115",
+        "textcraft_117",
+        "textcraft_118",
+        "textcraft_12",
+        "textcraft_120",
+        "textcraft_121",
+        "textcraft_122",
+        "textcraft_13",
+        "textcraft_15",
+        "textcraft_16",
+        "textcraft_17",
+        "textcraft_2",
+        "textcraft_20",
+        "textcraft_21",
+        "textcraft_22",
+        "textcraft_23",
+        "textcraft_24",
+        "textcraft_25",
+        "textcraft_26",
+        "textcraft_27",
+        "textcraft_28",
+        "textcraft_29",
+        "textcraft_3",
+        "textcraft_31",
+        "textcraft_32",
+        "textcraft_33",
+        "textcraft_34",
+        "textcraft_35",
+        "textcraft_36",
+        "textcraft_37",
+        "textcraft_39",
+        "textcraft_4",
+        "textcraft_40",
+        "textcraft_41",
+        "textcraft_43",
+        "textcraft_44",
+        "textcraft_45",
+        "textcraft_47",
+        "textcraft_48",
+        "textcraft_49",
+        "textcraft_5",
+        "textcraft_50",
+        "textcraft_51",
+        "textcraft_52",
+        "textcraft_53",
+        "textcraft_54",
+        "textcraft_55",
+        "textcraft_56",
+        "textcraft_57",
+        "textcraft_58",
+        "textcraft_59",
+        "textcraft_6",
+        "textcraft_61",
+        "textcraft_62",
+        "textcraft_64",
+        "textcraft_65",
+        "textcraft_67",
+        "textcraft_68",
+        "textcraft_69",
+        "textcraft_7",
+        "textcraft_71",
+        "textcraft_72",
+        "textcraft_73",
+        "textcraft_74",
+        "textcraft_75",
+        "textcraft_76",
+        "textcraft_77",
+        "textcraft_78",
+        "textcraft_8",
+        "textcraft_81",
+        "textcraft_82",
+        "textcraft_83",
+        "textcraft_85",
+        "textcraft_86",
+        "textcraft_87",
+        "textcraft_88",
+        "textcraft_89",
+        "textcraft_90",
+        "textcraft_91",
+        "textcraft_92",
+        "textcraft_93",
+        "textcraft_95",
+        "textcraft_97",
+        "textcraft_99"
+      ],
+      "test_tasks": [
+        "textcraft_103",
+        "textcraft_104",
+        "textcraft_113",
+        "textcraft_116",
+        "textcraft_119",
+        "textcraft_123",
+        "textcraft_124",
+        "textcraft_14",
+        "textcraft_18",
+        "textcraft_19",
+        "textcraft_30",
+        "textcraft_38",
+        "textcraft_42",
+        "textcraft_46",
+        "textcraft_60",
+        "textcraft_63",
+        "textcraft_66",
+        "textcraft_70",
+        "textcraft_79",
+        "textcraft_80",
+        "textcraft_84",
+        "textcraft_9",
+        "textcraft_94",
+        "textcraft_96",
+        "textcraft_98"
+      ],
+      "status": "ok"
+    }
+  ],
+  "bootstrap_scope": "Conditional on fitted probes and observed mixed-outcome tasks; not retraining uncertainty",
+  "pooled_auc_caveat": "OOF probabilities come from different fitted probes. Within-task pairs share a fold.",
+  "baseline_caveat": "Beating this text baseline does not prove information is unavailable to all external observers."
+}
