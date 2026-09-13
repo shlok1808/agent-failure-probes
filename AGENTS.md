@@ -132,6 +132,25 @@ export CUDA_VISIBLE_DEVICES=0     # so "cuda" in runtime.json is unambiguous
 PYTHONHASHSEED=0 pytest -q
 ```
 
+### 1b. macOS only: the console script may not work
+
+The editable install's `.pth` and finder in `.venv/lib/python3.13/site-packages/`
+carry the macOS hidden flag (visible as `hidden` in `ls -lO`), and
+`.venv/bin/failure-probes` was observed failing with `ModuleNotFoundError`.
+Clearing the flag fixed it:
+
+```bash
+chflags -R nohidden .venv
+```
+
+Always-works fallback: use `python -m failure_probes.cli` wherever the runbook
+says `failure-probes`.
+
+**`pytest` masks this** - it imports from the working directory, so green tests
+do not prove the console script works. The dry-run below is the first command
+that actually exercises it. Linux/Lambda is unaffected, so this cannot change
+any digest; it only decides whether the command runs at all.
+
 ### 2. Determinism check (BOTH machines, then diff)
 
 ```bash
@@ -146,6 +165,12 @@ diff /tmp/dry-mac.json /tmp/dry-lambda.json && echo MATCH
 Must print `MATCH` before collecting. If `crafting_tree_hash` differs →
 load-order problem. If it matches but `task_hash`es differ → `PYTHONHASHSEED`
 or Python-version mismatch in `commands`.
+
+The dry-run prints only `recipe_order`, `manifest_hash`, `selection_digest` and
+the task table - deliberately not `packages`. The Mac venv inherits system
+site-packages (torch, transformers, scikit-learn resolve to system Python), so
+package versions legitimately differ between machines and land in the manifest.
+Only `recipe_order` and the `task_hash` values must match.
 
 ### 3. Stage 2 (LAMBDA only)
 
