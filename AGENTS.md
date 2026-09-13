@@ -11,8 +11,9 @@ the code and that have already cost us one invalid run.
   from one fold with **2 comparison pairs**. All four feature sets scored an
   identical 0.25. That is a sample-size artefact, not a broken probe. Do not
   treat 0.25 / 0.17 as a result, and do not "fix" the probe in response to it.
-- Stage 2 has **not been collected yet**. The code for it has just landed and is
-  **untested** — see "What has not been verified".
+- Stage 2 has **not been collected yet**. The code has landed, tests pass on both
+  platforms, and cross-platform determinism is verified - see below. What is
+  unexercised is the collection path itself.
 
 ## The bug that shaped everything
 
@@ -128,28 +129,17 @@ the items below are no longer untested - the determinism check above is done.
 run directory, no `collect`, no `extract`, no `analyze` at scale. Highest-risk
 remaining items, in order:
 
-1. `test_debug_tasks_are_solvable_using_supplied_recipes` — rewritten to generate
-   tasks and require ≥3 of the first 10 to be solvable end to end. The threshold
-   is a guess; if it fails, check whether these goals need craftable (therefore
-   un-`get`table) ingredients before assuming the environment is broken.
-2. `test_real_environment_errors_and_success` — inverted to gold_ingot/gold_nugget.
-   Correct per the craftability check above, but unrun.
-3. The `collect` retry loop was re-indented by hand. It parses; it has not run.
-4. `fingerprint()` reads `itemid_recipes` / `tag_recipes` / `tag_set` directly —
-   attribute names confirmed present, serialisation unrun.
-
-## Current git state (as of handoff)
-
-All changes below are **uncommitted, on `main`**, and the repo has no other
-branch. Nothing has been pushed. Suggested first move:
-
-```bash
-git checkout -b stage2-determinism
-git add -A && git commit
-```
-
-Deleted file to expect in the diff: `tests/fixtures/debug_tasks.json`.
-New files: `AGENTS.md`, `configs/stage2.json`, `tests/test_ordering.py`.
+1. **The `collect` retry loop has never executed.** It parses and passes tests
+   that never reach it. The retry path, the `errors/*.retry{k}.json` writes and
+   the `FATAL_ERRORS` allowlist are all unexercised. The first real fault is the
+   first test of that code.
+2. **`analyze` at scale is unexercised.** The streaming rewrite, the
+   incomplete-run refusal and the stage-aware prose have never run on a real
+   analysis - not even on the debug shape since the rewrite.
+3. **`extract` on CUDA is unexercised.** The layer-28 hook has only ever run on
+   MPS, and `extract` refuses to run if device/dtype differ from collection.
+4. **Mixed-outcome yield is unknown** until roughly 2 h into collection. See the
+   risk section - this is the one that decides whether the run is worth anything.
 
 ## Runbook
 
