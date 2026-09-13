@@ -229,3 +229,74 @@ the obvious next check.
 2. Re-extract the canonical features at layer 12 on CUDA to get an authoritative number.
 3. Rounds sweep at layer 12 rather than 28 — the rounds and layers were swept separately,
    so their interaction is only measured at rounds 1 and 3.
+
+---
+
+## 2026-09-13 (later still) — Round 3 / layer 12 showdown
+
+`scripts/round3_showdown.py`, 568 episodes alive at round 3, 225 eventual failures.
+Two questions: does the hidden state beat what an outside observer can already read,
+and does a better-placed probe detect failure modes the round-1 probe missed.
+
+### Against the observable baseline
+
+| Model | Within-task | Pooled | CI |
+|---|---|---|---|
+| **Hidden, layer 12** | **0.801** | 0.855 | [0.74, 0.86] |
+| Hidden, layer 28 (paper) | 0.749 | 0.840 | [0.68, 0.82] |
+| Text observable + surface | 0.725 | 0.825 | [0.64, 0.82] |
+| Surface counts only | 0.698 | 0.741 | [0.62, 0.78] |
+
+The text model saw every prompt, response and error message through round 3 — the
+honest competitor to activation probing. Layer 12 beats it by 0.076.
+
+**Do not overstate this.** The intervals overlap heavily, and this is evidence of an
+increment, not proof of one. A paired test on shared folds, or a replication, is what
+would settle it. The text baseline reaching 0.725 on its own is itself the finding that
+most of this is readable from the outside.
+
+### What layer 12 detects (mean score on eventual successes: 0.195)
+
+| Failure mode | n | mean score | caught (>0.5) | R1/L28 caught |
+|---|---|---|---|---|
+| plural_trap_task | 69 | 0.874 | 88% | 77% |
+| repeated_same_action_5x | 213 | 0.741 | 73% | ~29%* |
+| mostly_impossible_actions | 148 | 0.726 | 71% | ~29%* |
+| repeated_format_errors | 56 | 0.798 | 80% | ~29%* |
+| explicit_abort | 18 | 0.779 | 83% | ~29%* |
+| never_executed_anything | 29 | 0.528 | 48% | ~29%* |
+
+<sub>*the round-1 layer-28 probe caught 29% of non-trap failures as an undifferentiated group.</sub>
+
+**This is the strongest result in the project so far, and it is qualitative rather than
+numerical.** The round-1 layer-28 probe was substantially a detector for one lexical,
+task-level trap. At round 3 / layer 12 the probe detects every failure mode: looping
+jumps from roughly 29% to 73% across 213 episodes, format errors to 80%, explicit
+give-ups to 83%. A change in *which categories* are detected is much harder to produce
+by chance than a change in a single AUC.
+
+The residual blind spot is `never_executed_anything` at 48% — episodes that never land
+a valid action at all. Those may look confused rather than stuck.
+
+### Status of the claim
+
+Defensible now:
+- layer 12 > layer 28, replicated at rounds 1 and 3, both metrics, smooth unimodal curve
+- the failure-mode generalisation above
+
+Not yet established:
+- 0.801 as an effect size. It is a cell selected from a 7-layer x 6-round search and
+  should be quoted as an exploratory maximum, not a measurement.
+- the margin over the text baseline (overlapping intervals)
+- anything beyond TextCraft and Qwen3-1.7B
+
+### Next, in order of value
+
+1. **Pre-registered replication.** Fresh 1000 episodes at a new `generation_seed`, with
+   layer 12 / round 3 fixed in advance. Converts a discovered cell into a tested
+   prediction. A few GPU-hours.
+2. **Re-extract layer 12 / round 3 on CUDA** through the standard `extract`/`analyze`
+   path, removing the MPS caveat and producing an authoritative number. ~15 min.
+3. Paired fold-level test of hidden vs text, rather than comparing two intervals.
+4. Rounds sweep *at layer 12* — rounds and layers were swept separately, so their
+   interaction is only observed at rounds 1 and 3.
