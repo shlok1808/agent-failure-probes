@@ -82,11 +82,51 @@ Why `generation_seed` is `20260912` in stage 2, not `20260911`: the seed is
 `generation_seed + data_idx*100000 + attempt*100 + round`, so reusing the debug
 value would replay identical rollouts for overlapping indices.
 
+## Determinism: VERIFIED 2026-09-13
+
+Mac and Lambda dry-runs agree. This closes the platform bug.
+
+| Field | Result |
+|---|---|
+| `crafting_tree_hash` | `2d92c2df4840aee9944ad645aea783aafcad5930ec7b3338e5415efb4c3e972f` - identical |
+| `recipe_corpus_hash` | `2b11d08046dc9f217732a6d301b433dfcebbae54af1675552ec55d6d3efa9da8` - identical |
+| `selection_digest` | `a900ecc5a9d33377e4e8b8e6eb63c977b802a65b8c49c3a7eb9514c081ec2fa9` - identical |
+| All 125 task entries | 0 mismatches (`data_idx`, `goal`, `recipe_depth`, `task_hash`) |
+| `manifest_hash` | **differs, and that is correct** |
+
+`manifest_hash` is computed over the whole manifest including `platform`,
+`python` and `packages`, which legitimately differ between machines. A plain
+`diff` of the two dry-run files therefore reports one line. Compare
+`recipe_order`, `selection_digest` and the task table - not `manifest_hash`.
+
+## Lambda environment (as provisioned)
+
+A100-SXM4-40GB, us-east-1, 472G free. The box shipped with **Python 3.10 only**,
+below this project's `requires-python >=3.11`, so 3.13.15 was installed with
+`uv` to match the Mac's 3.13.7 minor version. Repo delivered by `rsync` (not a
+clone) because it is private; `.git` and the submodule metadata came across, so
+`prepare`'s pinned/clean submodule check passes.
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+cd ~/agent-failure-probes && source .venv/bin/activate && export PYTHONHASHSEED=0
+```
+
+**Package drift from `requirements-tested.txt`** - torch 2.14.0+cu130 (vs 2.13.0),
+transformers 5.17.0 (vs 5.12.1), numpy 2.5.3, scikit-learn 1.9.1. Proven not to
+affect task identity, but it is a real difference from the debug run's
+environment and will be recorded in the stage-2 manifest. 21 tests pass there.
+
+HF Hub is unauthenticated (slower downloads, possible rate limits). Set
+`HF_TOKEN` if the model download stalls.
+
 ## What has NOT been verified
 
-**Nothing here has been executed.** The owner asked to run everything
-themselves. No `pytest`, no smoke run, no `prepare`. Treat every change as
-untested. Highest-risk items, in order:
+Tests now pass on both platforms (21 on Mac, 21 on Lambda) and CI is green, so
+the items below are no longer untested - the determinism check above is done.
+**What remains unexecuted is the collection itself**: no `prepare` into a real
+run directory, no `collect`, no `extract`, no `analyze` at scale. Highest-risk
+remaining items, in order:
 
 1. `test_debug_tasks_are_solvable_using_supplied_recipes` — rewritten to generate
    tasks and require ≥3 of the first 10 to be solvable end to end. The threshold
@@ -134,21 +174,22 @@ PYTHONHASHSEED=0 pytest -q
 
 ### 1b. macOS only: the console script may not work
 
-The editable install's `.pth` and finder in `.venv/lib/python3.13/site-packages/`
-carry the macOS hidden flag (visible as `hidden` in `ls -lO`), and
-`.venv/bin/failure-probes` was observed failing with `ModuleNotFoundError`.
-Clearing the flag fixed it:
+**Root cause, confirmed in the stdlib:** Python 3.13's `site.addpackage`
+(`site.py:177-179`) silently skips any `.pth` file carrying the macOS
+`UF_HIDDEN` flag. Every file in this venv's `site-packages` had that flag, so
+the editable install's `.pth` never executed, the import hook was never
+registered, and `failure_probes` was invisible - with no error anywhere.
 
 ```bash
-chflags -R nohidden .venv
+chflags -R nohidden .venv     # already applied on the Mac; keep if you rebuild
 ```
 
-Always-works fallback: use `python -m failure_probes.cli` wherever the runbook
-says `failure-probes`.
+Always-works fallback: `python -m failure_probes.cli` wherever the runbook says
+`failure-probes`.
 
 **`pytest` masks this** - it imports from the working directory, so green tests
 do not prove the console script works. The dry-run below is the first command
-that actually exercises it. Linux/Lambda is unaffected, so this cannot change
+that exercises it. Linux is unaffected (no `UF_HIDDEN`), so this cannot change
 any digest; it only decides whether the command runs at all.
 
 ### 2. Determinism check (BOTH machines, then diff)
