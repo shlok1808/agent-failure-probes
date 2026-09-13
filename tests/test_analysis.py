@@ -37,3 +37,31 @@ def test_grouped_predictions_never_see_their_task():
 def test_one_class_is_not_fake_auc():
     scores, splits = grouped_scores(np.ones((4, 2)), np.zeros(4), np.array(["a", "a", "b", "b"]))
     assert np.isnan(scores).all() and not splits
+
+
+def test_shard_slices_are_disjoint_and_cover_every_task():
+    """Sharding must partition the tasks exactly: no episode run twice, none skipped.
+
+    The seed is generation_seed + data_idx*100000 + attempt*100 + round, so it
+    does not depend on execution order - N workers over disjoint slices produce
+    the same episodes as one worker. That only holds if the slices partition.
+    """
+    tasks = [f"textcraft_{i}" for i in range(125)]
+    for count in [1, 2, 4, 6, 8, 125, 200]:
+        slices = [tasks[i::count] for i in range(count)]
+        flat = [t for s in slices for t in s]
+        assert sorted(flat) == sorted(tasks), f"{count} shards do not cover every task"
+        assert len(flat) == len(set(flat)), f"{count} shards overlap"
+
+
+def test_shard_striding_spreads_adjacent_tasks():
+    """Stride, not blocks. Slow tasks cluster alphabetically - the plural-trap
+    *_planks goals sit near each other - so block slicing would pile them onto
+    one worker that then runs long after the others finished. Striding sends
+    every run of consecutive tasks to distinct workers."""
+    tasks = list(range(125))
+    for count in [2, 4, 6, 8]:
+        owner = {t: i for i in range(count) for t in tasks[i::count]}
+        for start in range(0, 125 - count):
+            window = [owner[t] for t in tasks[start:start + count]]
+            assert len(set(window)) == count, f"{count} shards collide on {window}"

@@ -207,7 +207,22 @@ site-packages (torch, transformers, scikit-learn resolve to system Python), so
 package versions legitimately differ between machines and land in the manifest.
 Only `recipe_order` and the `task_hash` values must match.
 
-### 3. Stage 2 (LAMBDA only)
+### 3. Stage 2 (LAMBDA only) - PARALLEL
+
+One worker leaves the A100 at ~33% (batch-1 decode is bandwidth-bound), giving a
+~10h run. Six workers over disjoint task slices bring it to roughly 1.5-2h.
+
+**Why this is safe:** the per-round seed is
+`generation_seed + data_idx*100000 + attempt*100 + round` - it depends only on
+which task/attempt/round it is, never on execution order. N workers over
+disjoint slices therefore produce byte-identical episodes to one worker.
+**Batching inside a generate() call would NOT be safe**, because
+`actor.generate` calls `set_seed` per call; do not try it.
+
+Slices stride (`tasks[i::n]`), not block, because the slow plural-trap tasks
+cluster alphabetically and blocks would leave one worker running long.
+
+### 3b. Single-worker form (slower, still correct)
 
 ```bash
 tmux new -s stage2                 # detach Ctrl+B D, reattach: tmux attach -t stage2

@@ -144,7 +144,16 @@ def validate_manifest(run):
     return manifest
 
 
-def collect(run, device=None):
+def collect(run, device=None, shard=None):
+    """Collect episodes, optionally one disjoint slice of the tasks.
+
+    `shard` is (index, count). Sharding is safe because the per-round seed is
+    `generation_seed + data_idx*100000 + attempt*100 + round`, which depends only
+    on which task/attempt/round it is, never on execution order. N workers over
+    disjoint task slices therefore produce byte-identical episodes to one worker
+    doing all of them. Batching inside a generate() call would NOT be safe:
+    actor.generate seeds each call individually.
+    """
     from .actor import Actor, locate_action_tokens
     run = Path(run)
     manifest = validate_manifest(run)
@@ -160,18 +169,29 @@ def collect(run, device=None):
     runtime = {"device": actor.device, "dtype": str(actor.dtype),
                                     "model_revision": actor.model.config._commit_hash,
                                     **code_fingerprint()}
-    if (run / "runtime.json").exists():
-        prior = read_json(run / "runtime.json")
-        for field in ["device", "dtype", "model_revision", "code_hashes"]:
-            if prior[field] != runtime[field]:
-                raise ValueError(f"Resume changes {field}; use a fresh run directory")
-    else:
+    # Concurrent workers race here, so write-then-reread and compare: whoever
+    # wins is authoritative and everyone must agree with it.
+    if not (run / "runtime.json").exists():
         write_json(run / "runtime.json", runtime)
-    total = len(manifest["tasks"]) * config["attempts_per_task"]
+    prior = read_json(run / "runtime.json")
+    for field in ["device", "dtype", "model_revision", "code_hashes"]:
+        if prior[field] != runtime[field]:
+            raise ValueError(f"Resume changes {field}; use a fresh run directory")
+    tasks = manifest["tasks"]
+    label = ""
+    if shard is not None:
+        index, count = shard
+        if not (0 <= index < count):
+            raise ValueError(f"Bad shard {index}/{count}")
+        # Stride, not blocks: slow tasks cluster alphabetically, so striding
+        # spreads them evenly and the workers finish at about the same time.
+        tasks = tasks[index::count]
+        label = f"w{index} "
+    total = len(tasks) * config["attempts_per_task"]
     done = 0
     exhausted = []
     started = time.time()
-    for task in manifest["tasks"]:
+    for task in tasks:
         for attempt in range(config["attempts_per_task"]):
             done += 1
             episode_id = f'{task["task_id"]}_attempt_{attempt:02d}'
@@ -208,7 +228,7 @@ def collect(run, device=None):
                     record["total_generated_tokens"] = sum(len(r["generated_token_ids"]) for r in record["rounds"])
                     write_json(output, record)
                     rate = (time.time() - started) / done
-                    print(f'[{done}/{total}] {episode_id} rounds={len(record["rounds"])} '
+                    print(f'{label}[{done}/{total}] {episode_id} rounds={len(record["rounds"])} '
                           f'success={record["success"]} eta={(total - done) * rate / 3600:.1f}h', flush=True)
                     append_jsonl(run / "progress.jsonl", {"episode_id": episode_id, "index": done,
                                                           "success": record["success"], "rounds": len(record["rounds"]),
@@ -224,19 +244,20 @@ def collect(run, device=None):
                     # a deterministic fault recurs and exhausts the budget, by design.
                     record.update({"status": "error", "error": repr(exc), "retry": retry})
                     write_json(run / "errors" / f"{episode_id}.retry{retry}.json", record)
-                    print(f'[{done}/{total}] {episode_id} ERROR (attempt {retry}): {exc!r}', flush=True)
+                    print(f'{label}[{done}/{total}] {episode_id} ERROR (attempt {retry}): {exc!r}', flush=True)
                     if torch is not None and torch.cuda.is_available():
                         torch.cuda.empty_cache()
                     if isinstance(exc, NON_RETRYABLE) or retry == config["max_episode_retries"]:
                         exhausted.append(episode_id)
                         break
 
-    _finish_collect(run, exhausted, total)
+    _finish_collect(run, exhausted, total, shard)
 
 
-def _finish_collect(run, exhausted, total):
+def _finish_collect(run, exhausted, total, shard=None):
     if exhausted:
-        write_json(Path(run) / "incomplete.json", {"exhausted_episodes": sorted(exhausted), "expected": total})
+        suffix = f".w{shard[0]}" if shard else ""
+        write_json(Path(run) / f"incomplete{suffix}.json", {"exhausted_episodes": sorted(exhausted), "expected": total})
         raise RuntimeError(
             f"{len(exhausted)} of {total} episodes never completed: {sorted(exhausted)[:5]}"
             f"{' ...' if len(exhausted) > 5 else ''}. Records are in errors/. Re-run collect to retry them; "
