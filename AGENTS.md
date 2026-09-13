@@ -83,13 +83,13 @@ Why `generation_seed` is `20260912` in stage 2, not `20260911`: the seed is
 `generation_seed + data_idx*100000 + attempt*100 + round`, so reusing the debug
 value would replay identical rollouts for overlapping indices.
 
-## Determinism: VERIFIED 2026-09-13
+## Determinism: VERIFIED 2026-09-13 (re-verified after the audit fixes)
 
 Mac and Lambda dry-runs agree. This closes the platform bug.
 
 | Field | Result |
 |---|---|
-| `crafting_tree_hash` | `2d92c2df4840aee9944ad645aea783aafcad5930ec7b3338e5415efb4c3e972f` - identical |
+| `crafting_tree_hash` | `8ec9aad5989b4afe9a01c5d69c9648b23ef59dbd1517aa8aa647ee0c5db2367c` - identical |
 | `recipe_corpus_hash` | `2b11d08046dc9f217732a6d301b433dfcebbae54af1675552ec55d6d3efa9da8` - identical |
 | `selection_digest` | `a900ecc5a9d33377e4e8b8e6eb63c977b802a65b8c49c3a7eb9514c081ec2fa9` - identical |
 | All 125 task entries | 0 mismatches (`data_idx`, `goal`, `recipe_depth`, `task_hash`) |
@@ -171,11 +171,15 @@ the editable install's `.pth` never executed, the import hook was never
 registered, and `failure_probes` was invisible - with no error anywhere.
 
 ```bash
-chflags -R nohidden .venv     # already applied on the Mac; keep if you rebuild
+chflags -R nohidden .venv     # RECURS - the flag came back on its own, most
+                              # likely iCloud syncing ~/Documents. Re-apply
+                              # whenever imports break, or just use python -m.
 ```
 
-Always-works fallback: `python -m failure_probes.cli` wherever the runbook says
-`failure-probes`.
+**Prefer `python -m` on the Mac**: `python -m failure_probes.cli` and
+`python -m pytest` bypass the `.pth` entirely and cannot hit this. The flag has
+been observed returning after being cleared, so the console script is not
+trustworthy there. Lambda is unaffected.
 
 **`pytest` masks this** - it imports from the working directory, so green tests
 do not prove the console script works. The dry-run below is the first command

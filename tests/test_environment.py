@@ -110,6 +110,7 @@ def test_debug_tasks_are_solvable_using_supplied_recipes(env):
     solved = 0
     for index in range(10):
         task = env.freeze_task(index)
+        env.reset(task)  # _recipes_for_goal needs env.env; do not rely on fixture state
         for command, recipe in _recipes_for_goal(env, task):
             env.reset(task)
             if all(env.step(f"Action: get {i.count} {_ingredient_name(i)}")["validity"] == "executable"

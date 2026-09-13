@@ -138,6 +138,7 @@ class TextCraft:
             "itemid_recipes": [[str(k), [str(r) for r in v]] for k, v in self.tree.itemid_recipes.items()],
             "tag_recipes": [[str(k), [str(r) for r in v]] for k, v in self.tree.tag_recipes.items()],
             "itemid_set": sorted(str(i) for i in self.tree.itemid_set),
+            "item_id_to_tag": sorted((str(k), str(v)) for k, v in self.tree.item_id_to_tag.items()),
             "tag_set": sorted(str(t) for t in self.tree.tag_set),
             "pool": [[str(getattr(item, "name", item)), depth] for item, depth in pool],
         }

@@ -83,16 +83,31 @@ def analyze(run, allow_incomplete=False):
     data = []
     for episode in iter_episodes(run):
         first = episode["rounds"][0]
+        if episode["manifest_hash"] != manifest["manifest_hash"]:
+            raise ValueError(f'{episode["episode_id"]} came from a different manifest')
+        if episode.get("status") != "complete":
+            raise ValueError(f'{episode["episode_id"]} is not complete')
         data.append({"episode_id": episode["episode_id"], "task_id": episode["task_id"],
                      "success": episode["success"], "validity": first["validity"],
+                     "probe_site": first["probe_site"],
                      "surface": surface_features(first), "text": first["prompt"] + first["response"]})
-    expected = manifest["config"]["num_tasks"] * manifest["config"]["attempts_per_task"]
-    missing = expected - len(data)
+    # Identity, not just count: one missing episode plus one stale or foreign one
+    # would otherwise pass a count check and yield a plausible, biased AUC.
+    wanted = {f'{t["task_id"]}_attempt_{a:02d}'
+              for t in manifest["tasks"] for a in range(manifest["config"]["attempts_per_task"])}
+    found = [e["episode_id"] for e in data]
+    if len(found) != len(set(found)):
+        raise ValueError("Duplicate episode ids")
+    expected, missing = len(wanted), len(wanted - set(found))
+    unexpected = sorted(set(found) - wanted)
+    if unexpected:
+        raise ValueError(f"Episodes not in the manifest: {unexpected[:5]}")
     if missing and not allow_incomplete:
         raise ValueError(
-            f"{missing} of {expected} episodes are missing. Episode loss is not missing-at-random: "
-            "context blowups and long trajectories track failing episodes, so analysing a subset "
-            "biases the label distribution. Re-run the gaps, or pass --allow-incomplete deliberately.")
+            f"{missing} of {expected} manifest episodes are missing. Episode loss is not "
+            "missing-at-random: context blowups and long trajectories track failing episodes, so "
+            "analysing a subset biases the label distribution. Re-run the gaps, or pass "
+            "--allow-incomplete deliberately.")
     stored = np.load(run / "features.npz", allow_pickle=False)
     vectors = dict(zip(stored["keys"].tolist(), stored["residual"]))
     x = np.stack([vectors[e["episode_id"] + ":r1"] for e in data])
@@ -119,16 +134,23 @@ def analyze(run, allow_incomplete=False):
         text_scores[test] = classifier.predict_proba(hstack([b, csr_matrix(scaler.transform(surface[test]))]))[:, 1]
     score_sets["prefix_text_plus_surface"] = text_scores
     valid = np.array([e["validity"] == "executable" for e in data])
+    # The primary estimand is "last action token". Episodes with no parseable
+    # action fall back to the last response token, which is a different site.
+    action_token = np.array([e["probe_site"] == "last_action_token" for e in data])
     report = {"stage": config["stage"], "interpretation": INTERPRETATION.get(config["stage"], INTERPRETATION["debug"]),
               "missing_episodes": missing,
               "n_episodes": len(y), "n_tasks": len(set(groups)), "successes": int(sum(y == 0)),
+              "probe_site_fallbacks": int((~action_token).sum()),
+              "estimand_note": "Primary estimand is last_action_token_only; 'all' includes "
+                               "fallback-site episodes, which read a different token.",
               "models": {}, "folds": [{k: v for k, v in s.items() if k not in ("train", "test")} for s in splits],
               "bootstrap_scope": "Conditional on fitted probes and observed mixed-outcome tasks; not retraining uncertainty",
               "pooled_auc_caveat": "OOF probabilities come from different fitted probes. Within-task pairs share a fold.",
               "baseline_caveat": "Beating this text baseline does not prove information is unavailable to all external observers."}
     for name, scores in score_sets.items():
         report["models"][name] = {}
-        for subset, base in [("all", np.ones(len(y), bool)), ("executable_only", valid)]:
+        for subset, base in [("all", np.ones(len(y), bool)), ("executable_only", valid),
+                             ("last_action_token_only", action_token)]:
             mask = base & np.isfinite(scores)
             stats = within_task(y[mask], scores[mask], groups[mask])
             stats.update({"n": int(sum(mask)), "overall_auc": float(roc_auc_score(y[mask], scores[mask])) if len(np.unique(y[mask])) == 2 else None,

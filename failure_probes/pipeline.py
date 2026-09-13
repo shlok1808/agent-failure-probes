@@ -18,6 +18,51 @@ except ImportError:  # pragma: no cover
 # A broken setup must stop immediately rather than manufacture 1000 error records.
 FATAL_ERRORS = (KeyboardInterrupt, SystemExit, MemoryError, ImportError, OSError)
 
+# Per-round seeds are deterministic, so a retry reproduces the identical
+# trajectory. Only transient hardware faults are worth repeating; a logic or
+# guard failure recurs exactly and would just burn the budget.
+NON_RETRYABLE = (ValueError, KeyError, IndexError, TypeError, AttributeError)
+
+
+def check_upstream_pinned():
+    """The vendored environment must be the pinned commit, unmodified.
+
+    prepare() alone is not enough: collect() could otherwise run against edited
+    upstream mechanics, and audit() would replay through the same edit and pass.
+    The recipe fingerprint catches tree changes but not edits to step logic.
+    """
+    sha = subprocess.check_output(["git", "-C", str(UPSTREAM), "rev-parse", "HEAD"], text=True).strip()
+    dirty = subprocess.check_output(["git", "-C", str(UPSTREAM), "status", "--porcelain"], text=True).strip()
+    if sha != COMMIT or dirty:
+        raise ValueError("Upstream checkout differs from pinned, unmodified commit")
+    return sha
+
+
+def code_fingerprint():
+    return {"code_commit": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
+            "code_hashes": {str(f.relative_to(ROOT)): digest(f.read_text())
+                            for f in sorted((ROOT / "failure_probes").glob("*.py"))}}
+
+
+def check_runtime_matches(run, actor=None):
+    """Compare the recorded collection runtime against this process.
+
+    Without this, editing actor.py after collection would silently extract
+    different features from the same episodes.
+    """
+    runtime = read_json(Path(run) / "runtime.json")
+    current = code_fingerprint()
+    if runtime["code_hashes"] != current["code_hashes"]:
+        changed = sorted(k for k in set(runtime["code_hashes"]) | set(current["code_hashes"])
+                         if runtime["code_hashes"].get(k) != current["code_hashes"].get(k))
+        raise ValueError(f"Code changed since collection: {changed}. Use a fresh run directory.")
+    if actor is not None:
+        if actor.device != runtime["device"] or str(actor.dtype) != runtime["dtype"]:
+            raise ValueError("Replay backend/precision must match collection")
+        if actor.model.config._commit_hash != runtime["model_revision"]:
+            raise ValueError("Model revision differs from collection")
+    return runtime
+
 
 def require_deterministic_hashing():
     # Upstream builds prompts from `random.sample(list(<set of str>))`, so set
@@ -52,9 +97,7 @@ def prepare(config_path, run, task_ids=None, dry_run=False):
     require_deterministic_hashing()
     if config["stage"] == "stage2" and Path(run).name.startswith("debug"):
         raise ValueError("Debug data must not become confirmatory data; use a non-debug run directory")
-    sha = subprocess.check_output(["git", "-C", str(UPSTREAM), "rev-parse", "HEAD"], text=True).strip()
-    if sha != COMMIT or subprocess.check_output(["git", "-C", str(UPSTREAM), "status", "--porcelain"], text=True).strip():
-        raise ValueError("Upstream checkout differs from pinned, unmodified commit")
+    sha = check_upstream_pinned()
     env = TextCraft()
     # AgentEval publishes indices only, never goals, so it is provenance and a
     # coverage cross-check - not the selection mechanism.
@@ -107,6 +150,7 @@ def collect(run, device=None):
     manifest = validate_manifest(run)
     config = manifest["config"]
     require_deterministic_hashing()
+    check_upstream_pinned()
     env = TextCraft()
     # Check the environment before the model loads: a mismatch then costs
     # seconds instead of GPU hours.
@@ -115,8 +159,7 @@ def collect(run, device=None):
     actor = Actor(config, device)
     runtime = {"device": actor.device, "dtype": str(actor.dtype),
                                     "model_revision": actor.model.config._commit_hash,
-                                    "code_commit": subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip(),
-                                    "code_hashes": {str(p.relative_to(ROOT)): digest(p.read_text()) for p in sorted((ROOT / "failure_probes").glob("*.py"))}}
+                                    **code_fingerprint()}
     if (run / "runtime.json").exists():
         prior = read_json(run / "runtime.json")
         for field in ["device", "dtype", "model_revision", "code_hashes"]:
@@ -126,6 +169,7 @@ def collect(run, device=None):
         write_json(run / "runtime.json", runtime)
     total = len(manifest["tasks"]) * config["attempts_per_task"]
     done = 0
+    exhausted = []
     started = time.time()
     for task in manifest["tasks"]:
         for attempt in range(config["attempts_per_task"]):
@@ -180,19 +224,32 @@ def collect(run, device=None):
                     # a deterministic fault recurs and exhausts the budget, by design.
                     record.update({"status": "error", "error": repr(exc), "retry": retry})
                     write_json(run / "errors" / f"{episode_id}.retry{retry}.json", record)
-                    print(f'[{done}/{total}] {episode_id} ERROR (retry {retry}): {exc!r}', flush=True)
+                    print(f'[{done}/{total}] {episode_id} ERROR (attempt {retry}): {exc!r}', flush=True)
                     if torch is not None and torch.cuda.is_available():
                         torch.cuda.empty_cache()
+                    if isinstance(exc, NON_RETRYABLE) or retry == config["max_episode_retries"]:
+                        exhausted.append(episode_id)
+                        break
+
+    _finish_collect(run, exhausted, total)
+
+
+def _finish_collect(run, exhausted, total):
+    if exhausted:
+        write_json(Path(run) / "incomplete.json", {"exhausted_episodes": sorted(exhausted), "expected": total})
+        raise RuntimeError(
+            f"{len(exhausted)} of {total} episodes never completed: {sorted(exhausted)[:5]}"
+            f"{' ...' if len(exhausted) > 5 else ''}. Records are in errors/. Re-run collect to retry them; "
+            "analyze refuses incomplete runs because episode loss is not missing-at-random.")
 
 
 def extract(run, device=None):
     from .actor import Actor
     run = Path(run)
     manifest = validate_manifest(run)
+    check_upstream_pinned()
     actor = Actor(manifest["config"], device)
-    runtime = read_json(run / "runtime.json")
-    if actor.device != runtime["device"] or str(actor.dtype) != runtime["dtype"]:
-        raise ValueError("Replay backend/precision must match collection")
+    check_runtime_matches(run, actor)
     vectors, normalized, keys, replay_checks = [], [], [], []
     for episode in iter_episodes(run):
         if episode["manifest_hash"] != manifest["manifest_hash"]:
@@ -224,6 +281,8 @@ AUDIT_PURPOSE = {
 def audit(run):
     run = Path(run)
     manifest = validate_manifest(run)
+    check_upstream_pinned()
+    check_runtime_matches(run)
     env = TextCraft()
     if env.fingerprint() != manifest["recipe_order"]:
         raise ValueError("Crafting tree differs from the tree used at prepare time")
