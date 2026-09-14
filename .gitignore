@@ -7,3 +7,6 @@ runs/
 .env
 *.pt
 *.safetensors
+writeup/*.aux
+writeup/*.log
+writeup/*.out
