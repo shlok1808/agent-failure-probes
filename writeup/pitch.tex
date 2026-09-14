@@ -20,8 +20,10 @@
 
 \section{Motivation}
 
-Hera, MTRouter and CEB all need an estimate of the acting model's state \emph{at each
-step} in order to route or intervene, and all three reconstruct it from outside the
+\href{https://arxiv.org/abs/2605.24598}{Hera},
+\href{https://aclanthology.org/2026.acl-long.2045/}{MTRouter} and CEB all need an
+estimate of the acting model's state \emph{at each step} in order to route or
+intervene, and all three reconstruct it from outside the
 model. Hera observes that device/cloud step agreement correlates with predictive
 entropy---an internal signal---then trains a separate 500M network to read state text
 instead. MTRouter cannot inspect a mostly-closed model pool, so it learns a per-model
